@@ -1,8 +1,15 @@
+import { BrowserRouter as Router, Outlet, Route, Routes } from 'react-router-dom'
+
+//COMPONENTS
+import { Footer, Navbar, ScrollToTop } from "./components"
+
+//USER INTERFACE
+import { Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site"
+
+//OTHERS
 import { ToastContainer } from "react-toastify"
 import ThemeContextProvider from "./context/ThemeContext"
-import { BrowserRouter as Router, Outlet, Route, Routes } from 'react-router-dom'
-import { Footer, Navbar } from "./components"
-import { Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site"
+import './App.css'
 
 const App = () => {
     return (
@@ -10,7 +17,7 @@ const App = () => {
             {/* <AuthContext.Provider value={{ authState, setAuthState }}> */}
             <ThemeContextProvider>
                 <Router>
-                    {/* <ScrollToTop /> */}
+                    <ScrollToTop />
                     <ToastContainer />
                     <Routes>
 
