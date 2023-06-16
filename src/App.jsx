@@ -8,7 +8,7 @@ import {Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRea
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBanners, AdminLogin, AdminUsers} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBanners, AdminLogin, AdminUsers} from "./pages/admin";
 
 //OTHERS
 import {ToastContainer} from "react-toastify";
@@ -73,6 +73,7 @@ const App = () => {
                             <Route path='gallery/video-create' element={<AdminVideoCreate />} /> */}
 
                             <Route path="banners" element={<AdminBanners />} />
+                            <Route path="banner-create" element={<AdminBannerCreate />} />
                             {/* <Route path='web/banner-create' element={<AdminWebBannerCreate />} />
                             <Route path='web/banner-edit/:bannerId' element={<AdminWebBannerEdit />} />
 

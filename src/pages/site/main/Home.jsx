@@ -1,4 +1,3 @@
-import React from 'react'
 import HomeBanner from '../../../components/banners/HomeBanner'
 
 import { Link } from 'react-router-dom'

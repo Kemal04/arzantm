@@ -1,6 +1,6 @@
-import {Link, NavLink, Outlet} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faBell, faExclamationCircle, faFileText, faGlobe, faHome, faImage, faImages, faList, faMessage, faPercent, faUsers, faWallet} from "@fortawesome/free-solid-svg-icons";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMessage, faTags, faTh, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
 import "../../Admin.css";
 
 const AdminLayout = () => {
@@ -10,7 +10,7 @@ const AdminLayout = () => {
                 <div className="iq-sidebar sidebar-default">
                     <div className="iq-sidebar-logo d-flex align-items-center justify-content-between">
                         <NavLink to={"/"} className="header-logo">
-                            <h5 className="logo-title light-logo ml-3">ARZAN TM</h5>
+                            <h5 className="logo-title light-logo ml-3 text-green">ARZAN TM</h5>
                         </NavLink>
                         <div className="iq-menu-bt-sidebar ml-0">
                             <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
@@ -20,76 +20,70 @@ const AdminLayout = () => {
                     <div className="data-scrollbar" data-scroll="1">
                         <nav className="iq-sidebar-menu">
                             <ul id="iq-sidebar-toggle" className="iq-menu">
-                                <li className="">
+                                <li>
                                     <NavLink to={"/admin"} className="svg-icon" end>
                                         <FontAwesomeIcon icon={faHome} />
-                                        <span className="ml-4">Esasy</span>
+                                        <span className="ml-4">Esasy Sahypa</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"users"} className="svg-icon">
                                         <FontAwesomeIcon icon={faUsers} />
                                         <span className="ml-4">Ulanyjylar</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"banners"} className="svg-icon">
                                         <FontAwesomeIcon icon={faImages} />
                                         <span className="ml-4">Bannerler</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
-                                    <NavLink to={"/"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faList} />
-                                        <span className="ml-4">Kategoriýalar</span>
-                                    </NavLink>
-                                </li>
-                                <li className="">
-                                    <NavLink to={"/"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faPercent} />
-                                        <span className="ml-4">Skidkalar</span>
-                                    </NavLink>
-                                </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
                                         <FontAwesomeIcon icon={faImage} />
                                         <span className="ml-4">Galereýa</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
-                                    <NavLink to={"/"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faGlobe} />
-                                        <span className="ml-4">Welaýatlar</span>
+                                <li>
+                                    <NavLink to={"posts"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faTags} />
+                                        <span className="ml-4">Arzanladyşlar</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faMessage} />
-                                        <span className="ml-4">Feedback</span>
+                                        <FontAwesomeIcon icon={faList} />
+                                        <span className="ml-4">Kategoriýalar</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faExclamationCircle} />
-                                        <span className="ml-4">Complaints</span>
+                                        <FontAwesomeIcon icon={faTh} />
+                                        <span className="ml-4">Sub kategoriýalar</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
                                         <FontAwesomeIcon icon={faWallet} />
-                                        <span className="ml-4">Payment</span>
+                                        <span className="ml-4">Tölegler</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
                                         <FontAwesomeIcon icon={faBell} />
-                                        <span className="ml-4">Notifications</span>
+                                        <span className="ml-4">Bildirişler</span>
                                     </NavLink>
                                 </li>
-                                <li className="">
+                                <li>
                                     <NavLink to={"/"} className="svg-icon">
                                         <FontAwesomeIcon icon={faFileText} />
-                                        <span className="ml-4">Pages</span>
+                                        <span className="ml-4">Sahypalar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faMessage} />
+                                        <span className="ml-4">Teswirler</span>
                                     </NavLink>
                                 </li>
                             </ul>
