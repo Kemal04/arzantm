@@ -16,6 +16,7 @@ const AdminLayout = () => {
                             <FontAwesomeIcon className="wrapper-menu" icon={faBars} />
                         </div>
                     </div>
+                    {/* kemal */}
                     <div className="data-scrollbar" data-scroll="1">
                         <nav className="iq-sidebar-menu">
                             <ul id="iq-sidebar-toggle" className="iq-menu">
