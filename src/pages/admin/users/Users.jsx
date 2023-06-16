@@ -1,10 +1,10 @@
-import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {toast} from "react-toastify";
+import { faEye, faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 import useFetch from "../../../hooks/useFetch";
 
 const Users = () => {
-    const [users, loading, error] = useFetch("v1/users", "users");
+    const [users, loading, error] = useFetch("v1/user", "users");
 
     if (error) {
         toast.error(error.message);
@@ -38,7 +38,7 @@ const Users = () => {
                                 </tr>
                             </thead>
                             {loading ? (
-                                <tbody>Loading...</tbody>
+                                <tbody><tr><td>Loading...</td></tr></tbody>
                             ) : (
                                 <tbody className="ligth-body">
                                     {/* MAP ETMELI YERI */}
@@ -46,18 +46,18 @@ const Users = () => {
                                         <tr key={index}>
                                             <td>{user.id}</td>
                                             <td>{user.name}</td>
-                                            <td>{user.phone}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.type}</td>
+                                            <td>+993 {user.phone_num}</td>
+                                            <td>{!user.email && "E-mail girizilmedik"}</td>
+                                            <td>{user.role}</td>
                                             <td>
                                                 <div className="d-flex align-items-center list-action">
-                                                    <a className="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
+                                                    <a className="badge badge-primary mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
                                                         <FontAwesomeIcon icon={faEye} className="mr-0" />
                                                     </a>
-                                                    <a className="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
+                                                    <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
                                                         <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                     </a>
-                                                    <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
+                                                    <a className="badge bg-danger mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
                                                         <FontAwesomeIcon icon={faTrash} className="mr-0" />
                                                     </a>
                                                 </div>
