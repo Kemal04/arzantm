@@ -8,7 +8,7 @@ import {Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRea
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotos, AdminPosts, AdminSubCategories, AdminUserCreate, AdminUsers, AdminVideos} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCreate, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotoCreate, AdminPhotos, AdminPostCreate, AdminPosts, AdminSubCategories, AdminSubCategoryCreate, AdminUserCreate, AdminUsers, AdminVideoCreate, AdminVideos, AdminWelayats} from "./pages/admin";
 
 //OTHERS
 import {ToastContainer} from "react-toastify";
@@ -56,6 +56,8 @@ const App = () => {
                         <Route path="/admin" element={<AdminLayout />}>
                             <Route path="" element={<Admin />} />
 
+                            <Route path="welayats" element={<AdminWelayats />} />
+
                             <Route path="users" element={<AdminUsers />} />
                             <Route path='user-create' element={<AdminUserCreate />} />
 
@@ -63,14 +65,27 @@ const App = () => {
                             <Route path="banner-create" element={<AdminBannerCreate />} />
 
                             <Route path="categories" element={<AdminCategories />} />
+                            <Route path="category-create" element={<AdminCategoryCreate />} />
+
                             <Route path="sub-categories" element={<AdminSubCategories />} />
+                            <Route path="sub-category-create" element={<AdminSubCategoryCreate />} />
+
                             <Route path="comments" element={<AdminComments />} />
+
                             <Route path="gallery/photos" element={<AdminPhotos />} />
+                            <Route path="gallery/photo-create" element={<AdminPhotoCreate />} />
+
                             <Route path="gallery/videos" element={<AdminVideos />} />
+                            <Route path="gallery/video-create" element={<AdminVideoCreate />} />
+
                             <Route path="notifications" element={<AdminNotifications />} />
+
                             <Route path="pages" element={<AdminPages />} />
+
                             <Route path="payments" element={<AdminPayments />} />
+
                             <Route path="posts" element={<AdminPosts />} />
+                            <Route path="post-create" element={<AdminPostCreate />} />
                         </Route>
 
                         <Route path="/admin/login" element={<AdminLogin />} />

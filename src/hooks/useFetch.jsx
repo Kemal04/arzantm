@@ -6,7 +6,7 @@ const useFetch = (url, req) => {
     const [error, setError] = useState(null);
     useEffect(() => {
         const fetchTariffs = async () => {
-            const response = await fetch(import.meta.env.VITE_API_FETCH + url, {
+            const response = await fetch(import.meta.env.VITE_API_FETCH_LOCAL + url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
