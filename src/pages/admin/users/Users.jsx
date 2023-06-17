@@ -2,6 +2,7 @@ import { faEye, faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import useFetch from "../../../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 const Users = () => {
     const [users, loading, error] = useFetch("v1/user", "users");
@@ -18,10 +19,10 @@ const Users = () => {
                         <div>
                             <h3 className="mb-3">Ulanyjylar</h3>
                         </div>
-                        <a href="page-add-users.html" className="btn btn-primary add-list">
+                        <Link to="/admin/user-create" className="btn btn-primary add-list">
                             <FontAwesomeIcon icon={faPlus} className="mr-3" />
                             Ulanyjy goş
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="col-lg-12">

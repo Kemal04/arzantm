@@ -13,7 +13,6 @@ const BannerCreate = () => {
 
     return (
         <>
-
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <div className="col-lg-8">

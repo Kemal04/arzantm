@@ -39,7 +39,7 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"gallery/photos"} className="svg-icon">
                                         <FontAwesomeIcon icon={faImage} />
                                         <span className="ml-4">Galereýa</span>
                                     </NavLink>
@@ -51,37 +51,37 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faList} />
                                         <span className="ml-4">Kategoriýalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"sub-categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faTh} />
                                         <span className="ml-4">Sub kategoriýalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"payments"} className="svg-icon">
                                         <FontAwesomeIcon icon={faWallet} />
                                         <span className="ml-4">Tölegler</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"notifications"} className="svg-icon">
                                         <FontAwesomeIcon icon={faBell} />
                                         <span className="ml-4">Bildirişler</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"pages"} className="svg-icon">
                                         <FontAwesomeIcon icon={faFileText} />
                                         <span className="ml-4">Sahypalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/"} className="svg-icon">
+                                    <NavLink to={"comments"} className="svg-icon">
                                         <FontAwesomeIcon icon={faMessage} />
                                         <span className="ml-4">Teswirler</span>
                                     </NavLink>
