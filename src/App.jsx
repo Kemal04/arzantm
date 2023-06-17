@@ -8,7 +8,7 @@ import {Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRea
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBanners, AdminLogin, AdminUsers} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotos, AdminPosts, AdminSubCategories, AdminUserCreate, AdminUsers, AdminVideos} from "./pages/admin";
 
 //OTHERS
 import {ToastContainer} from "react-toastify";
@@ -57,34 +57,20 @@ const App = () => {
                             <Route path="" element={<Admin />} />
 
                             <Route path="users" element={<AdminUsers />} />
-
-                            {/* <Route path='offical/users' element={<AdminOffical />} />
-                            <Route path='top-users' element={<AdminTopUsers />} />
                             <Route path='user-create' element={<AdminUserCreate />} />
-                            <Route path='user-edit/:user_id' element={<AdminUserEdit />} />
-
-                            <Route path='discounts' element={<AdminDiscounts />} />
-                            <Route path='discount-create' element={<AdminDiscountCreate />} />
-                            <Route path='discount-edit/:discountId' element={<AdminDiscountEdit />} />
-
-                            <Route path='gallery/photo' element={<AdminPhoto />} />
-                            <Route path='gallery/photo-create' element={<AdminPhotoCreate />} />
-                            <Route path='gallery/video' element={<AdminVideo />} />
-                            <Route path='gallery/video-create' element={<AdminVideoCreate />} /> */}
 
                             <Route path="banners" element={<AdminBanners />} />
                             <Route path="banner-create" element={<AdminBannerCreate />} />
-                            {/* <Route path='web/banner-create' element={<AdminWebBannerCreate />} />
-                            <Route path='web/banner-edit/:bannerId' element={<AdminWebBannerEdit />} />
 
-                            <Route path='web/categories' element={<AdminWebCategory />} />
-                            <Route path='web/category-create' element={<AdminWebCategoryCreate />} />
-
-                            <Route path='app/banners' element={<AdminAppBanners />} />
-                            <Route path='app/banner-create' element={<AdminAppBannerCreate />} />
-
-                            <Route path='app/categories' element={<AdminAppCategory />} />
-                            <Route path='app/category-create' element={<AdminAppCategoryCreate />} /> */}
+                            <Route path="categories" element={<AdminCategories />} />
+                            <Route path="sub-categories" element={<AdminSubCategories />} />
+                            <Route path="comments" element={<AdminComments />} />
+                            <Route path="gallery/photos" element={<AdminPhotos />} />
+                            <Route path="gallery/videos" element={<AdminVideos />} />
+                            <Route path="notifications" element={<AdminNotifications />} />
+                            <Route path="pages" element={<AdminPages />} />
+                            <Route path="payments" element={<AdminPayments />} />
+                            <Route path="posts" element={<AdminPosts />} />
                         </Route>
 
                         <Route path="/admin/login" element={<AdminLogin />} />
