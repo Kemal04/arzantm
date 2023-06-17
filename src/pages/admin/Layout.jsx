@@ -1,6 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMessage, faTags, faTh, faUsers, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faTags, faTh, faUsers, faVideo, faWallet } from "@fortawesome/free-solid-svg-icons";
 import "../../Admin.css";
 
 const AdminLayout = () => {
@@ -41,7 +41,13 @@ const AdminLayout = () => {
                                 <li>
                                     <NavLink to={"gallery/photos"} className="svg-icon">
                                         <FontAwesomeIcon icon={faImage} />
-                                        <span className="ml-4">Galereýa</span>
+                                        <span className="ml-4">Suratlar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"gallery/videos"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faVideo} />
+                                        <span className="ml-4">Wideolar</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -60,6 +66,12 @@ const AdminLayout = () => {
                                     <NavLink to={"sub-categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faTh} />
                                         <span className="ml-4">Sub kategoriýalar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"welayats"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faMapLocationDot} />
+                                        <span className="ml-4">Welayatlar</span>
                                     </NavLink>
                                 </li>
                                 <li>

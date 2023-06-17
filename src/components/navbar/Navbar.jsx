@@ -5,8 +5,8 @@ import { Link, NavLink } from 'react-router-dom';
 //COMPONENTS
 import Auth from '../auth/Auth';
 import CheckSms from '../auth/CheckSms';
-import User from '../users/User';
-import Offical from '../users/Offical';
+// import User from '../users/User';
+// import Offical from '../users/Offical';
 
 //IMAGES
 import logo from '../../assets/logo/logo.svg'

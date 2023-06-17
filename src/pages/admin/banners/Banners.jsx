@@ -1,4 +1,4 @@
-import { faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe, faMobileAlt, faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import useFetch from "../../../hooks/useFetch";
@@ -18,14 +18,39 @@ const Banners = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <div>
-                                <h3 className="mb-3">Bannerler</h3>
-                            </div>
+                            <h3 className="mb-3">Bannerler</h3>
                             <Link to="/admin/banner-create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Banner goş
                             </Link>
                         </div>
+                    </div>
+                    <div className="col-xl-10">
+                        <ul className="nav nav-pills" id="pills-tab" role="tablist">
+                            <li className="nav-item" role="presentation">
+                                <button style={{ borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500" }} className="text-dark nav-link active px-5 bg-light" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                    <FontAwesomeIcon icon={faMobileAlt} className="me-2" />
+                                    App Banner
+                                </button>
+                            </li>
+                            <li className="nav-item" role="presentation">
+                                <button style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500" }} className="text-dark nav-link px-5 bg-light" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                    <FontAwesomeIcon icon={faGlobe} className="me-2" />
+                                    Web Banner
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-xl-2 mb-4">
+                        <select className="form-control" id="validationDefault04" required>
+                            <option defaultValue>Welayats</option>
+                            <option value="Ashgabat">Ashgabat</option>
+                            <option value="Ahal">Ahal</option>
+                            <option value="Mary">Mary</option>
+                            <option value="Lebap">Lebap</option>
+                            <option value="Dashoguz">Dashoguz</option>
+                            <option value="Balkan">Balkan</option>
+                        </select>
                     </div>
                     <div className="col-lg-12">
                         {loading ? (
