@@ -1,14 +1,98 @@
-import { useState } from "react";
-import img_icon from '../../../assets/icons/img.svg'
+import {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-hot-toast";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import img_icon from "../../../assets/icons/img.svg";
+import useFetch from "../../../hooks/useFetch";
 
 const BannerCreate = () => {
+    const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const title = useRef("");
+    const url = useRef("");
+    const start_date = useRef("");
+    const end_date = useRef("");
+    const page_id = useRef("");
+    const platform_id = useRef("");
+    const location_id = useRef("");
+    const [description, setDescription] = useState();
 
-    const [image, setImage] = useState(null)
+    const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState();
 
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined);
+            return;
         }
+
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setPreview(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile]);
+
+    const onSelectFile = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined);
+            return;
+        }
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const [locations, error] = useFetch("api/v1/location/list", "data");
+
+    if (error) {
+        toast.error(error);
+    }
+
+    const pages = [
+        {id: 1, page: "Home"},
+        {id: 2, page: "Photo"},
+        {id: 3, page: "Video"},
+    ];
+
+    const platforms = [
+        {id: 1, platform: "WEB"},
+        {id: 2, platform: "APP"},
+    ];
+
+    async function submitHandler(event) {
+        setIsSubmitting(true);
+        event.preventDefault();
+
+        const bannerData = new FormData();
+        bannerData.append("title", title.current.value);
+        bannerData.append("url", url.current.value);
+        bannerData.append("start_date", start_date.current.value);
+        bannerData.append("end_date", end_date.current.value);
+        bannerData.append("page_id", page_id.current.value);
+        bannerData.append("location_id", location_id.current.value);
+        bannerData.append("description", description);
+        bannerData.append("platform_id", platform_id.current.value);
+        bannerData.append("image", selectedFile);
+        
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/banner`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+            },
+            body: bannerData,
+        });
+
+        const resData = await response.json();
+        console.log(resData);
+        if (resData.status === false) {
+            toast.error(resData.message);
+            setIsSubmitting(false);
+        }
+        if (resData.status === true) {
+            toast.success(resData.message);
+            setIsSubmitting(false);
+            return navigate(-1);
+        }
+        setIsSubmitting(false);
     }
 
     return (
@@ -21,81 +105,97 @@ const BannerCreate = () => {
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
-                        <form>
+                        <form onSubmit={submitHandler} id="form" encType="multipart/form-data">
                             <div className="form-row">
-                                <div className='col-xl-12 mb-4'>
-                                    {
-                                        image === null
-                                            ?
-                                            <>
-                                                <label className='label text-center d-flex justify-content-center align-items-center flex-column' htmlFor="upload">
-                                                    <img src={img_icon} alt="" className='img-fluid mb-2' />
-                                                    <div className='text-green'>Surat goş</div>
-                                                </label>
+                                <div className="col-xl-12 mb-4">
+                                    {!selectedFile ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
 
-                                                <input type="file" name="banner_img" id="upload" hidden onChange={onImageChange} />
-                                            </>
-                                            :
-                                            <>
-                                                <img alt="" src={image} className='img-fluid' />
-                                            </>
-                                    }
+                                            <input type="file" id="image" className="form-control" name="image" onChange={onSelectFile} hidden />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <img alt="" src={preview} className="img-fluid" />
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="validationDefault02">Title</label>
-                                    <input type="text" className="form-control" id="validationDefault02" required />
+                                    <input type="text" className="form-control" id="title" name="title" ref={title} required />
                                 </div>
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="validationDefault02">Note</label>
-                                    <textarea type="number" className="form-control" id="validationDefault02" required rows={6}></textarea>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        data=""
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            setDescription(data);
+                                        }}
+                                    />
                                 </div>
-                                <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Url</label>
-                                    <input type="text" className="form-control" id="validationDefault02" required />
-                                </div>
-                                <div className="col-md-6 mb-3">
+                                {/* <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault02">Priority</label>
                                     <input type="number" className="form-control" id="validationDefault02" required />
-                                </div>
+                                </div> */}
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault01">Start Date</label>
-                                    <input type="date" className="form-control" id="validationDefault01" required />
+                                    <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault02">End Date</label>
-                                    <input type="date" className="form-control" id="validationDefault02" required />
+                                    <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} required />
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="validationDefault02">Url</label>
+                                    <input type="text" className="form-control" id="url" name="url" ref={url} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault04">Welayats</label>
-                                    <select className="form-control" id="validationDefault04" required>
-                                        <option defaultValue>Welayats</option>
-                                        <option value="Ashgabat">Ashgabat</option>
-                                        <option value="Ahal">Ahal</option>
-                                        <option value="Mary">Mary</option>
-                                        <option value="Lebap">Lebap</option>
-                                        <option value="Dashoguz">Dashoguz</option>
-                                        <option value="Balkan">Balkan</option>
+                                    <select className="form-select" name="location_id" id="location_id" ref={location_id}>
+                                        {locations?.map((location, index) => (
+                                            <option key={index} value={location.id}>
+                                                {location.name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault04">Pages</label>
-                                    <select className="form-control" id="validationDefault04" required>
-                                        <option defaultValue>Pages</option>
-                                        <option value="Home page">Home page</option>
-                                        <option value="Foto page">Foto pagel</option>
-                                        <option value="Video page">Video page</option>
+                                    <select className="form-select" name="page_id" id="page_id" ref={page_id}>
+                                        {pages?.map((page, index) => (
+                                            <option key={index} value={page.id}>
+                                                {page.page}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="validationDefault04">Platform</label>
+                                    <select className="form-select" name="platform_id" id="platform_id" ref={platform_id}>
+                                        {platforms?.map((platform, index) => (
+                                            <option key={index} value={platform.id}>
+                                                {platform.platform}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
-                                <button className="btn btn-green" type="submit">Submit</button>
+                                <button className="btn btn-green" disabled={isSubmitting}>
+                                    {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default BannerCreate
+export default BannerCreate;
