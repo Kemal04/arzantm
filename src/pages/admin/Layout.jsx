@@ -1,11 +1,11 @@
-import {Link, NavLink, Navigate, Outlet} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faTags, faTh, faUsers, faVideo, faWallet} from "@fortawesome/free-solid-svg-icons";
-import {useAuth} from "../../context/AuthContext";
+import { Link, NavLink, Navigate, Outlet } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../context/AuthContext";
 import "../../Admin.css";
 
 const AdminLayout = () => {
-    const {admin, setAdmin, isLoggedIn, setIsLoggedIn} = useAuth();
+    const { admin, setAdmin, isLoggedIn, setIsLoggedIn } = useAuth();
 
     const logout = () => {
         setIsLoggedIn(false);
@@ -118,16 +118,12 @@ const AdminLayout = () => {
                         </nav>
                     </div>
                 </div>
-                <div className="iq-top-navbar">
+                <div className="iq-top-navbar" style={{minHeight:"0"}}>
                     <div className="iq-navbar-custom">
-                        <nav className="navbar navbar-expand-lg navbar-light justify-content-end p-0">
+                        <nav className="navbar navbar-light py-3 justify-content-end">
                             <div className="d-flex align-items-center">
-                                <button
-                                    className="btn"
-                                    onClick={() => {
-                                        logout();
-                                    }}
-                                >
+                                <button className="btn btn-outline-green" onClick={() => { logout() }} >
+                                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2"/>
                                     Log out
                                 </button>
                             </div>
@@ -140,7 +136,7 @@ const AdminLayout = () => {
             </div>
             <footer className="iq-footer">
                 <div className="container-fluid">
-                    <div className="card">
+                    <div className="card border-0 mb-2">
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-lg-6">

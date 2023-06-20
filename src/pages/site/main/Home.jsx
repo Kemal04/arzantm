@@ -55,7 +55,7 @@ const Home = () => {
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-                    <div className='col-xl-auto mb-5'>
+                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
                         <div className='position-relative card-about'>
                             <img src={img_1} alt="About Us" className='img-fluid' />
                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -66,7 +66,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-xl-auto mb-5'>
+                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
                         <div className='position-relative card-about'>
                             <img src={img_2} alt="About Us" className='img-fluid' />
                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -77,7 +77,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-xl-auto mb-5'>
+                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
                         <div className='position-relative card-about'>
                             <img src={img_3} alt="About Us" className='img-fluid' />
                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -88,7 +88,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-xl-auto mb-5'>
+                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
                         <div className='position-relative card-about'>
                             <img src={img_4} alt="About Us" className='img-fluid' />
                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -99,7 +99,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-xl-auto mb-5'>
+                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
                         <div className='position-relative card-about'>
                             <img src={img_5} alt="About Us" className='img-fluid' />
                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -116,23 +116,23 @@ const Home = () => {
             {/* OTHERS */}
             <div className='container'>
                 <div className='row text-center'>
-                    <div className='col-xl-12 mb-4'>
+                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={konkurs} alt="" className='img-fluid w-100' />
                     </div>
-                    <div className='col-xl-12 mb-4'>
+                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={top} alt="" className='img-fluid w-100' />
                     </div>
-                    <div className='col-xl-6 mb-4'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
                         <Link to='/foto'>
                             <img src={foto} alt="" className='img-fluid w-100' />
                         </Link>
                     </div>
-                    <div className='col-xl-6 mb-4'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
                         <Link to='/video'>
                             <img src={video} alt="" className='img-fluid w-100' />
                         </Link>
                     </div>
-                    <div className='col-xl-12 mb-4'>
+                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={offical} alt="" className='img-fluid w-100' />
                     </div>
                 </div>
@@ -146,7 +146,7 @@ const Home = () => {
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_1} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -164,7 +164,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_2} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -182,7 +182,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_3} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -200,7 +200,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_4} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -218,7 +218,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_5} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -236,9 +236,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='row justify-content-between mt-1'>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_6} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -256,7 +254,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_7} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -274,7 +272,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_8} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -292,7 +290,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_9} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
@@ -310,7 +308,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-auto mb-3'>
+                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
                         <div className='card rounded-1' style={{ width: "230px" }}>
                             <img src={cheap_10} alt="" className='img-fluid' />
                             <div className='position-absolute p-2 end-0'>
