@@ -13,9 +13,9 @@ const BannerCreate = () => {
     const url = useRef("");
     const start_date = useRef("");
     const end_date = useRef("");
-    const page_id = useRef("");
     const platform_id = useRef("");
-    const location_id = useRef("");
+    const [selectedPages, setSelectedPages] = useState([]);
+    const [selectedLocations, setSelectedLocations] = useState([]);
     const [description, setDescription] = useState();
 
     const [selectedFile, setSelectedFile] = useState();
@@ -41,22 +41,34 @@ const BannerCreate = () => {
         setSelectedFile(e.target.files[0]);
     };
 
-    const [locations, error] = useFetch("api/v1/location/list", "data");
+    const handleSelectPages = function (selectedItems) {
+        const pages = [];
+        for (let i = 0; i < selectedItems.length; i++) {
+            pages.push(Number(selectedItems[i].value));
+        }
+        setSelectedPages(pages);
+    };
 
-    if (error) {
-        toast.error(error);
+    const handleSelectLocations = function (selectedItems) {
+        const pages = [];
+        console.log(typeof Number(selectedItems[0].value));
+        for (let i = 0; i < selectedItems.length; i++) {
+            pages.push(Number(selectedItems[i].value));
+        }
+        setSelectedLocations(pages);
+    };
+
+    const [locations, error_location] = useFetch("api/v1/location/list", "data");
+    const [pages, error_page] = useFetch("api/v1/page/list", "data");
+    const [platforms, error_platform] = useFetch("api/v1/platform/list", "data");
+
+    if (error_location) {
+        toast.error(error_location);
+    } else if (error_page) {
+        toast.error(error_page);
+    } else if (error_platform) {
+        toast.error(error_platform);
     }
-
-    const pages = [
-        {id: 1, page: "Home"},
-        {id: 2, page: "Photo"},
-        {id: 3, page: "Video"},
-    ];
-
-    const platforms = [
-        {id: 1, platform: "WEB"},
-        {id: 2, platform: "APP"},
-    ];
 
     async function submitHandler(event) {
         setIsSubmitting(true);
@@ -67,13 +79,13 @@ const BannerCreate = () => {
         bannerData.append("url", url.current.value);
         bannerData.append("start_date", start_date.current.value);
         bannerData.append("end_date", end_date.current.value);
-        bannerData.append("page_id", page_id.current.value);
-        bannerData.append("location_id", location_id.current.value);
+        bannerData.append("page_ids", JSON.stringify(selectedPages));
+        bannerData.append("location_ids", JSON.stringify(selectedLocations));
         bannerData.append("description", description);
         bannerData.append("platform_id", platform_id.current.value);
         bannerData.append("image", selectedFile);
-        
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/banner`, {
+
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/banner`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -156,7 +168,16 @@ const BannerCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault04">Welayats</label>
-                                    <select className="form-select" name="location_id" id="location_id" ref={location_id}>
+                                    <select
+                                        className="form-select"
+                                        name="location_id"
+                                        id="location_id"
+                                        multiple={true}
+                                        value={selectedLocations}
+                                        onChange={(e) => {
+                                            handleSelectLocations(e.target.selectedOptions);
+                                        }}
+                                    >
                                         {locations?.map((location, index) => (
                                             <option key={index} value={location.id}>
                                                 {location.name}
@@ -166,10 +187,19 @@ const BannerCreate = () => {
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault04">Pages</label>
-                                    <select className="form-select" name="page_id" id="page_id" ref={page_id}>
+                                    <select
+                                        className="form-select"
+                                        name="page_id"
+                                        id="page_id"
+                                        multiple={true}
+                                        value={selectedPages}
+                                        onChange={(e) => {
+                                            handleSelectPages(e.target.selectedOptions);
+                                        }}
+                                    >
                                         {pages?.map((page, index) => (
                                             <option key={index} value={page.id}>
-                                                {page.page}
+                                                {page.name}
                                             </option>
                                         ))}
                                     </select>
@@ -179,7 +209,7 @@ const BannerCreate = () => {
                                     <select className="form-select" name="platform_id" id="platform_id" ref={platform_id}>
                                         {platforms?.map((platform, index) => (
                                             <option key={index} value={platform.id}>
-                                                {platform.platform}
+                                                {platform.name}
                                             </option>
                                         ))}
                                     </select>

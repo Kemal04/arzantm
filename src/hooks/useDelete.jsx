@@ -1,7 +1,7 @@
 import {toast} from "react-hot-toast";
 
 const handleDelete = async (id, url, data) => {
-    const response = await fetch(import.meta.env.VITE_API_FETCH_LOCAL + url + id, {
+    const response = await fetch(import.meta.env.VITE_API_FETCH_ACTIVE + url + id, {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${localStorage.getItem("adACto")}`,

@@ -37,7 +37,7 @@ const CategoryCreate = () => {
         categoryData.append("name", name.current.value);
         categoryData.append("image", selectedFile);
         
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/category`, {
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/category`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
