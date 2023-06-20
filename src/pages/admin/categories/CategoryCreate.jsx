@@ -1,16 +1,63 @@
-import { useState } from 'react'
-import img_icon from '../../../assets/icons/img.svg'
+import {useEffect, useRef, useState} from "react";
+import img_icon from "../../../assets/icons/img.svg";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 const CategoryCreate = () => {
+    const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const name = useRef("");
 
-    const [image, setImage] = useState(null)
+    const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState();
 
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined);
+            return;
         }
-    }
+        const objectUrl = URL.createObjectURL(selectedFile);
+        setPreview(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [selectedFile]);
 
+    const onSelectFile = (e) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined);
+            return;
+        }
+        setSelectedFile(e.target.files[0]);
+    };
+
+    async function submitHandler(event) {
+        setIsSubmitting(true);
+        event.preventDefault();
+
+        const categoryData = new FormData();
+        categoryData.append("name", name.current.value);
+        categoryData.append("image", selectedFile);
+        
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/category`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
+            },
+            body: categoryData,
+        });
+
+        const resData = await response.json();
+        console.log(resData);
+        if (resData.status === false) {
+            toast.error(resData.message);
+            setIsSubmitting(false);
+        }
+        if (resData.status === true) {
+            toast.success(resData.message);
+            setIsSubmitting(false);
+            return navigate(-1);
+        }
+        setIsSubmitting(false);
+    }
     return (
         <>
             <div className="container-fluid">
@@ -21,44 +68,44 @@ const CategoryCreate = () => {
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
-                        <form>
+                        <form onSubmit={submitHandler} id="form" encType="multipart/form-data">
                             <div className="form-row">
-                                <div className='col-xl-7 mb-4'>
-                                    {
-                                        image === null
-                                            ?
-                                            <>
-                                                <label className='label text-center d-flex justify-content-center align-items-center flex-column' htmlFor="upload">
-                                                    <img src={img_icon} alt="" className='img-fluid mb-2' />
-                                                    <div className='text-green'>Surat goş</div>
-                                                </label>
+                                <div className="col-xl-7 mb-4">
+                                    {!selectedFile ? (
+                                        <>
+                                            <label className="label text-center d-flex justify-content-center align-items-center flex-column" htmlFor="image">
+                                                <img src={img_icon} alt="" className="img-fluid mb-2" />
+                                                <div className="text-green">Surat goş</div>
+                                            </label>
 
-                                                <input type="file" name="banner_img" id="upload" hidden onChange={onImageChange} />
-                                            </>
-                                            :
-                                            <>
-                                                <img alt="" src={image} className='img-fluid' />
-                                            </>
-                                    }
+                                            <input type="file" id="image" className="form-control" name="image" onChange={onSelectFile} hidden />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <img alt="" src={preview} className="img-fluid" />
+                                        </>
+                                    )}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Title</label>
-                                    <input type="text" className="form-control" id="validationDefault02" required />
+                                    <label htmlFor="validationDefault02">Name</label>
+                                    <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
-                                <div className="col-md-6 mb-3">
+                                {/* <div className="col-md-6 mb-3">
                                     <label htmlFor="validationDefault02">Priority</label>
                                     <input type="number" className="form-control" id="validationDefault02" required />
-                                </div>
+                                </div> */}
                             </div>
                             <div className="form-group d-grid mt-3 mb-5">
-                                <button className="btn btn-green" type="submit">Submit</button>
+                                <button className="btn btn-green" disabled={isSubmitting}>
+                                    {isSubmitting ? "Tassyklanýar..." : "Tassykla"}
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default CategoryCreate
+export default CategoryCreate;

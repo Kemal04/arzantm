@@ -16,7 +16,7 @@ const useFetch = (url, req) => {
                 return response;
             }
             if (!response.ok) {
-                setError(response.status);
+                setError(response.message);
                 setLoading(false);
             }
             const resData = await response.json();
