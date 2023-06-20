@@ -18,7 +18,7 @@ const Login = () => {
             email: email.current.value,
             password: password.current.value,
         };
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/account/login`, {
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/account/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

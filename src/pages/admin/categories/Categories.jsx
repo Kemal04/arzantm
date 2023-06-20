@@ -10,7 +10,7 @@ const Categories = () => {
 
     const fetchData = async () => {
         setIsLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/category`, {
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/category`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Categories = () => {
     const handleDelete = async (e, id) => {
         e.preventDefault();
         console.log(id);
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/category/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/category/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
