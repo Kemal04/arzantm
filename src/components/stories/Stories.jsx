@@ -16,8 +16,8 @@ const Stories = () => {
         breakpoints:
         {
             991: { perPage: 10, gap: '1.5rem', },
-            768: { perPage: 3, gap: '1.5rem', },
-            575: { perPage: 1, gap: '1rem', },
+            768: { perPage: 6, gap: '1.5rem', },
+            575: { perPage: 4, gap: '1rem', },
         }
     };
 

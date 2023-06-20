@@ -1,23 +1,29 @@
-import {useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {toast} from "react-hot-toast";
-import {useAuth} from "../../../context/AuthContext";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useAuth } from "../../../context/AuthContext";
 import login_img from "../../../assets/auth/login.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import not_see from '../../../assets/icons/not-see.svg'
 
 const Login = () => {
-    const {setAdmin, setIsLoggedIn} = useAuth();
+    const { setAdmin, setIsLoggedIn } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
     const email = useRef("");
     const password = useRef("");
 
     const submitHandler = async (e) => {
-        setIsSubmitting(true);
         e.preventDefault();
+
+        setIsSubmitting(true);
+
         const loginData = {
             email: email.current.value,
             password: password.current.value,
         };
+
         const response = await fetch(`${import.meta.env.VITE_API_FETCH_LOCAL}admin/account/login`, {
             method: "POST",
             headers: {
@@ -27,7 +33,7 @@ const Login = () => {
         });
 
         const resData = await response.json();
-        console.log(resData);
+
         if (resData.status === false) {
             toast.error(resData.message);
             setIsSubmitting(false);
@@ -41,6 +47,7 @@ const Login = () => {
             localStorage.setItem("adACto", token);
 
             setIsLoggedIn(true);
+
             setAdmin({
                 id: 1,
                 role: "Admin",
@@ -52,6 +59,15 @@ const Login = () => {
 
         setIsSubmitting(false);
     };
+
+
+    //PASSWORD SHOW
+    const [isVisible1, setVisible1] = useState(false);
+
+    const toggle1 = () => {
+        setVisible1(!isVisible1);
+    };
+
     return (
         <>
             <section className="login-content">
@@ -73,9 +89,12 @@ const Login = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-12">
-                                                        <div className="floating-label form-group">
-                                                            <input className="floating-input form-control" id="password" type="password" name="password" placeholder=" " ref={password} required />
-                                                            <label>Parol</label>
+                                                        <div className="floating-label form-group input-group">
+                                                            <input className="floating-input form-control " type={!isVisible1 ? "password" : "text"} id="password" name="password" placeholder=" " ref={password} required />
+                                                            <label className="top-0 px-2 bg-white">Parol</label>
+                                                            <span className="input-group-text bg-white border-start-0" style={{ cursor: "pointer" }} onClick={toggle1}>
+                                                                {isVisible1 ? <FontAwesomeIcon icon={faEye} className='text-muted' /> : <img src={not_see} alt="" className='img-fluid' />}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
