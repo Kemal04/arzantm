@@ -1,8 +1,8 @@
-import { faEye, faPen, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom";
+import {toast} from "react-hot-toast";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
-import { toast } from "react-toastify";
 
 const Welayats = () => {
     const [welayats, loading, error] = useFetch("v1/location/list", "data");
@@ -35,7 +35,11 @@ const Welayats = () => {
                                     </tr>
                                 </thead>
                                 {loading ? (
-                                    <tbody><tr><td>Loading...</td></tr></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td>Loading...</td>
+                                        </tr>
+                                    </tbody>
                                 ) : (
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
@@ -65,9 +69,9 @@ const Welayats = () => {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         </>
-    )
-}
+    );
+};
 
-export default Welayats
+export default Welayats;
