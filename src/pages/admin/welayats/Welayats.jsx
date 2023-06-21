@@ -5,7 +5,7 @@ import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../../hooks/useFetch";
 
 const Welayats = () => {
-    const [welayats, loading, error] = useFetch("v1/location/list", "data");
+    const [welayats, loading, error] = useFetch("/api/v1/location/list", "data");
 
     if (error) {
         toast.error(error.message);

@@ -18,7 +18,7 @@ const useFetch = (url, req, useToken) => {
             };
         }
         const fetchTariffs = async () => {
-            const response = await fetch(import.meta.env.VITE_API_FETCH_ACTIVE + url, {
+            const response = await fetch(url, {
                 method: "GET",
                 headers: header,
             });

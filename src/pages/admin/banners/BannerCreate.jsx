@@ -58,9 +58,9 @@ const BannerCreate = () => {
         setSelectedLocations(pages);
     };
 
-    const [locations, error_location] = useFetch("api/v1/location/list", "data");
-    const [pages, error_page] = useFetch("api/v1/page/list", "data");
-    const [platforms, error_platform] = useFetch("api/v1/platform/list", "data");
+    const [locations, error_location] = useFetch("/api/v1/location/list", "data");
+    const [pages, error_page] = useFetch("/api/v1/page/list", "data");
+    const [platforms, error_platform] = useFetch("/api/v1/platform/list", "data");
 
     if (error_location) {
         toast.error(error_location);
@@ -85,7 +85,7 @@ const BannerCreate = () => {
         bannerData.append("platform_id", platform_id.current.value);
         bannerData.append("image", selectedFile);
 
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/banner`, {
+        const response = await fetch(`/admin-api/banner`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
