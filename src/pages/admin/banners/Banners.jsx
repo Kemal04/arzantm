@@ -15,8 +15,8 @@ const Banners = () => {
     const [banners, setBanners] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [locations, error_location] = useFetch("api/v1/location/list", "data");
-    const [pages, error_page] = useFetch("api/v1/page/list", "data");
+    const [locations, error_location] = useFetch("/api/v1/location/list", "data");
+    const [pages, error_page] = useFetch("/api/v1/page/list", "data");
 
     if (error_location) {
         toast.error(error_location);
@@ -26,7 +26,7 @@ const Banners = () => {
 
     const fetchData = async (data) => {
         setIsLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/banner?` + new URLSearchParams(data), {
+        const response = await fetch(`/admin-api/banner?` + new URLSearchParams(data), {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -49,13 +49,13 @@ const Banners = () => {
     }, [urlParams]);
 
     useEffect(() => {
-        console.log(urlParams);
-    }, [urlParams]);
+        console.log(banners);
+    }, [banners]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
         console.log(id);
-        const response = await fetch(`${import.meta.env.VITE_API_FETCH_ACTIVE}admin/banner/${id}`, {
+        const response = await fetch(`/admin-api/banner/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -211,10 +211,10 @@ const Banners = () => {
                                                         <b>Type</b> - {banner.type}
                                                     </li> */}
                                                     <li>
-                                                        <b>Welayat</b> - {banner.location_ids.map((id) => locations.find((el) => el.id == id).name)}
+                                                        <b>Welayat</b> - {banner.location_ids.map((id) => locations?.find((el) => el.id == id).name)}
                                                     </li>
                                                     <li>
-                                                        <b>Pages</b> - {banner.page_ids.map((id) => pages.find((el) => el.id == id).name)}
+                                                        <b>Pages</b> - {banner.page_ids.map((id) => pages?.find((el) => el.id == id).name)}
                                                     </li>
                                                 </ul>
                                                 <div className="d-flex justify-content-between align-items-center">
