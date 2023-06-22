@@ -10,7 +10,7 @@ const Posts = () => {
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Posts</h3>
-                            <Link to="/admin/post-create" className="btn btn-primary add-list">
+                            <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Post goş
                             </Link>

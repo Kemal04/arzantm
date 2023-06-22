@@ -58,17 +58,9 @@ const BannerCreate = () => {
         setSelectedLocations(pages);
     };
 
-    const [locations, error_location] = useFetch("/api/v1/location/list", "data");
-    const [pages, error_page] = useFetch("/api/v1/page/list", "data");
-    const [platforms, error_platform] = useFetch("/api/v1/platform/list", "data");
-
-    if (error_location) {
-        toast.error(error_location);
-    } else if (error_page) {
-        toast.error(error_page);
-    } else if (error_platform) {
-        toast.error(error_platform);
-    }
+    const [locations] = useFetch("/api/v1/location/list", "data");
+    const [pages] = useFetch("/api/v1/page/list", "data");
+    const [platforms] = useFetch("/api/v1/platform/list", "data");
 
     async function submitHandler(event) {
         setIsSubmitting(true);
@@ -136,11 +128,11 @@ const BannerCreate = () => {
                                     )}
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="validationDefault02">Title</label>
+                                    <label htmlFor="title">Title</label>
                                     <input type="text" className="form-control" id="title" name="title" ref={title} required />
                                 </div>
                                 <div className="col-md-12 mb-3">
-                                    <label htmlFor="validationDefault02">Note</label>
+                                    <label htmlFor="">Description</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         data=""
@@ -155,19 +147,19 @@ const BannerCreate = () => {
                                     <input type="number" className="form-control" id="validationDefault02" required />
                                 </div> */}
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault01">Start Date</label>
+                                    <label htmlFor="start_date">Start Date</label>
                                     <input type="date" className="form-control" id="start_date" name="start_date" ref={start_date} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">End Date</label>
+                                    <label htmlFor="end_date">End Date</label>
                                     <input type="date" className="form-control" id="end_date" name="end_date" ref={end_date} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Url</label>
+                                    <label htmlFor="url">Url</label>
                                     <input type="text" className="form-control" id="url" name="url" ref={url} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault04">Welayats</label>
+                                    <label htmlFor="location_id">Welayats</label>
                                     <select
                                         className="form-select"
                                         name="location_id"
@@ -186,7 +178,7 @@ const BannerCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault04">Pages</label>
+                                    <label htmlFor="page_id">Pages</label>
                                     <select
                                         className="form-select"
                                         name="page_id"
@@ -205,7 +197,7 @@ const BannerCreate = () => {
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault04">Platform</label>
+                                    <label htmlFor="platform_id">Platform</label>
                                     <select className="form-select" name="platform_id" id="platform_id" ref={platform_id}>
                                         {platforms?.map((platform, index) => (
                                             <option key={index} value={platform.id}>

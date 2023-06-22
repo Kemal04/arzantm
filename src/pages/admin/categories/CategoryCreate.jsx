@@ -87,7 +87,7 @@ const CategoryCreate = () => {
                                     )}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label htmlFor="validationDefault02">Name</label>
+                                    <label htmlFor="name">Name</label>
                                     <input type="text" className="form-control" id="name" name="name" ref={name} required />
                                 </div>
                                 {/* <div className="col-md-6 mb-3">

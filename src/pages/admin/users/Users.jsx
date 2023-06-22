@@ -17,7 +17,7 @@ const Users = () => {
                 <div className="col-lg-12 mb-4">
                     <div className="d-flex flex-wrap align-items-center justify-content-between">
                         <h3>Ulanyjylar</h3>
-                        <Link to="/admin/user-create" className="btn btn-primary add-list">
+                        <Link to="create" className="btn btn-primary add-list">
                             <FontAwesomeIcon icon={faPlus} className="mr-3" />
                             Ulanyjy goş
                         </Link>
@@ -77,28 +77,32 @@ const Users = () => {
                             ) : (
                                 <tbody className="ligth-body">
                                     {/* MAP ETMELI YERI */}
-                                    {users?.map((user, index) => (
-                                        <tr key={index}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
-                                            <td>+993 {user.phone_num}</td>
-                                            <td>{!user.email && "E-mail girizilmedik"}</td>
-                                            <td>{user.role}</td>
-                                            <td>
-                                                <div className="d-flex align-items-center list-action">
-                                                    <a className="badge badge-primary mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
-                                                        <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                    </a>
-                                                    <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
-                                                        <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                    </a>
-                                                    <a className="badge bg-danger mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
-                                                        <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {users?.length > 0 ? (
+                                        users?.map((user, index) => (
+                                            <tr key={index}>
+                                                <td>{user.id}</td>
+                                                <td>{user.name}</td>
+                                                <td>+993 {user.phone_num}</td>
+                                                <td>{!user.email && "E-mail girizilmedik"}</td>
+                                                <td>{user.role}</td>
+                                                <td>
+                                                    <div className="d-flex align-items-center list-action">
+                                                        <a className="badge badge-primary mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
+                                                            <FontAwesomeIcon icon={faEye} className="mr-0" />
+                                                        </a>
+                                                        <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
+                                                            <FontAwesomeIcon icon={faPen} className="mr-0" />
+                                                        </a>
+                                                        <a className="badge bg-danger mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
+                                                            <FontAwesomeIcon icon={faTrash} className="mr-0" />
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <div>Maglumat yok</div>
+                                    )}
                                     {/* MAP ETMELI YERI */}
                                 </tbody>
                             )}

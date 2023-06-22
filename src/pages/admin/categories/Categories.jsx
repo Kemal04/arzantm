@@ -63,7 +63,7 @@ const Categories = () => {
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Categories</h3>
-                            <Link to="/admin/category-create" className="btn btn-primary add-list">
+                            <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Category goş
                             </Link>
@@ -91,29 +91,33 @@ const Categories = () => {
                                 ) : (
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
-                                        {categories?.map((category, index) => (
-                                            <tr key={index}>
-                                                <td>{index + 1}</td>
-                                                <td>{category.id}</td>
-                                                <td>
-                                                    <img src={category.image} alt="" style={{height: "65px"}} />
-                                                </td>
-                                                <td>{category.name}</td>
-                                                <td>
-                                                    <div className="d-flex align-items-center list-action">
-                                                        <button className="badge badge-primary mr-2">
-                                                            <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                        </button>
-                                                        <button className="badge bg-warning mr-2">
-                                                            <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                        </button>
-                                                        <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, category.id)}>
-                                                            <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {categories?.length > 0 ? (
+                                            categories?.map((category, index) => (
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{category.id}</td>
+                                                    <td>
+                                                        <img src={category.image} alt="" style={{height: "65px"}} />
+                                                    </td>
+                                                    <td>{category.name}</td>
+                                                    <td>
+                                                        <div className="d-flex align-items-center list-action">
+                                                            <button className="badge badge-primary mr-2">
+                                                                <FontAwesomeIcon icon={faEye} className="mr-0" />
+                                                            </button>
+                                                            <button className="badge bg-warning mr-2">
+                                                                <FontAwesomeIcon icon={faPen} className="mr-0" />
+                                                            </button>
+                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, category.id)}>
+                                                                <FontAwesomeIcon icon={faTrash} className="mr-0" />
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <div>Maglumat yok</div>
+                                        )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
                                 )}
