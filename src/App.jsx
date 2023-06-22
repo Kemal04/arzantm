@@ -9,7 +9,7 @@ import {Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRea
 
 //ADMIN
 import AdminLayout from "./pages/admin/Layout";
-import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCreate, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotoCreate, AdminPhotos, AdminPostCreate, AdminPosts, AdminSubCategories, AdminSubCategoryCreate, AdminUserCreate, AdminUsers, AdminVideoCreate, AdminVideos, AdminWelayats} from "./pages/admin";
+import {Admin, AdminBannerCreate, AdminBanners, AdminCategories, AdminCategoryCreate, AdminComments, AdminLogin, AdminNotifications, AdminPages, AdminPayments, AdminPhotoCreate, AdminPhotos, AdminPostCreate, AdminPosts, AdminSubCategories, AdminSubCategoryCreate, AdminUserCreate, AdminUsers, AdminVideoCategories, AdminVideoCategoryCreate, AdminVideoCreate, AdminVideos, AdminWelayats} from "./pages/admin";
 
 //OTHERS
 import {AuthProvider} from "./context/AuthContext";
@@ -61,24 +61,26 @@ const App = () => {
                                 <Route path="welayats" element={<AdminWelayats />} />
 
                                 <Route path="users" element={<AdminUsers />} />
-                                <Route path="user-create" element={<AdminUserCreate />} />
+                                <Route path="users/create" element={<AdminUserCreate />} />
 
                                 <Route path="banners" element={<AdminBanners />} />
-                                <Route path="banner-create" element={<AdminBannerCreate />} />
+                                <Route path="banners/create" element={<AdminBannerCreate />} />
 
                                 <Route path="categories" element={<AdminCategories />} />
-                                <Route path="category-create" element={<AdminCategoryCreate />} />
+                                <Route path="categories/create" element={<AdminCategoryCreate />} />
 
-                                <Route path="sub-categories" element={<AdminSubCategories />} />
-                                <Route path="sub-category-create" element={<AdminSubCategoryCreate />} />
+                                <Route path="subcategories" element={<AdminSubCategories />} />
+                                <Route path="subcategories/create" element={<AdminSubCategoryCreate />} />
 
                                 <Route path="comments" element={<AdminComments />} />
 
-                                <Route path="gallery/photos" element={<AdminPhotos />} />
-                                <Route path="gallery/photo-create" element={<AdminPhotoCreate />} />
+                                <Route path="photos" element={<AdminPhotos />} />
+                                <Route path="photos/create" element={<AdminPhotoCreate />} />
 
-                                <Route path="gallery/videos" element={<AdminVideos />} />
-                                <Route path="gallery/video-create" element={<AdminVideoCreate />} />
+                                <Route path="videos" element={<AdminVideos />} />
+                                <Route path="videos/create" element={<AdminVideoCreate />} />
+                                <Route path="video_categories" element={<AdminVideoCategories />} />
+                                <Route path="video_categories/create" element={<AdminVideoCategoryCreate />} />
 
                                 <Route path="notifications" element={<AdminNotifications />} />
 
@@ -87,7 +89,7 @@ const App = () => {
                                 <Route path="payments" element={<AdminPayments />} />
 
                                 <Route path="posts" element={<AdminPosts />} />
-                                <Route path="post-create" element={<AdminPostCreate />} />
+                                <Route path="posts/create" element={<AdminPostCreate />} />
                             </Route>
 
                             <Route path="/admin/login" element={<AdminLogin />} />
