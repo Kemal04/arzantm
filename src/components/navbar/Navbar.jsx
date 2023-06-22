@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 
 //COMPONENTS
 import Auth from '../auth/Auth';
-import CheckSms from '../auth/CheckSms';
 // import User from '../users/User';
 // import Offical from '../users/Offical';
 
@@ -89,13 +88,7 @@ const Navbar = () => {
                                         <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
                                     </div>
                                 </div>
-                                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <Auth />
-                                </div>
-
-                                <div className="modal fade" id="exampleModalVertification" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <CheckSms />
-                                </div>
+                                <Auth />
                             </>
 
                             <>

@@ -1,38 +1,31 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
-const useFetch = (url, req, useToken) => {
+const useFetch = (url, req) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-
+    const [error, setError] = useState(null);
     useEffect(() => {
-        let header = {};
-        if (useToken === true) {
-            header = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("adACto")}`,
-            };
-        } else {
-            header = {
-                "Content-Type": "application/json",
-            };
-        }
         const fetchTariffs = async () => {
             const response = await fetch(url, {
                 method: "GET",
-                headers: header,
+                headers: {
+                    "Content-Type": "application/json",
+                },
             });
-            const resData = await response.json();
-            if (resData.status === false) {
-                setError(resData.message);
+            if (response.status === 422 || response.status === 401) {
+                return response;
+            }
+            if (!response.ok) {
+                setError(response.status);
                 setLoading(false);
             }
+            const resData = await response.json();
             setData(resData[req]);
             setLoading(false);
         };
 
         fetchTariffs();
-    }, [req, url, useToken]);
+    }, [req, url]);
     return [data, loading, error];
 };
 

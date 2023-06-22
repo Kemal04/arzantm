@@ -9,18 +9,13 @@ export default defineConfig({
         port: 3000,
 
         proxy: {
-            "/admin-api": {
-                target: "http://10.15.0.76:8081",
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/admin-api/, "/admin"),
-            },
             "/admin/static": {
-                target: "http://10.15.0.76:8081",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/admin\/static/, "/static"),
             },
             "/api/v1": {
-                target: "http://10.15.0.76:8081",
+                target: "http://95.85.126.113:8080",
                 changeOrigin: true,
             },
         },
