@@ -10,7 +10,7 @@ const Photos = () => {
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Photos</h3>
-                            <Link to="/admin/gallery/photo-create" className="btn btn-primary add-list">
+                            <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Photo goş
                             </Link>

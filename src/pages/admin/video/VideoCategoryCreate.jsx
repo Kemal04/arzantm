@@ -1,9 +1,9 @@
 import {useEffect, useRef, useState} from "react";
-import img_icon from "../../../assets/icons/img.svg";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-hot-toast";
+import img_icon from "../../../assets/icons/img.svg";
 
-const CategoryCreate = () => {
+const VideoCategoryCreate = () => {
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const name = useRef("");
@@ -37,7 +37,7 @@ const CategoryCreate = () => {
         categoryData.append("name", name.current.value);
         categoryData.append("image", selectedFile);
 
-        const response = await fetch("/admin-api/category", {
+        const response = await fetch("/admin-api/video/category", {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -45,6 +45,11 @@ const CategoryCreate = () => {
             body: categoryData,
         });
 
+        console.log(response.status);
+        if (response.status !== 200) {
+            toast.error(response.statusText);
+            setIsSubmitting(false)
+        }
         const resData = await response.json();
         console.log(resData);
         if (resData.status === false) {
@@ -64,7 +69,7 @@ const CategoryCreate = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Category Create</h3>
+                            <h3 className="mb-3">Video Category Create</h3>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-3">
@@ -108,4 +113,4 @@ const CategoryCreate = () => {
     );
 };
 
-export default CategoryCreate;
+export default VideoCategoryCreate;

@@ -1,11 +1,11 @@
-import { Link, NavLink, Navigate, Outlet } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo, faWallet } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../../context/AuthContext";
+import {Link, NavLink, Navigate, Outlet} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars, faBell, faFileText, faHome, faImage, faImages, faList, faMapLocationDot, faMessage, faSignOutAlt, faTags, faTh, faUsers, faVideo, faWallet} from "@fortawesome/free-solid-svg-icons";
+import {useAuth} from "../../context/AuthContext";
 import "../../Admin.css";
 
 const AdminLayout = () => {
-    const { admin, setAdmin, isLoggedIn, setIsLoggedIn } = useAuth();
+    const {admin, setAdmin, isLoggedIn, setIsLoggedIn} = useAuth();
 
     const logout = () => {
         setIsLoggedIn(false);
@@ -49,39 +49,45 @@ const AdminLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"banners"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faImages} />
-                                        <span className="ml-4">Bannerler</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"gallery/photos"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faImage} />
-                                        <span className="ml-4">Suratlar</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"gallery/videos"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faVideo} />
-                                        <span className="ml-4">Wideolar</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"posts"} className="svg-icon">
-                                        <FontAwesomeIcon icon={faTags} />
-                                        <span className="ml-4">Arzanladyşlar</span>
-                                    </NavLink>
-                                </li>
-                                <li>
                                     <NavLink to={"categories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faList} />
                                         <span className="ml-4">Kategoriýalar</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"sub-categories"} className="svg-icon">
+                                    <NavLink to={"subcategories"} className="svg-icon">
                                         <FontAwesomeIcon icon={faTh} />
                                         <span className="ml-4">Sub kategoriýalar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"banners"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faImages} />
+                                        <span className="ml-4">Bannerler</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"photos"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faImage} />
+                                        <span className="ml-4">Suratlar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"videos"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faVideo} />
+                                        <span className="ml-4">Wideolar</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"video_categories"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faVideo} />
+                                        <span className="ml-4">Wideo kategoriýalary</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"posts"} className="svg-icon">
+                                        <FontAwesomeIcon icon={faTags} />
+                                        <span className="ml-4">Arzanladyşlar</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -118,12 +124,17 @@ const AdminLayout = () => {
                         </nav>
                     </div>
                 </div>
-                <div className="iq-top-navbar" style={{minHeight:"0"}}>
+                <div className="iq-top-navbar" style={{minHeight: "0"}}>
                     <div className="iq-navbar-custom">
                         <nav className="navbar navbar-light py-3 justify-content-end">
                             <div className="d-flex align-items-center">
-                                <button className="btn btn-outline-green" onClick={() => { logout() }} >
-                                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2"/>
+                                <button
+                                    className="btn btn-outline-green"
+                                    onClick={() => {
+                                        logout();
+                                    }}
+                                >
+                                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
                                     Log out
                                 </button>
                             </div>

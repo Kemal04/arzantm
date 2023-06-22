@@ -1,17 +1,16 @@
-import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect} from "react";
-import {useState} from "react";
-import {toast} from "react-hot-toast";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {toast} from "react-hot-toast";
 
-const SubCategories = () => {
-    const [subCategories, setSubCategories] = useState([]);
+const VideoCategories = () => {
+    const [videoCategories, setVideoCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = async () => {
         setIsLoading(true);
-        const response = await fetch(`/admin-api/sub-category`, {
+        const response = await fetch(`/admin-api/video/category`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +24,7 @@ const SubCategories = () => {
         }
         const resData = await response.json();
         console.log(resData);
-        setSubCategories(resData.data);
+        setVideoCategories(resData.data);
         setIsLoading(false);
     };
 
@@ -36,7 +35,7 @@ const SubCategories = () => {
     const handleDelete = async (e, id) => {
         e.preventDefault();
         console.log(id);
-        const response = await fetch(`/admin-api/sub-category/${id}`, {
+        const response = await fetch(`/admin-api/video/category/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("adACto")}`,
@@ -63,10 +62,10 @@ const SubCategories = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
-                            <h3 className="mb-3">Sub Category</h3>
+                            <h3 className="mb-3">Video Categories</h3>
                             <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
-                                Sub Category goş
+                                Video Category goş
                             </Link>
                         </div>
                     </div>
@@ -76,9 +75,10 @@ const SubCategories = () => {
                                 <thead className="bg-white text-uppercase">
                                     <tr className="ligth ligth-data">
                                         <th>№</th>
-                                        <th>Id</th>
+                                        <th>ID</th>
+                                        <th>Image</th>
                                         <th>Title</th>
-                                        <th>Category</th>
+                                        {/* <th>Priority</th> */}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -91,13 +91,15 @@ const SubCategories = () => {
                                 ) : (
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
-                                        {subCategories?.length > 0 ? (
-                                            subCategories?.map((subCategory, index) => (
+                                        {videoCategories?.length > 0 ? (
+                                            videoCategories?.map((category, index) => (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
-                                                    <td>{subCategory.id}</td>
-                                                    <td>{subCategory.name}</td>
-                                                    <td>{subCategory.category.name}</td>
+                                                    <td>{category.id}</td>
+                                                    <td>
+                                                        <img src={category.image.url} alt="" style={{height: "65px"}} />
+                                                    </td>
+                                                    <td>{category.name}</td>
                                                     <td>
                                                         <div className="d-flex align-items-center list-action">
                                                             <button className="badge badge-primary mr-2">
@@ -106,7 +108,7 @@ const SubCategories = () => {
                                                             <button className="badge bg-warning mr-2">
                                                                 <FontAwesomeIcon icon={faPen} className="mr-0" />
                                                             </button>
-                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, subCategory.id)}>
+                                                            <button className="badge bg-danger mr-2" onClick={(e) => handleDelete(e, category.id)}>
                                                                 <FontAwesomeIcon icon={faTrash} className="mr-0" />
                                                             </button>
                                                         </div>
@@ -128,4 +130,4 @@ const SubCategories = () => {
     );
 };
 
-export default SubCategories;
+export default VideoCategories;

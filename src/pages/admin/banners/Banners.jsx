@@ -1,28 +1,21 @@
 import {Link} from "react-router-dom";
-import {toast} from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobe, faMobileAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faClose, faGlobe, faMobileAlt, faPen, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import {useEffect} from "react";
 import useFetch from "../../../hooks/useFetch";
+import {toast} from "react-hot-toast";
+import Popup from "reactjs-popup";
 
 const Banners = () => {
-    const [urlParams, setUrlParams] = useState({
-        platform: 2,
-        location: 1,
-        page: 1,
-    });
+    const [activeType, setActiveType] = useState();
+    const [urlParams, setUrlParams] = useState({});
     const [banners, setBanners] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [locations, error_location] = useFetch("/api/v1/location/list", "data");
-    const [pages, error_page] = useFetch("/api/v1/page/list", "data");
-
-    if (error_location) {
-        toast.error(error_location);
-    } else if (error_page) {
-        toast.error(error_page);
-    }
+    const [locations] = useFetch("/api/v1/location/list", "data");
+    const [pages] = useFetch("/api/v1/page/list", "data");
+    const [platforms] = useFetch("/api/v1/platform/list", "data");
 
     const fetchData = async (data) => {
         setIsLoading(true);
@@ -49,8 +42,8 @@ const Banners = () => {
     }, [urlParams]);
 
     useEffect(() => {
-        console.log(banners);
-    }, [banners]);
+        console.log(locations);
+    }, [locations]);
 
     const handleDelete = async (e, id) => {
         e.preventDefault();
@@ -65,15 +58,12 @@ const Banners = () => {
         const resData = await response.json();
         console.log(resData);
         if (resData.status === false) {
-            console.log("1");
             return null;
         } else if (resData.status === true) {
-            console.log("2");
-            // toast.success(resData.message);
+            toast.success(resData.message);
             fetchData();
         } else {
-            console.log("3");
-            // toast.error(resData.message);
+            toast.error(resData.message);
             return null;
         }
     };
@@ -85,26 +75,21 @@ const Banners = () => {
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Bannerler</h3>
-                            <Link to="/admin/banner-create" className="btn btn-primary add-list">
+                            <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Banner goş
                             </Link>
                         </div>
                     </div>
-                    <div className="col-xl-8">
+                    <div className="col-xl-8 mb-4">
                         <ul className="nav nav-pills" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button
                                     style={{borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500"}}
-                                    className="text-dark nav-link active px-5 bg-light"
-                                    id="pills-home-tab"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#pills-home"
+                                    className={activeType === 2 ? "text-dark nav-link active px-5 bg-light" : "text-dark nav-link px-5 bg-light"}
                                     type="button"
-                                    role="tab"
-                                    aria-controls="pills-home"
-                                    aria-selected="true"
                                     onClick={() => {
+                                        setActiveType(2);
                                         setUrlParams({
                                             ...urlParams,
                                             platform: 2,
@@ -118,15 +103,10 @@ const Banners = () => {
                             <li className="nav-item" role="presentation">
                                 <button
                                     style={{borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500"}}
-                                    className="text-dark nav-link px-5 bg-light"
-                                    id="pills-profile-tab"
-                                    data-bs-toggle="pill"
-                                    data-bs-target="#pills-profile"
+                                    className={activeType === 1 ? "text-dark nav-link active px-5 bg-light" : "text-dark nav-link px-5 bg-light"}
                                     type="button"
-                                    role="tab"
-                                    aria-controls="pills-profile"
-                                    aria-selected="false"
                                     onClick={() => {
+                                        setActiveType(1);
                                         setUrlParams({
                                             ...urlParams,
                                             platform: 1,
@@ -146,12 +126,23 @@ const Banners = () => {
                             id="page_id"
                             value={urlParams.page}
                             onChange={(e) => {
-                                setUrlParams({
-                                    ...urlParams,
-                                    page: e.target.value,
-                                });
+                                if (e.target.value === "Ählisi") {
+                                    setUrlParams((current) => {
+                                        const copy = {...current};
+                                        delete copy["page"];
+                                        return copy;
+                                    });
+                                } else {
+                                    setUrlParams({
+                                        ...urlParams,
+                                        page: e.target.value,
+                                    });
+                                }
                             }}
                         >
+                            <option value={null} selected>
+                                Ählisi
+                            </option>
                             {pages?.map((page, index) => (
                                 <option key={index} value={page.id}>
                                     {page.name}
@@ -166,12 +157,23 @@ const Banners = () => {
                             id="location_id"
                             value={urlParams.location}
                             onChange={(e) => {
-                                setUrlParams({
-                                    ...urlParams,
-                                    location: e.target.value,
-                                });
+                                if (e.target.value === "Ählisi") {
+                                    setUrlParams((current) => {
+                                        const copy = {...current};
+                                        delete copy["location"];
+                                        return copy;
+                                    });
+                                } else {
+                                    setUrlParams({
+                                        ...urlParams,
+                                        location: e.target.value,
+                                    });
+                                }
                             }}
                         >
+                            <option value={null} selected>
+                                Ählisi
+                            </option>
                             {locations?.map((location, index) => (
                                 <option key={index} value={location.id}>
                                     {location.name}
@@ -184,51 +186,92 @@ const Banners = () => {
                     ) : (
                         <div className="col-lg-12">
                             <div className="row">
-                                {banners?.map((banner, index) => (
-                                    <div key={index} className="col-xl-3 col-sm-6 col-md-6">
-                                        <div className="card">
-                                            <img src={banner.image} className="card-img-top" alt="Banner img" />
-                                            <div className="card-body">
-                                                <h4 className="card-title">{banner.title}</h4>
-                                                <p className="card-text" dangerouslySetInnerHTML={{__html: banner.description}}></p>
-                                                <ul className="list-unstyled">
-                                                    <li>
-                                                        <b>Url</b> -
-                                                        <Link to={banner.url} target="_blank" rel="noreferrer">
-                                                            {banner.url}
-                                                        </Link>
-                                                    </li>
-                                                    {/* <li>
+                                {banners.length > 0 ? (
+                                    banners?.map((banner, index) => (
+                                        <div key={index} className="col-xl-3 col-sm-6 col-md-6">
+                                            <div className="card">
+                                                <img src={banner.image} className="card-img-top" alt="Banner img" />
+                                                <div className="card-body">
+                                                    <h4 className="card-title">{banner.title}</h4>
+                                                    <p className="card-text" dangerouslySetInnerHTML={{__html: banner.description.substring(0, 100) + "..."}}></p>
+                                                    <ul className="list-unstyled">
+                                                        <li>
+                                                            <b>Url</b> -
+                                                            <Link to={banner.url} target="_blank" rel="noreferrer">
+                                                                {banner.url}
+                                                            </Link>
+                                                        </li>
+                                                        {/* <li>
                                                         <b>Priority</b> - {banner.priority}
                                                     </li> */}
-                                                    <li>
-                                                        <b>Start date</b> - {banner.start_date.slice(0, 10)}
-                                                    </li>
-                                                    <li>
-                                                        <b>End date</b> - {banner.end_date.slice(0, 10)}
-                                                    </li>
-                                                    {/* <li>
-                                                        <b>Type</b> - {banner.type}
-                                                    </li> */}
-                                                    <li>
-                                                        <b>Welayat</b> - {banner.location_ids.map((id) => locations?.find((el) => el.id == id).name)}
-                                                    </li>
-                                                    <li>
-                                                        <b>Pages</b> - {banner.page_ids.map((id) => pages?.find((el) => el.id == id).name)}
-                                                    </li>
-                                                </ul>
-                                                <div className="d-flex justify-content-between align-items-center">
-                                                    <Link to="banners" className="btn btn-warning btn-sm">
-                                                        <FontAwesomeIcon icon={faPen} className="" /> Üýtget
-                                                    </Link>
-                                                    <button className="btn btn-danger btn-sm" onClick={(e) => handleDelete(e, banner.id)}>
-                                                        <FontAwesomeIcon icon={faTrash} className="" /> Poz
-                                                    </button>
+                                                        <li>
+                                                            <b>Start date</b> - {banner.start_date.slice(0, 10)}
+                                                        </li>
+                                                        <li>
+                                                            <b>End date</b> - {banner.end_date.slice(0, 10)}
+                                                        </li>
+                                                        <li>
+                                                            <b>Type</b> - {platforms?.find((o) => o.id === banner.platform_id).name}
+                                                        </li>
+                                                        <li>
+                                                            <b>Welayat</b> -
+                                                            {banner.location_ids.map((id) => {
+                                                                return locations?.find((el) => el.id == id).name + " ";
+                                                            })}
+                                                        </li>
+                                                        <li>
+                                                            <b>Pages</b> -
+                                                            {banner.page_ids.map((id) => {
+                                                                return pages?.find((el) => el.id == id).name + " ";
+                                                            })}
+                                                        </li>
+                                                    </ul>
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <Link to="banners" className="btn btn-warning btn-sm">
+                                                            <FontAwesomeIcon icon={faPen} className="" /> Üýtget
+                                                        </Link>
+
+                                                        <Popup
+                                                            trigger={
+                                                                <button className="btn btn-danger btn-sm">
+                                                                    <FontAwesomeIcon icon={faTrash} className="" /> Poz
+                                                                </button>
+                                                            }
+                                                            modal
+                                                            nested
+                                                        >
+                                                            {(close) => (
+                                                                <article className="modal-container">
+                                                                    <header className="modal-container-header">
+                                                                        <h3 className="modal-container-title">Üns beriň!</h3>
+                                                                        <button
+                                                                            className="close icon-button"
+                                                                            onClick={() => {
+                                                                                close();
+                                                                            }}
+                                                                        >
+                                                                            <FontAwesomeIcon icon={faClose} />
+                                                                        </button>
+                                                                    </header>
+                                                                    <section className="modal-container-body">
+                                                                        <p>Siz hakykatdan hem pozmak isleýärsiňizmi?</p>
+                                                                    </section>
+                                                                    <footer className="modal-container-footer">
+                                                                        <button className="table-btn btn-delete" onClick={(e) => handleDelete(e, banner.id)}>
+                                                                            Poz
+                                                                        </button>
+                                                                    </footer>
+                                                                </article>
+                                                            )}
+                                                        </Popup>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    <div>Maglumat yok</div>
+                                )}
                             </div>
                         </div>
                     )}

@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 const useFetch = (url, req, useToken) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         let header = {};
@@ -22,14 +22,11 @@ const useFetch = (url, req, useToken) => {
                 method: "GET",
                 headers: header,
             });
-            if (response.status === 422 || response.status === 401) {
-                return response;
-            }
-            if (!response.ok) {
-                setError(response.message);
+            const resData = await response.json();
+            if (resData.status === false) {
+                setError(resData.message);
                 setLoading(false);
             }
-            const resData = await response.json();
             setData(resData[req]);
             setLoading(false);
         };

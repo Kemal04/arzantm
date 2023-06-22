@@ -18,7 +18,7 @@ const Welayats = () => {
                     <div className="col-lg-12">
                         <div className="d-flex flex-wrap align-items-center justify-content-between mb-4">
                             <h3 className="mb-3">Welayats</h3>
-                            <Link to="/admin/sub-category-create" className="btn btn-primary add-list">
+                            <Link to="create" className="btn btn-primary add-list">
                                 <FontAwesomeIcon icon={faPlus} className="mr-3" />
                                 Welayat goş
                             </Link>
@@ -43,25 +43,29 @@ const Welayats = () => {
                                 ) : (
                                     <tbody className="ligth-body">
                                         {/* MAP ETMELI YERI */}
-                                        {welayats?.map((welayat, index) => (
-                                            <tr key={index}>
-                                                <td>{welayat.id}</td>
-                                                <td>{welayat.name}</td>
-                                                <td>
-                                                    <div className="d-flex align-items-center list-action">
-                                                        <a className="badge badge-primary mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
-                                                            <FontAwesomeIcon icon={faEye} className="mr-0" />
-                                                        </a>
-                                                        <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
-                                                            <FontAwesomeIcon icon={faPen} className="mr-0" />
-                                                        </a>
-                                                        <a className="badge bg-danger mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
-                                                            <FontAwesomeIcon icon={faTrash} className="mr-0" />
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {welayats?.length > 0 ? (
+                                            welayats?.map((welayat, index) => (
+                                                <tr key={index}>
+                                                    <td>{welayat.id}</td>
+                                                    <td>{welayat.name}</td>
+                                                    <td>
+                                                        <div className="d-flex align-items-center list-action">
+                                                            <a className="badge badge-primary mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="page-list-users.html#">
+                                                                <FontAwesomeIcon icon={faEye} className="mr-0" />
+                                                            </a>
+                                                            <a className="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="page-list-users.html#">
+                                                                <FontAwesomeIcon icon={faPen} className="mr-0" />
+                                                            </a>
+                                                            <a className="badge bg-danger mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="page-list-users.html#">
+                                                                <FontAwesomeIcon icon={faTrash} className="mr-0" />
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <div>Maglumat yok</div>
+                                        )}
                                         {/* MAP ETMELI YERI */}
                                     </tbody>
                                 )}
