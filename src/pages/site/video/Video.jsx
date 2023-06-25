@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import banner from '../../../assets/banners/video/1.png'
-
 import img_1 from '../../../assets/cards/foto/1.png'
 import img_2 from '../../../assets/cards/foto/2.png'
 import img_3 from '../../../assets/cards/foto/3.png'
@@ -32,6 +30,7 @@ import { faArrowLeft, faBackward, faDownload, faExpand, faForward, faPause, faPl
 
 import asset_video from '../../../assets/video/video.mp4'
 import './video-player.css'
+import HomeBanner from '../../../components/banners/HomeBanner'
 
 const Video = () => {
 
@@ -123,7 +122,7 @@ const Video = () => {
                 </div>
 
                 <div className='my-3'>
-                    <img src={banner} alt="" className='img-fluid w-100' />
+                    <HomeBanner page_number={3} />
                 </div>
 
                 <div className='row justify-content-center'>

@@ -42,7 +42,7 @@ import { Stories } from '../../../components'
 const Home = () => {
     return (
         <>
-            <HomeBanner />
+            <HomeBanner page_number={1} />
 
             {/* Stories */}
             <Stories />

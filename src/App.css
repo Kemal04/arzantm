@@ -160,3 +160,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.cursor-pointer{
+    cursor: pointer!important;
+}

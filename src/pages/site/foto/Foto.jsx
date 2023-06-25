@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import banner from '../../../assets/banners/foto/1.png'
 
 import img_1 from '../../../assets/cards/foto/1.png'
 import img_2 from '../../../assets/cards/foto/2.png'
@@ -21,6 +20,7 @@ import eye from '../../../assets/icons/eye.png'
 
 import grid_little from '../../../assets/icons/grid-little.svg'
 import grid_big from '../../../assets/icons/grid-big.svg'
+import HomeBanner from '../../../components/banners/HomeBanner'
 
 const Foto = () => {
 
@@ -44,7 +44,7 @@ const Foto = () => {
                 </div>
 
                 <div className='my-3'>
-                    <img src={banner} alt="" className='img-fluid w-100' />
+                    <HomeBanner page_number={2} />
                 </div>
 
                 <div className='row my-5 gx-3'>

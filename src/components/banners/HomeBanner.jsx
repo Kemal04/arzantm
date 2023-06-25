@@ -2,8 +2,9 @@ import '@splidejs/react-splide/css';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { toast } from 'react-hot-toast';
 import useFetch from '../../hooks/useFetch';
+import { Link } from 'react-router-dom';
 
-const HomeBanner = () => {
+const HomeBanner = ({ page_number }) => {
 
     const options = {
         type: 'loop',
@@ -13,7 +14,7 @@ const HomeBanner = () => {
         autoplay: false,
     };
 
-    const [banners, loading, error] = useFetch("/api/v1/banner/list", "data");
+    const [banners, loading, error] = useFetch("/api/v1/banner", "data");
 
     if (error) {
         toast.error(error.message);
@@ -28,15 +29,19 @@ const HomeBanner = () => {
                             <SplideSlide>Loading...</SplideSlide>
                         ) : (
                             banners.map((banner, index) =>
-                                <SplideSlide className='col-lg-12 p-0' key={index}>
-                                    <img src={banner.image} alt="banner" className='img-fluid' style={{ height: "430px" }} />
+                                // banner.page_id === page_number
+                                // &&
+                                <SplideSlide className='col-lg-12 p-0' key={index} >
+                                    <Link to={banner.link}>
+                                        <img src={banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title}/>
+                                    </Link>
                                 </SplideSlide>
                             )
                         )
                     }
                 </SplideTrack>
             </Splide>
-        </div>
+        </div >
     )
 }
 

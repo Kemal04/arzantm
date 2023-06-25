@@ -14,10 +14,18 @@ import search from '../../assets/icons/search.svg'
 import globus from '../../assets/icons/globus.svg'
 import bell from '../../assets/icons/bell.svg'
 import logo_circle from '../../assets/icons/logo-circle.svg'
+import useFetch from '../../hooks/useFetch';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
 
     const { darkMode } = useContext(ThemeContext)
+
+    const [locations, loading, error] = useFetch("/api/v1/location/list", "data");
+
+    if (error) {
+        toast.error(error.message);
+    }
 
     return (
         <>
@@ -41,16 +49,19 @@ const Navbar = () => {
                                 <NavLink to="/" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>
                                         <img src={location} alt="" className='img-fluid me-1' />
-                                        Ashgabat
+                                        Türkmenistan
                                     </span>
                                 </NavLink>
                                 <ul className="dropdown-menu">
-                                    <li><Link to='/' className="dropdown-item">Ashgabat</Link></li>
-                                    <li><Link to='/' className="dropdown-item">Ahal</Link></li>
-                                    <li><Link to='/' className="dropdown-item">Balkan</Link></li>
-                                    <li><Link to='/' className="dropdown-item">Dashoguz</Link></li>
-                                    <li><Link to='/' className="dropdown-item">Mary</Link></li>
-                                    <li><Link to='/' className="dropdown-item">Lebap</Link></li>
+                                    {
+                                        loading ? (
+                                            <li>Loading...</li>
+                                        ) : (
+                                            locations.map((location, index) =>
+                                                <li key={index}><div className="dropdown-item cursor-pointer">{location.name}</div></li>
+                                            )
+                                        )
+                                    }
                                 </ul>
                             </li>
                             <form className="d-flex ms-5">

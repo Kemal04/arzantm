@@ -26,7 +26,7 @@ const App = () => {
     });
 
     useEffect(() => {
-        axios.get(`/api/v1/account/current`, {
+        axios.get(`/api/v1/userinformation`, {
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
             },
