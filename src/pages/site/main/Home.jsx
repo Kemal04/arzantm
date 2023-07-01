@@ -1,4 +1,4 @@
-import HomeBanner from '../../../components/banners/HomeBanner'
+import Banner from '../../../components/banners/Banner'
 
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,17 +16,6 @@ import foto from '../../../assets/cards/others/foto.png'
 import video from '../../../assets/cards/others/video.png'
 import offical from '../../../assets/cards/others/offical.png'
 
-import cheap_1 from '../../../assets/cards/cheap/1.png'
-import cheap_2 from '../../../assets/cards/cheap/2.png'
-import cheap_3 from '../../../assets/cards/cheap/3.png'
-import cheap_4 from '../../../assets/cards/cheap/4.png'
-import cheap_5 from '../../../assets/cards/cheap/5.png'
-import cheap_6 from '../../../assets/cards/cheap/6.png'
-import cheap_7 from '../../../assets/cards/cheap/7.png'
-import cheap_8 from '../../../assets/cards/cheap/8.png'
-import cheap_9 from '../../../assets/cards/cheap/9.png'
-import cheap_10 from '../../../assets/cards/cheap/10.png'
-
 import offical_1 from '../../../assets/cards/offical/1.png'
 import offical_2 from '../../../assets/cards/offical/2.png'
 import offical_3 from '../../../assets/cards/offical/3.png'
@@ -38,11 +27,21 @@ import offical_8 from '../../../assets/cards/offical/8.png'
 
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import { Stories } from '../../../components'
+import useFetch from '../../../hooks/useFetch'
+import { toast } from 'react-hot-toast'
+import moment from 'moment/moment'
 
 const Home = () => {
+
+    const [posts, loading, error] = useFetch("/api/v1/post", "data");
+
+    if (error) {
+        toast.error(error.message);
+    }
+
     return (
         <>
-            <HomeBanner page_number={1} />
+            <Banner page_name="HOME" />
 
             {/* Stories */}
             <Stories />
@@ -142,190 +141,39 @@ const Home = () => {
             <div className='container mt-2'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='h3'>Arzanladyşlar</div>
-                    <Link to="/" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_1} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
+
+                    {
+                        loading ? (
+                            <div>Loading...</div>
+                        ) : (
+                            posts.map((post, index) =>
+                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
+                                    <div className='card rounded-1 h-100' style={{ width: "230px" }}>
+                                        <div className='text-center'>
+                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                        </div>
+                                        <div className='position-absolute p-2 end-0'>
+                                            <div className='bg-green text-white small rounded-circle p-2'>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
+                                        </div>
+                                        <div className='card-body p-2'>
+                                            <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
+                                            <div className='d-flex justify-content-between align-items-center mt-3'>
+                                                <div className='small text-secondary'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
+                                                <div className='small text-secondary'>
+                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
+                                                    {post.viewed_count}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_2} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_3} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_4} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_5} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_6} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_7} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_8} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_9} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3'>
-                        <div className='card rounded-1' style={{ width: "230px" }}>
-                            <img src={cheap_10} alt="" className='img-fluid' />
-                            <div className='position-absolute p-2 end-0'>
-                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                            </div>
-                            <div className='card-body p-2'>
-                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                    <div className='small text-secondary'>19.02.2022</div>
-                                    <div className='small text-secondary'>
-                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                        121
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </Link>
+                            )
+                        )
+                    }
                 </div>
             </div>
 

@@ -112,10 +112,8 @@ const Auth = () => {
             toast.error("Açar sözüňiz 8-den uly bolmaly")
         }
         else {
-            await axios.post(`/api/v1/account/login`, data).then((res) => {
-                if (res.data.error) {
-                    toast.error(res.data.error)
-                } else {
+            await axios.post(`/api/v1/account/login`, data)
+                .then((res) => {
                     localStorage.setItem("accessToken", res.data.data.token)
                     setAuthState({
                         name: res.data.data.name,
@@ -125,9 +123,9 @@ const Auth = () => {
                         role: res.data.data.role,
                     });
                     toast.success(res.data.message)
-                }
-
-            })
+                }).catch((err) => {
+                    toast.error(err.response.data.message);
+                })
         }
     }
 

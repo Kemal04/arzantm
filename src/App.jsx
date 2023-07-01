@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ScrollToTop } from "./components";
 
 //USER INTERFACE
-import { Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
+import { Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -13,7 +13,7 @@ import ThemeContextProvider from "./context/ThemeContext";
 import "./App.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const App = () => {
 
@@ -26,24 +26,19 @@ const App = () => {
     });
 
     useEffect(() => {
-        axios.get(`/api/v1/userinformation`, {
-            headers: {
-                accessToken: localStorage.getItem("accessToken"),
-            },
-        }).then((res) => {
-            if (res.data.error) {
-                setAuthState({ ...authState, status: false, role: "Guest" });
-            } else {
-                setAuthState({
-                    name: res.data.name,
-                    phone: res.data.phone,
-                    id: res.data.id,
-                    status: true,
-                    role: res.data.role,
-                });
-            }
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        try {
+            const token = localStorage.getItem("accessToken");
+            const res = jwtDecode(token);
+            setAuthState({
+                name: res.name,
+                phone: res.phone,
+                id: res.id,
+                status: true,
+                role: res.subscription_type.type,
+            });
+        } catch (error) {
+            setAuthState({ ...authState, status: false, role: "Guest" });
+        }
     }, []);
 
     return (
@@ -58,20 +53,36 @@ const App = () => {
                                 <Route path="/" element={<Home />} />
 
                                 <Route path="/foto" element={<Foto />} />
-                                <Route path="/foto/arzanTm" element={<FotoRead />} />
+                                <Route path="/foto/:fotoId" element={<FotoRead />} />
 
                                 <Route path="/video" element={<Video />} />
 
+                                <Route path="/arzanladyslar" element={<Posts />} />
+                                <Route path="/arzanladys/:postId" element={<PostRead />} />
+
                                 <Route path="/top-list" element={<TopList />} />
 
-                                <Route path="/profile" element={<Profile />} />
-                                <Route path="/profile/wallet" element={<ProfileWallet />} />
-                                <Route path="/profile/bloked" element={<ProfileBloked />} />
+                                {
+                                    authState.role === "USER"
+                                    &&
+                                    <>
+                                        <Route path="/profile" element={<Profile />} />
+                                        <Route path="/profile/wallet" element={<ProfileWallet />} />
+                                        <Route path="/profile/bloked" element={<ProfileBloked />} />
+                                    </>
+                                }
 
-                                <Route path="/offical" element={<Offical />} />
-                                <Route path="/offical/follow" element={<OfficalFollow />} />
-                                <Route path="/offical/expired" element={<OfficalExpired />} />
-                                <Route path="/offical/self" element={<OfficalSelf />} />
+
+                                {
+                                    authState.role === "OFFICAL"
+                                    &&
+                                    <>
+                                        <Route path="/offical" element={<Offical />} />
+                                        <Route path="/offical/follow" element={<OfficalFollow />} />
+                                        <Route path="/offical/expired" element={<OfficalExpired />} />
+                                        <Route path="/offical/self" element={<OfficalSelf />} />
+                                    </>
+                                }
 
                                 <Route path="/post-gosmak" element={<PostAdd />} />
 

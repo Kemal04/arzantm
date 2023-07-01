@@ -16,10 +16,14 @@ import bell from '../../assets/icons/bell.svg'
 import logo_circle from '../../assets/icons/logo-circle.svg'
 import useFetch from '../../hooks/useFetch';
 import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../context/AuthContext';
+import User from '../users/User';
+import Offical from '../users/Offical';
 
 const Navbar = () => {
 
     const { darkMode } = useContext(ThemeContext)
+    const { authState } = useContext(AuthContext)
 
     const [locations, loading, error] = useFetch("/api/v1/location/list", "data");
 
@@ -94,18 +98,33 @@ const Navbar = () => {
                             </div>
 
                             <>
-                                <div className="ms-5">
-                                    <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
-                                    </div>
-                                </div>
-                                <Auth />
+
+                                {
+                                    authState.status === false
+                                    &&
+                                    <>
+                                        <div className="ms-5">
+                                            <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
+                                            </div>
+                                        </div>
+                                        <Auth />
+                                    </>
+                                }
                             </>
 
                             <>
-                                {/* <User />
+                                {
+                                    authState.role === "USER"
+                                    &&
+                                    <User />
+                                }
 
-                                <Offical /> */}
+                                {
+                                    authState.role === "OFFICAL"
+                                    &&
+                                    <Offical />
+                                }
                             </>
 
                         </ul>

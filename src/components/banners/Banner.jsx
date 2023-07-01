@@ -4,7 +4,8 @@ import { toast } from 'react-hot-toast';
 import useFetch from '../../hooks/useFetch';
 import { Link } from 'react-router-dom';
 
-const HomeBanner = ({ page_number }) => {
+// eslint-disable-next-line react/prop-types
+const Banner = ({ page_name }) => {
 
     const options = {
         type: 'loop',
@@ -29,11 +30,13 @@ const HomeBanner = ({ page_number }) => {
                             <SplideSlide>Loading...</SplideSlide>
                         ) : (
                             banners.map((banner, index) =>
-                                // banner.page_id === page_number
-                                // &&
+                                banner.platform[0].name === "WEB"
+                                &&
+                                banner.page_category[0].page.name === page_name
+                                &&
                                 <SplideSlide className='col-lg-12 p-0' key={index} >
-                                    <Link to={banner.link}>
-                                        <img src={banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title}/>
+                                    <Link to={banner.url}>
+                                        <img src={'http://95.85.126.113/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
                                     </Link>
                                 </SplideSlide>
                             )
@@ -45,4 +48,4 @@ const HomeBanner = ({ page_number }) => {
     )
 }
 
-export default HomeBanner
+export default Banner

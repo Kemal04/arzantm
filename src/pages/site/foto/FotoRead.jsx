@@ -1,63 +1,75 @@
-import React from 'react'
-import arzanTm from '../../../assets/cards/posts/arzanTm.png'
-
-import img_1 from '../../../assets/cards/foto-detail/1.png'
-import img_2 from '../../../assets/cards/foto-detail/2.png'
-import img_3 from '../../../assets/cards/foto-detail/3.png'
-import img_4 from '../../../assets/cards/foto-detail/4.png'
-import img_5 from '../../../assets/cards/foto-detail/5.png'
-import img_6 from '../../../assets/cards/foto-detail/6.png'
-import img_7 from '../../../assets/cards/foto-detail/7.png'
-import img_8 from '../../../assets/cards/foto-detail/8.png'
-import img_9 from '../../../assets/cards/foto-detail/9.png'
+import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import useFetch from '../../../hooks/useFetch'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 const FotoRead = () => {
+
+    const { fotoId } = useParams()
+
+    const [gallery, loading, error] = useFetch(`/api/v1/gallery/${fotoId}`, "data");
+
+    if (error) {
+        toast.error(error.message);
+    }
+
     return (
         <>
-            <div className='container d-flex align-items-center my-4'>
-                <div className='text-green'>Baş sahypa</div>
-                <div className='mx-2'>/</div>
-                <div className='text-green'>Surat</div>
-                <div className='mx-2'>/</div>
-                <div>ArzanTM-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid..</div>
-            </div>
+            {
 
-            <div className='container mt-2'>
-                <div className='d-flex align-items-center mb-4'>
-                    <img src={arzanTm} alt="" className='img-fluid me-2' style={{ width: "60px" }} />
-                    <div>ArzanTm</div>
-                </div>
+                loading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <>
+                        <div className='container d-flex align-items-center my-4'>
+                            <Link to="/" className='text-green text-decoration-none'>Baş sahypa</Link>
+                            <div className='mx-2'>/</div>
+                            <Link to="/foto" className='text-green text-decoration-none'>Surat</Link>
+                            <div className='mx-2'>/</div>
+                            <div>{gallery.title}</div>
+                        </div>
 
-                <div className='row gx-3 justify-content-start'>
-                    <div className='col-auto mb-3'>
-                        <img src={img_1} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_2} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_3} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_4} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_5} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_6} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_7} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_8} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={img_9} alt="" className='img-fluid' />
-                    </div>
-                </div>
-            </div>
+                        <div className='container mt-2'>
+                            <div className='d-flex align-items-center mb-4'>
+                                <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2' style={{ width: "60px" }} />
+                                <div>{gallery.user.name}</div>
+                            </div>
+
+                            <div className='row gx-3 justify-content-start'>
+
+                                {
+                                    loading ? (
+                                        <div>Loading...</div>
+                                    ) : (
+                                        gallery.images.map((image, index) => (
+                                            <div className='col-xl-3 mb-3' key={index}>
+                                                <div className='card border-0'>
+                                                    <img src={'http://95.85.126.113:8080/' + image.url} alt="" className='img-fluid' />
+                                                    <div className='position-absolute px-3 py-2 bottom-0 text-white small w-100'>
+                                                        <div className='d-flex justify-content-between align-items-center'>
+                                                            <div className='px-2 rounded' style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                                                                <FontAwesomeIcon icon={faEye} className='me-2' />
+                                                                {image.view_count}
+                                                            </div>
+                                                            <div className='px-2 rounded' style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                                                                <FontAwesomeIcon icon={faHeart} className='me-2 text-danger' />
+                                                                {image.like_count}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )
+                                }
+
+                            </div>
+                        </div>
+                    </>
+                )
+            }
+
         </>
     )
 }
