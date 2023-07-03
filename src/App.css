@@ -161,6 +161,10 @@
     background-position: center;
 }
 
-.cursor-pointer{
-    cursor: pointer!important;
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.bg-green-opacity-50 {
+    background-color: rgba(14, 194, 67, 0.1);
 }

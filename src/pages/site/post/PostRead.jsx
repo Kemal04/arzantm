@@ -1,8 +1,13 @@
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import useFetch from "../../../hooks/useFetch";
 import { toast } from "react-hot-toast";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt, faComment, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
+import bookmark from '../../../assets/icons/bookmark.svg'
+import share from '../../../assets/icons/share.svg'
+import like from '../../../assets/icons/like-empty.svg'
 
 const PostRead = () => {
 
@@ -61,13 +66,68 @@ const PostRead = () => {
                                                 }
                                             </SplideTrack>
                                         </Splide>
-                                        <div className="d-flex justify-content-between">
+                                        <div className="d-flex justify-content-between mt-4">
                                             <div>
-                                                <FontAwesomeIcon icon={faPoui}/>
+                                                <img src={bookmark} alt="" className="me-3" style={{ width: "25px" }} />
+                                                <img src={share} alt="" style={{ width: "25px" }} />
                                             </div>
                                             <div>
-
+                                                <img src={like} alt="" style={{ width: "25px" }} />
                                             </div>
+                                        </div>
+                                        <div className="small mt-4 d-flex align-items-center text-muted">
+                                            <span>{moment(post.created_at).format('DD.MM.YYYY')}</span>
+                                            <div className='ms-3'>
+                                                <FontAwesomeIcon icon={faEye} className='me-2' />
+                                                {post.viewed_count}
+                                            </div>
+                                            <div className='ms-3'>
+                                                <FontAwesomeIcon icon={faHeart} className='me-2' />
+                                                {post.like_count}
+                                            </div>
+                                            <div className='ms-3'>
+                                                <FontAwesomeIcon icon={faComment} className='me-2' />
+                                                0
+                                            </div>
+                                        </div>
+                                        <div className="mt-4 h4">
+                                            {post.title}
+                                        </div>
+                                        <div className="d-flex justify-content-between align-items-center border-top border-bottom py-4 my-3">
+                                            <div>
+                                                <div>
+                                                    <span className="text-green h2">{post.discount}</span><span className="fs-17 fw-black"> manat</span>
+                                                    <span className="fs-17 ms-4 text-muted text-decoration-line-through">{post.price}<span className="fs-17"> manat</span></span>
+                                                </div>
+                                                <div className="d-flex align-items-center mt-4 text-muted small">
+                                                    <FontAwesomeIcon icon={faCalendarAlt} />
+                                                    <div className="ms-2">{moment(post.start_date).format('DD.MM.YYYY')} - </div>
+                                                    <div className="ms-2">{moment(post.end_date).format('DD.MM.YYYY')}</div>
+                                                </div>
+                                            </div>
+                                            <div className="bg-green text-white rounded-circle p-4 h5">
+                                                {post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%
+                                            </div>
+                                        </div>
+                                        <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
+                                        <div className="row mb-4">
+                                            {
+                                                post.tags.map((tag, index) => (
+                                                    <div key={index} className="col-auto">
+                                                        <div className="bg-green-opacity-50 text-green fw-black px-2 py-1 rounded">
+                                                            #{tag.name}
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                        <div>
+                                            <Link to="/offical/follow" className='btn btn-green me-3' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
+                                                Yzarla
+                                            </Link>
+                                            <button className='btn btn-light border' style={{ paddingLeft: "60px", paddingRight: "60px" }}>
+                                                Teswirler ( 45/200 )
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

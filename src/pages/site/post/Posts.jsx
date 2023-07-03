@@ -37,7 +37,7 @@ const Posts = () => {
                                             <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                         </div>
                                         <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle p-2'>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
+                                            <div className='bg-green text-white small rounded-circle p-2'>{post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%</div>
                                         </div>
                                         <div className='card-body p-2'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
