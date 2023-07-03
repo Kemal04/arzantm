@@ -1,17 +1,46 @@
-import { toast } from "react-hot-toast";
-import useFetch from "../../../hooks/useFetch";
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import ReactPaginate from 'react-paginate'
+import axios from 'axios'
+import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
 
 const Posts = () => {
 
-    const [posts, loading, error] = useFetch("/api/v1/post", "data");
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
+    const [urlParams, setUrlParams] = useState({
+        limit: 10,
+    });
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState([]);
 
-    if (error) {
-        toast.error(error.message);
-    }
+    const changePage = ({ selected }) => {
+        setPage(selected + 1);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+    };
+
+    useEffect(() => {
+        fetchData(urlParams);
+    }, [urlParams]);
+
+    const fetchData = async (data) => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/post?publication_type_id=1&` + new URLSearchParams(data)).then((res) => {
+            setPosts(res.data.data);
+            setPages(res.data.data[0].items_full_count / urlParams.limit);
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        setLoading(false);
+    };
 
     return (
         <>
@@ -54,6 +83,22 @@ const Posts = () => {
                             ))
                         )
                     }
+                    <nav className='col-xl-12 d-flex justify-content-center mt-5'>
+                        {
+                            <ReactPaginate
+                                previousLabel="Yza"
+                                nextLabel="Öňe"
+                                pageCount={pages}
+                                onPageChange={changePage}
+                                containerClassName={"pagination"}
+                                pageLinkClassName={"page-link text-success"}
+                                previousLinkClassName={"page-link text-success"}
+                                nextLinkClassName={"page-link text-success"}
+                                activeLinkClassName={"page-link active bg-green border-green text-white"}
+                                disabledLinkClassName={"page-link disabled"}
+                            />
+                        }
+                    </nav>
                 </div>
             </div >
         </>

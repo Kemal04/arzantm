@@ -3,7 +3,7 @@ import useFetch from "../../../hooks/useFetch";
 import { toast } from "react-hot-toast";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faComment, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faComment, faEye, faHeart, faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import bookmark from '../../../assets/icons/bookmark.svg'
 import share from '../../../assets/icons/share.svg'
@@ -40,11 +40,16 @@ const PostRead = () => {
                             <div className='mx-2'>/</div>
                             <div className='text-green'>Arzanladyşlar</div>
                             <div className='mx-2'>/</div>
-                            <div>{post.title}</div>
+                            <div>{post.title} {post.id}</div>
                         </div>
 
                         <div className="container">
                             <div className="row justify-content-center">
+                                <div className="col-xl-2" style={{ marginTop: "50%" }}>
+                                    <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle px-3 py-2 d-inline">
+                                        <FontAwesomeIcon icon={faArrowLeft} />
+                                    </Link>
+                                </div>
                                 <div className="col-xl-8">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
@@ -130,6 +135,11 @@ const PostRead = () => {
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="col-xl-2 text-end" style={{ marginTop: "50%" }}>
+                                    <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle px-3 py-2 d-inline`}>
+                                        <FontAwesomeIcon icon={faArrowRight} />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
