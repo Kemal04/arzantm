@@ -22,7 +22,7 @@ const Foto = () => {
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
-                <div className='text-green'>Baş sahypa</div>
+                <Link to='/' className='text-green text-decoration-none'>Baş sahypa</Link>
                 <div className='mx-2'>/</div>
                 <div>Surat</div>
             </div>

@@ -1,4 +1,16 @@
-import { useRef, useState } from 'react'
+import { useState, useEffect } from 'react'
+import ReactPaginate from 'react-paginate'
+import { Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import axios from 'axios'
+import moment from 'moment/moment'
+import { ControlBar, CurrentTimeDisplay, ForwardControl, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider, VolumeMenuButton } from 'video-react'
+import Banner from '../../../components/banners/Banner'
+import "video-react/dist/video-react.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+
 import download from '../../../assets/icons/download.svg'
 import eye from '../../../assets/icons/eye.png'
 import like from '../../../assets/icons/like.svg'
@@ -8,70 +20,68 @@ import grid_big from '../../../assets/icons/grid-big.svg'
 import star from '../../../assets/icons/star.svg'
 import play from '../../../assets/icons/play.svg'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faBackward, faDownload, faExpand, faForward, faPause, faPlay, faPlayCircle, faTimes, faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
-
-import './video-player.css'
-import Banner from '../../../components/banners/Banner'
-import useFetch from '../../../hooks/useFetch'
-import { toast } from 'react-hot-toast'
-import moment from 'moment/moment'
+function MyVerticallyCenteredModal(props) {
+    return (
+        <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+            <Player>
+                <source src={'http://95.85.126.113:8080/' + props.src} />
+                <ControlBar>
+                    <ReplayControl seconds={10} order={1.1} />
+                    <ForwardControl seconds={30} order={1.2} />
+                    <CurrentTimeDisplay order={4.1} />
+                    <TimeDivider order={4.2} />
+                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
+                    <VolumeMenuButton disabled />
+                </ControlBar>
+            </Player>
+        </Modal>
+    );
+}
 
 const Video = () => {
 
-    const [videos, loading, error] = useFetch("/api/v1/video", "data");
-
-    if (error) {
-        toast.error(error.message);
-    }
+    const [modalShow, setModalShow] = useState(false);
+    const [videoSrc, setVideoSrc] = useState("");
 
     const [grid, setGrid] = useState(false)
 
-    const videoRef = useRef(null);
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
+    const [urlParams, setUrlParams] = useState({
+        limit: 12,
+    });
+    const [loading, setLoading] = useState(false);
+    const [videos, setVideos] = useState([]);
 
-    const [playing, setPlaying] = useState(false);
-
-    const [videoTime, setVideoTime] = useState(0);
-
-    const [currentTime, setCurrentTime] = useState(0);
-
-    const [progress, setProgress] = useState(0);
-
-    const videoHandler = (control) => {
-        if (control === "play") {
-            videoRef.current.play();
-            setPlaying(true);
-            var vid = document.getElementById("video177");
-            setVideoTime(vid.duration);
-        } else if (control === "pause") {
-            videoRef.current.pause();
-            setPlaying(false);
-        }
+    const changePage = ({ selected }) => {
+        setPage(selected + 1);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
     };
 
-    const fastForward = () => {
-        videoRef.current.currentTime += 5;
+    useEffect(() => {
+        fetchData(urlParams);
+    }, [urlParams]);
+
+    const fetchData = async (data) => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/video?` + new URLSearchParams(data)).then((res) => {
+            setVideos(res.data.data);
+            setPages(res.data.data[0].items_full_count / urlParams.limit);
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        setLoading(false);
     };
-
-    const revert = () => {
-        videoRef.current.currentTime -= 5;
-    };
-
-    window.setInterval(function () {
-        setCurrentTime(videoRef.current?.currentTime);
-        setProgress((videoRef.current?.currentTime / videoTime) * 100);
-    }, 1000);
-
-    const handleVideoProgress = (e) => {
-        console.log((e.pageX / e.target.offsetWidth) * 100);
-        videoRef.current.currentTime = 100 * e.pageX / e.target.offsetWidth
-    };
-
 
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
-                <div className='text-green'>Baş sahypa</div>
+                <Link to='/' className='text-green text-decoration-none'>Baş sahypa</Link>
                 <div className='mx-2'>/</div>
                 <div>Wideo</div>
             </div>
@@ -131,6 +141,8 @@ const Video = () => {
                     </div>
                 </div>
 
+                <MyVerticallyCenteredModal src={videoSrc} show={modalShow} onHide={() => setModalShow(false)} />
+
                 <div className='row mb-5 mt-4 gx-3'>
                     {
                         loading ? (
@@ -138,7 +150,7 @@ const Video = () => {
                         ) : (
                             videos.map((video, index) => (
                                 <div key={index} className={`col-xl-4 mb-3 ${grid === true ? "col-xl-6" : null}`}>
-                                    <div type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${video.id}`}>
+                                    <div onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }}>
                                         <div className='card rounded-21'>
                                             <div className='card-body d-flex align-items-center'>
                                                 <img src={'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
@@ -172,72 +184,26 @@ const Video = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* MOdal  */}
-                                    <div className="modal fade" id={`staticBackdrop${video.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div className="modal-dialog modal-dialog-centered modal-xl">
-                                            <div className="modal-content border-0" style={{ backgroundColor: "transparent" }}>
-                                                <div className="modal-body">
-                                                    <div className='position-relative'>
-                                                        <video src={'http://95.85.126.113:8080/' + video.video.url} id={`video${video.id}`} className='img-fluid' ref={videoRef}></video>
-                                                        {/* Video Header */}
-                                                        <div className='position-absolute top-0 start-0 text-white px-3 py-2 w-100'>
-                                                            <div className='d-flex justify-content-between align-items-center'>
-                                                                <div className='fw-black'>
-                                                                    <FontAwesomeIcon icon={faArrowLeft} />
-                                                                    <span className='ms-4'>{video.title}</span>
-                                                                </div>
-                                                                <div className='d-flex align-items-center'>
-                                                                    <img src={like_empty} alt="" style={{ width: '25px' }} /> <span className='ms-2 me-5 small'>{video.likes_count}</span>
-                                                                    <FontAwesomeIcon icon={faTimes} style={{ fontSize: "25px", cursor: "pointer" }} data-bs-dismiss="modal" aria-label="Close" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {/* Video Footer */}
-                                                        <div className='position-absolute start-0 end-0 bottom-0 text-white p-3 w-100'>
-                                                            <div className='video-timeline' onClick={(e) => handleVideoProgress(e)}>
-                                                                <div className='progress-area'>
-                                                                    <span>{Math.floor(currentTime / 60) + ":" + ("0" + Math.floor(currentTime % 60)).slice(-2)}</span>
-                                                                    <div className='progress-bar' style={{ width: `${progress}%` }}></div>
-                                                                </div>
-                                                            </div>
-                                                            <div className='video-controls'>
-                                                                <div className='options left'>
-                                                                    <button className='volume'><FontAwesomeIcon icon={faVolumeHigh} /></button>
-                                                                    <input type="range" />
-                                                                    <div className='video-timer'>
-                                                                        <div className='current-time'>{Math.floor(currentTime / 60) + ":" + ("0" + Math.floor(currentTime % 60)).slice(-2)}</div>
-                                                                        <div className='separator'>/</div>
-                                                                        <div className='video-duration'>{Math.floor(videoTime / 60) + ":" + ("0" + Math.floor(videoTime % 60)).slice(-2)}</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className='options center'>
-                                                                    <button onClick={revert} className='skip-backward' ><FontAwesomeIcon icon={faBackward} /></button>
-                                                                    <button className='play-pause'>
-                                                                        {
-                                                                            playing ? (
-                                                                                <FontAwesomeIcon icon={faPause} onClick={() => videoHandler("pause")} />
-                                                                            ) : (
-                                                                                <FontAwesomeIcon icon={faPlay} onClick={() => videoHandler("play")} />
-                                                                            )
-                                                                        }
-                                                                    </button>
-                                                                    <button onClick={fastForward} className='skip-forward'><FontAwesomeIcon icon={faForward} /></button>
-                                                                </div>
-                                                                <div className='options right'>
-                                                                    <button className='download'><FontAwesomeIcon icon={faDownload} /></button>
-                                                                    <button className='fullscreen'><FontAwesomeIcon icon={faExpand} /></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             ))
                         )
                     }
+                    <nav className='col-xl-12 d-flex justify-content-center mt-5'>
+                        {
+                            <ReactPaginate
+                                previousLabel="Yza"
+                                nextLabel="Öňe"
+                                pageCount={pages}
+                                onPageChange={changePage}
+                                containerClassName={"pagination"}
+                                pageLinkClassName={"page-link text-success"}
+                                previousLinkClassName={"page-link text-success"}
+                                nextLinkClassName={"page-link text-success"}
+                                activeLinkClassName={"page-link active bg-green border-green text-white"}
+                                disabledLinkClassName={"page-link disabled"}
+                            />
+                        }
+                    </nav>
                 </div>
             </div >
         </>

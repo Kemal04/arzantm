@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 
 const useFetch = (url, req) => {
+
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(() => {
-        const fetchTariffs = async () => {
+        const fetchData = async () => {
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -24,8 +26,9 @@ const useFetch = (url, req) => {
             setLoading(false);
         };
 
-        fetchTariffs();
+        fetchData();
     }, [req, url]);
+
     return [data, loading, error];
 };
 

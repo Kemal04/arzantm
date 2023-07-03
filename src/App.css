@@ -168,3 +168,7 @@
 .bg-green-opacity-50 {
     background-color: rgba(14, 194, 67, 0.1);
 }
+
+.bg-none{
+    background: none!important;
+}

@@ -121,12 +121,12 @@ const PostRead = () => {
                                                 ))
                                             }
                                         </div>
-                                        <div>
-                                            <Link to="/offical/follow" className='btn btn-green me-3' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
-                                                Yzarla
-                                            </Link>
-                                            <button className='btn btn-light border' style={{ paddingLeft: "60px", paddingRight: "60px" }}>
-                                                Teswirler ( 45/200 )
+                                        <div className="d-flex align-items-center mb-5">
+                                            <button className='btn btn-light border me-3 w-100'>
+                                                Teswirler
+                                            </button>
+                                            <button className='btn btn-outline-danger w-100'>
+                                                Şikaýat et
                                             </button>
                                         </div>
                                     </div>

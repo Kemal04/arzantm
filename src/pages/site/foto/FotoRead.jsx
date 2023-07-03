@@ -3,6 +3,8 @@ import { toast } from 'react-hot-toast'
 import useFetch from '../../../hooks/useFetch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { SlideshowLightbox } from 'lightbox.js-react'
+import 'lightbox.js-react/dist/index.css'
 
 const FotoRead = () => {
 
@@ -32,12 +34,11 @@ const FotoRead = () => {
 
                         <div className='container mt-2'>
                             <div className='d-flex align-items-center mb-4'>
-                                <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2' style={{ width: "60px" }} />
+                                <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
                                 <div>{gallery.user.name}</div>
                             </div>
 
                             <div className='row gx-3 justify-content-start'>
-
                                 {
                                     loading ? (
                                         <div>Loading...</div>
@@ -45,7 +46,9 @@ const FotoRead = () => {
                                         gallery.images.map((image, index) => (
                                             <div className='col-xl-3 mb-3' key={index}>
                                                 <div className='card border-0'>
-                                                    <img src={'http://95.85.126.113:8080/' + image.url} alt="" className='img-fluid' />
+                                                    <SlideshowLightbox>
+                                                        <img src={'http://95.85.126.113:8080/' + image.url} alt="" className='img-fluid' />
+                                                    </SlideshowLightbox>
                                                     <div className='position-absolute px-3 py-2 bottom-0 text-white small w-100'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <div className='px-2 rounded' style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
@@ -63,7 +66,6 @@ const FotoRead = () => {
                                         ))
                                     )
                                 }
-
                             </div>
                         </div>
                     </>

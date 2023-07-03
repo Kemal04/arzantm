@@ -4,12 +4,6 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 
-import img_1 from '../../../assets/cards/selected/1.png'
-import img_2 from '../../../assets/cards/selected/2.png'
-import img_3 from '../../../assets/cards/selected/3.png'
-import img_4 from '../../../assets/cards/selected/4.png'
-import img_5 from '../../../assets/cards/selected/5.png'
-
 import konkurs from '../../../assets/cards/others/konkurs.png'
 import top from '../../../assets/cards/others/top.png'
 import foto from '../../../assets/cards/others/foto.png'
@@ -27,17 +21,54 @@ import offical_8 from '../../../assets/cards/offical/8.png'
 
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import { Stories } from '../../../components'
-import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
 import moment from 'moment/moment'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import ReactPaginate from 'react-paginate'
 
 const Home = () => {
 
-    const [posts, loading, error] = useFetch("/api/v1/post", "data");
+    const [pages, setPages] = useState();
+    const [page, setPage] = useState(1);
+    const [urlParams, setUrlParams] = useState({
+        limit: 10,
+    });
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [selectedPosts, setSelectedPosts] = useState([]);
 
-    if (error) {
-        toast.error(error.message);
-    }
+    const changePage = ({ selected }) => {
+        setPage(selected + 1);
+        setUrlParams({
+            ...urlParams,
+            offset: selected * urlParams.limit,
+        });
+    };
+
+    useEffect(() => {
+        fetchData(urlParams);
+    }, [urlParams]);
+
+    const fetchData = async (data) => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/post?publication_type_id=1&` + new URLSearchParams(data)).then((res) => {
+            setPosts(res.data.data);
+            setPages(res.data.data[0].items_full_count / urlParams.limit);
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        await axios.get(`/api/v1/post?publication_type_id=3&limit=6`).then((res) => {
+            setSelectedPosts(res.data.data);
+        }).catch((res) => {
+            toast.error(res.response.statusText)
+        })
+
+        setLoading(false);
+    };
+
 
     return (
         <>
@@ -50,65 +81,29 @@ const Home = () => {
             <div className='container mt-3'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='h3'>Saýlananlar</div>
-                    <Link to="/" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
-                        <div className='position-relative card-about'>
-                            <img src={img_1} alt="About Us" className='img-fluid' />
-                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                <div className='h5 text-white'>
-                                    Iýmit
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        selectedPosts.map((post, index) => (
+                            <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5 text-decoration-none'>
+                                <div className='position-relative card-about'>
+                                    <div className='text-center'>
+                                        <img src={'http://95.85.126.113/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
+                                    </div>
+                                    <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
+                                        <div className='h5 text-white'>
+                                            {post.title}
+                                        </div>
+                                        <small className='' style={{ color: "#C4C4C4" }}>{moment(post.created_at).format('DD.MM.YYYY')}</small>
+                                    </div>
                                 </div>
-                                <small className='' style={{ color: "#C4C4C4" }}>19.02.2022</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
-                        <div className='position-relative card-about'>
-                            <img src={img_2} alt="About Us" className='img-fluid' />
-                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                <div className='h5 text-white'>
-                                    Oýun
-                                </div>
-                                <small className='' style={{ color: "#C4C4C4" }}>19.02.2022</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
-                        <div className='position-relative card-about'>
-                            <img src={img_3} alt="About Us" className='img-fluid' />
-                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                <div className='h5 text-white'>
-                                    Multik
-                                </div>
-                                <small className='' style={{ color: "#C4C4C4" }}>19.02.2022</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
-                        <div className='position-relative card-about'>
-                            <img src={img_4} alt="About Us" className='img-fluid' />
-                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                <div className='h5 text-white'>
-                                    Multik
-                                </div>
-                                <small className='' style={{ color: "#C4C4C4" }}>19.02.2022</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5'>
-                        <div className='position-relative card-about'>
-                            <img src={img_5} alt="About Us" className='img-fluid' />
-                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                <div className='h5 text-white'>
-                                    Oýun
-                                </div>
-                                <small className='' style={{ color: "#C4C4C4" }}>19.02.2022</small>
-                            </div>
-                        </div>
-                    </div>
+                            </Link>
+                        ))
+                    )}
                 </div>
             </div>
 
@@ -119,7 +114,9 @@ const Home = () => {
                         <img src={konkurs} alt="" className='img-fluid w-100' />
                     </div>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
-                        <img src={top} alt="" className='img-fluid w-100' />
+                        <Link to='/top-list'>
+                            <img src={top} alt="" className='img-fluid w-100' />
+                        </Link>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
                         <Link to='/foto'>
@@ -145,7 +142,6 @@ const Home = () => {
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-
                     {
                         loading ? (
                             <div>Loading...</div>
@@ -174,6 +170,22 @@ const Home = () => {
                             )
                         )
                     }
+                    <nav className='col-xl-12 d-flex justify-content-center mt-5'>
+                        {
+                            <ReactPaginate
+                                previousLabel="Yza"
+                                nextLabel="Öňe"
+                                pageCount={pages}
+                                onPageChange={changePage}
+                                containerClassName={"pagination"}
+                                pageLinkClassName={"page-link text-success"}
+                                previousLinkClassName={"page-link text-success"}
+                                nextLinkClassName={"page-link text-success"}
+                                activeLinkClassName={"page-link active bg-green border-green text-white"}
+                                disabledLinkClassName={"page-link disabled"}
+                            />
+                        }
+                    </nav>
                 </div>
             </div>
 
