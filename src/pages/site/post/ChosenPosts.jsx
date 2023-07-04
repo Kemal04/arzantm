@@ -7,7 +7,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-const Posts = () => {
+const ChosenPosts = () => {
 
     const [pages, setPages] = useState();
     const [page, setPage] = useState(1);
@@ -32,7 +32,7 @@ const Posts = () => {
     const fetchData = async (data) => {
         setLoading(true);
 
-        await axios.get(`/api/v1/post?publication_type_id=1&` + new URLSearchParams(data)).then((res) => {
+        await axios.get(`/api/v1/post?publication_type_id=3&` + new URLSearchParams(data)).then((res) => {
             setPosts(res.data.data);
             setPages(res.data.data[0].items_full_count / urlParams.limit);
         }).catch((res) => {
@@ -52,7 +52,7 @@ const Posts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Arzanladyşlar <span className='text-green'>(+135)</span></div>
+                    <div className='h3'>Saylananlar <span className='text-green'>(+135)</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {
@@ -105,4 +105,4 @@ const Posts = () => {
     )
 }
 
-export default Posts
+export default ChosenPosts

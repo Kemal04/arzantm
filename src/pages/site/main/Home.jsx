@@ -81,7 +81,7 @@ const Home = () => {
             <div className='container mt-3'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='h3'>Saýlananlar</div>
-                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>

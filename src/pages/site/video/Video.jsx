@@ -19,6 +19,7 @@ import grid_little from '../../../assets/icons/grid-little.svg'
 import grid_big from '../../../assets/icons/grid-big.svg'
 import star from '../../../assets/icons/star.svg'
 import play from '../../../assets/icons/play.svg'
+import useFetch from '../../../hooks/useFetch'
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -78,6 +79,8 @@ const Video = () => {
         setLoading(false);
     };
 
+    const [categories, loading1] = useFetch("/api/v1/page-category?page_id=3", "data");
+
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
@@ -95,31 +98,18 @@ const Video = () => {
                     </div>
                 </div>
 
-                <div className='row mt-2'>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Hemmesi (256)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn btn-green btn-sm rounded px-4'>Sport (65)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Awto (23)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Medeniýet (39)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Kibersport (11)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Kibersport (11)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Awto (23)</button>
-                    </div>
-                    <div className='col-xl-auto'>
-                        <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>Medeniýet (39)</button>
-                    </div>
+                <div className='row mt-2 justify-content-between'>
+                    {
+                        loading1 ? (
+                            <div>Loading...</div>
+                        ) : (
+                            categories.map((category, index) => (
+                                <div className='col-xl-auto' key={index}>
+                                    <button className='btn bg-light btn-outline-green btn-sm rounded px-4' id={category.category.id}>{category.category.name} (1)</button>
+                                </div>
+                            ))
+                        )
+                    }
                 </div>
 
                 <div className='my-3'>

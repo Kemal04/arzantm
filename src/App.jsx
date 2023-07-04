@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ScrollToTop } from "./components";
 
 //USER INTERFACE
-import { Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
+import { ChosenPosts, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -57,6 +57,7 @@ const App = () => {
 
                                 <Route path="/video" element={<Video />} />
 
+                                <Route path="/saylananlar" element={<ChosenPosts />} />
                                 <Route path="/arzanladyslar" element={<Posts />} />
                                 <Route path="/arzanladys/:postId" element={<PostRead />} />
 

@@ -15,6 +15,8 @@ const Foto = () => {
 
     const [galleries, loading, error] = useFetch("/api/v1/gallery", "data");
 
+    const [categories] = useFetch("/api/v1/page-category?page_id=2", "data");
+
     if (error) {
         toast.error(error.message);
     }
@@ -34,6 +36,20 @@ const Foto = () => {
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
                         <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
                     </div>
+                </div>
+
+                <div className='row mt-2 justify-content-between'>
+                    {
+                        loading ? (
+                            <div>Loading...</div>
+                        ) : (
+                            categories.map((category, index) => (
+                                <div className='col-xl-auto' key={index}>
+                                    <button className='btn bg-light btn-outline-green btn-sm rounded px-4'>{category.category.name} (1)</button>
+                                </div>
+                            ))
+                        )
+                    }
                 </div>
 
                 <div className='my-3'>
