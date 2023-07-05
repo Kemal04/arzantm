@@ -60,7 +60,7 @@ const Home = () => {
             toast.error(res.response.data.error.message)
         })
 
-        await axios.get(`/api/v1/post?publication_type_id=3&limit=6`).then((res) => {
+        await axios.get(`/api/v1/post?publication_type_id=3&limit=5`).then((res) => {
             setSelectedPosts(res.data.data);
         }).catch((res) => {
             toast.error(res.response.statusText)

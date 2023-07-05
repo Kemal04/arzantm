@@ -44,15 +44,21 @@ const Video = () => {
     const [modalShow, setModalShow] = useState(false);
     const [videoSrc, setVideoSrc] = useState("");
 
+    //DESIGN GRIDS
     const [grid, setGrid] = useState(false)
 
+    //STATES
+    const [activeCat, setActiveCat] = useState("All");
+    const [loading, setLoading] = useState(false);
+    const [videos, setVideos] = useState([]);
+    const [filteredData, setFilteredData] = useState([])
+
+    //PAGITAIONS 
     const [pages, setPages] = useState();
     const [page, setPage] = useState(1);
     const [urlParams, setUrlParams] = useState({
         limit: 12,
     });
-    const [loading, setLoading] = useState(false);
-    const [videos, setVideos] = useState([]);
 
     const changePage = ({ selected }) => {
         setPage(selected + 1);
@@ -66,10 +72,12 @@ const Video = () => {
         fetchData(urlParams);
     }, [urlParams]);
 
+    //FETCH DATA
     const fetchData = async (data) => {
         setLoading(true);
 
         await axios.get(`/api/v1/video?` + new URLSearchParams(data)).then((res) => {
+            setFilteredData(res.data.data);
             setVideos(res.data.data);
             setPages(res.data.data[0].items_full_count / urlParams.limit);
         }).catch((res) => {
@@ -79,7 +87,38 @@ const Video = () => {
         setLoading(false);
     };
 
+    //CATEGORIES
     const [categories, loading1] = useFetch("/api/v1/page-category?page_id=3", "data");
+
+    //FILTERED DATA
+    const changeData = async (e) => {
+        const catId = e.target.id
+
+        const res = await axios.get(`/api/v1/video?limit=1000`)
+        const data = res.data.data
+
+        setActiveCat(catId);
+        if (catId === "All") {
+            setFilteredData(videos);
+        } else {
+            const filter = data.filter(video => (video.page_category[0].category?.id) == catId)
+            setFilteredData(filter);
+        }
+    }
+
+    //DATA BADGES
+    const [count, setCount] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/video/badge`).then((res) => {
+                setCount(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
 
     return (
         <>
@@ -91,7 +130,7 @@ const Video = () => {
 
             <div className='container my-2'>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Wideo <span className='text-green'>(+19)</span></div>
+                    <div className='h3'>Wideo <span className='text-green'>( {count.count} )</span></div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
                         <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
@@ -99,13 +138,16 @@ const Video = () => {
                 </div>
 
                 <div className='row mt-2 justify-content-between'>
+                    <div className='col-xl-auto'>
+                        <button className={activeCat == "All" ? `btn bg-green text-white btn-sm rounded px-4` : `btn btn-outline-green btn-sm rounded px-4`} id={"All"} onClick={changeData}>Hemmesi ({videos.length})</button>
+                    </div>
                     {
                         loading1 ? (
                             <div>Loading...</div>
                         ) : (
                             categories.map((category, index) => (
                                 <div className='col-xl-auto' key={index}>
-                                    <button className='btn bg-light btn-outline-green btn-sm rounded px-4' id={category.category.id}>{category.category.name} (1)</button>
+                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white` : `btn bg-light btn-outline-green btn-sm rounded px-4`} id={category.category.id} onClick={changeData}>{category.category.name} ()</button>
                                 </div>
                             ))
                         )
@@ -138,7 +180,7 @@ const Video = () => {
                         loading ? (
                             <div>Loading...</div>
                         ) : (
-                            videos.map((video, index) => (
+                            filteredData?.map((video, index) => (
                                 <div key={index} className={`col-xl-4 mb-3 ${grid === true ? "col-xl-6" : null}`}>
                                     <div onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }}>
                                         <div className='card rounded-21'>

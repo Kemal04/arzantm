@@ -70,6 +70,7 @@ const App = () => {
                                         <Route path="/profile" element={<Profile />} />
                                         <Route path="/profile/wallet" element={<ProfileWallet />} />
                                         <Route path="/profile/bloked" element={<ProfileBloked />} />
+                                        <Route path="/post-gosmak" element={<PostAdd />} />
                                     </>
                                 }
 
@@ -85,7 +86,6 @@ const App = () => {
                                     </>
                                 }
 
-                                <Route path="/post-gosmak" element={<PostAdd />} />
 
                                 <Route path="/bildirisler" element={<Notifications />} />
                                 <Route path="/bildiris/:notificationId" element={<NotificationRead />} />
