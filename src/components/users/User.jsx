@@ -8,11 +8,16 @@ import plus from '../../assets/icons/plus.svg'
 import selected from '../../assets/icons/selected.svg'
 import logout_img from '../../assets/icons/logout.svg'
 import bell from '../../assets/icons/bell.svg'
+import { AuthContext } from '../../context/AuthContext'
+import { useContext } from 'react'
 
 const User = () => {
 
-    const handleLogout = () => {
+    const { authState, setAuthState } = useContext(AuthContext)
 
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setAuthState({ name: "", id: 0, status: false, role: "Guest" })
     };
 
     return (

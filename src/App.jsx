@@ -19,7 +19,6 @@ const App = () => {
 
     const [authState, setAuthState] = useState({
         name: "",
-        phone: "",
         id: 0,
         status: false,
         role: "Guest",
@@ -31,7 +30,6 @@ const App = () => {
             const res = jwtDecode(token);
             setAuthState({
                 name: res.name,
-                phone: res.phone,
                 id: res.id,
                 status: true,
                 role: res.subscription_type.type,

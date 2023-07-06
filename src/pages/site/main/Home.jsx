@@ -21,54 +21,14 @@ import offical_8 from '../../../assets/cards/offical/8.png'
 
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import { Stories } from '../../../components'
-import { toast } from 'react-hot-toast'
 import moment from 'moment/moment'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import ReactPaginate from 'react-paginate'
+import useFetch from '../../../hooks/useFetch'
 
 const Home = () => {
 
-    const [pages, setPages] = useState();
-    const [page, setPage] = useState(1);
-    const [urlParams, setUrlParams] = useState({
-        limit: 10,
-    });
-    const [loading, setLoading] = useState(false);
-    const [posts, setPosts] = useState([]);
-    const [selectedPosts, setSelectedPosts] = useState([]);
+    const [posts, loading] = useFetch("/api/v1/post?publication_type_id=1&limit=10", "data");
 
-    const changePage = ({ selected }) => {
-        setPage(selected + 1);
-        setUrlParams({
-            ...urlParams,
-            offset: selected * urlParams.limit,
-        });
-    };
-
-    useEffect(() => {
-        fetchData(urlParams);
-    }, [urlParams]);
-
-    const fetchData = async (data) => {
-        setLoading(true);
-
-        await axios.get(`/api/v1/post?publication_type_id=1&` + new URLSearchParams(data)).then((res) => {
-            setPosts(res.data.data);
-            setPages(res.data.data[0].items_full_count / urlParams.limit);
-        }).catch((res) => {
-            toast.error(res.response.data.error.message)
-        })
-
-        await axios.get(`/api/v1/post?publication_type_id=3&limit=5`).then((res) => {
-            setSelectedPosts(res.data.data);
-        }).catch((res) => {
-            toast.error(res.response.statusText)
-        })
-
-        setLoading(false);
-    };
-
+    const [selectedPosts, loading1] = useFetch("/api/v1/post?publication_type_id=3&limit=5", "data");
 
     return (
         <>
@@ -85,7 +45,7 @@ const Home = () => {
                 </div>
 
                 <div className='row justify-content-between mt-3'>
-                    {loading ? (
+                    {loading1 ? (
                         <div>Loading...</div>
                     ) : (
                         selectedPosts.map((post, index) => (
@@ -170,22 +130,6 @@ const Home = () => {
                             )
                         )
                     }
-                    <nav className='col-xl-12 d-flex justify-content-center mt-5'>
-                        {
-                            <ReactPaginate
-                                previousLabel="Yza"
-                                nextLabel="Öňe"
-                                pageCount={pages}
-                                onPageChange={changePage}
-                                containerClassName={"pagination"}
-                                pageLinkClassName={"page-link text-success"}
-                                previousLinkClassName={"page-link text-success"}
-                                nextLinkClassName={"page-link text-success"}
-                                activeLinkClassName={"page-link active bg-green border-green text-white"}
-                                disabledLinkClassName={"page-link disabled"}
-                            />
-                        }
-                    </nav>
                 </div>
             </div>
 
