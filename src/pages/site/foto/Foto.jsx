@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Banner from '../../../components/banners/Banner'
 import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
 
@@ -10,8 +9,17 @@ import grid_little from '../../../assets/icons/grid-little.svg'
 import grid_big from '../../../assets/icons/grid-big.svg'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 
 const Foto = () => {
+
+    const options = {
+        type: 'loop',
+        perPage: 1,
+        perMove: 1,
+        pagination: true,
+        autoplay: false,
+    };
 
     //DESIGN GRIDS
     const [grid, setGrid] = useState(false)
@@ -59,15 +67,41 @@ const Foto = () => {
         setLoading(false);
     };
 
+    const [filteredBanner, setFilteredBanner] = useState([])
+    const [banners, setBanners] = useState([]);
+
+    //FETCH DATA
+    const fetchBanner = async () => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/banner`).then((res) => {
+            setFilteredBanner(res.data.data);
+            setBanners(res.data.data)
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        fetchBanner();
+    }, []);
+
     //FILTERED DATA
     const changeData = async (e) => {
         const catId = e.target.id
         setActiveCat(catId);
         if (catId === "All") {
             setFilteredData(galleries);
+            setFilteredBanner(banners);
         } else {
             const filter = galleries.filter(gallery => (gallery.page_category[0].category?.id) == catId)
             setFilteredData(filter);
+
+            const filterBanner = banners.filter(banner => (banner.page_category[0].category?.id) == catId)
+            setFilteredBanner(filterBanner);
+
         }
     }
 
@@ -120,7 +154,29 @@ const Foto = () => {
                 </div>
 
                 <div className='my-3'>
-                    <Banner page_name='PHOTO' />
+                    <div className='container p-0 text-center mt-3'>
+                        <Splide options={options} hasTrack={false}>
+                            <SplideTrack className='row g-0'>
+                                {
+                                    loading ? (
+                                        <SplideSlide>Loading...</SplideSlide>
+                                    ) : (
+                                        filteredBanner?.map((banner, index) =>
+                                            banner.platform[0].name === "WEB"
+                                            &&
+                                            banner.page_category[0].page.name === "PHOTO"
+                                            &&
+                                            <SplideSlide className='col-lg-12 p-0' key={index} >
+                                                <Link to={banner.url}>
+                                                    <img src={'http://95.85.126.113/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
+                                                </Link>
+                                            </SplideSlide>
+                                        )
+                                    )
+                                }
+                            </SplideTrack>
+                        </Splide>
+                    </div >
                 </div>
 
                 <div className='row my-5 gx-3'>

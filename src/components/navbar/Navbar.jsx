@@ -19,7 +19,6 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
 import User from '../users/User';
 import Offical from '../users/Offical';
-import { useState } from 'react';
 
 const Navbar = () => {
 
@@ -31,11 +30,6 @@ const Navbar = () => {
     if (error) {
         toast.error(error.message);
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true)
 
     return (
         <>
@@ -110,11 +104,11 @@ const Navbar = () => {
                                     &&
                                     <>
                                         <div className="ms-5">
-                                            <div type="button" onClick={handleShow}>
+                                            <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
                                             </div>
                                         </div>
-                                        <Auth show={show} onHide={handleClose} />
+                                        <Auth />
                                     </>
                                 }
                             </>

@@ -13,6 +13,7 @@ const ChosenPosts = () => {
     const [page, setPage] = useState(1);
     const [urlParams, setUrlParams] = useState({
         limit: 15,
+        publication_type_id: 3
     });
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -32,7 +33,7 @@ const ChosenPosts = () => {
     const fetchData = async (data) => {
         setLoading(true);
 
-        await axios.get(`/api/v1/post?publication_type_id=3&` + new URLSearchParams(data)).then((res) => {
+        await axios.get(`/api/v1/post?` + new URLSearchParams(data)).then((res) => {
             setPosts(res.data.data);
             setPages(res.data.data[0].items_full_count / urlParams.limit);
         }).catch((res) => {
@@ -41,6 +42,20 @@ const ChosenPosts = () => {
 
         setLoading(false);
     };
+
+    //DATA BADGES
+    const [count, setCount] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/post/badge?publication_type_id=3`).then((res) => {
+                setCount(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
 
     return (
         <>
@@ -52,7 +67,7 @@ const ChosenPosts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Saylananlar <span className='text-green'>(+135)</span></div>
+                    <div className='h3'>Saylananlar <span className='text-green'>(+{count.count})</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {

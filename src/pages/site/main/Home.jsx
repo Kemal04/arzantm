@@ -23,12 +23,44 @@ import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import { Stories } from '../../../components'
 import moment from 'moment/moment'
 import useFetch from '../../../hooks/useFetch'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const Home = () => {
 
     const [posts, loading] = useFetch("/api/v1/post?publication_type_id=1&limit=10", "data");
 
     const [selectedPosts, loading1] = useFetch("/api/v1/post?publication_type_id=3&limit=5", "data");
+
+    //PHOTO DATA BADGES
+    const [countGallery, setCountGallery] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/gallery/badge`).then((res) => {
+                setCountGallery(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
+
+    //VIDEO DATA BADGES
+    const [countVideo, setCountVideo] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/video/badge`).then((res) => {
+                setCountVideo(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
 
     return (
         <>
@@ -79,13 +111,23 @@ const Home = () => {
                         </Link>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
-                        <Link to='/foto'>
+                        <Link to='/foto' className='card border-0'>
                             <img src={foto} alt="" className='img-fluid w-100' />
+                            <div className='card-img-overlay p-0'>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                    Foto ({countGallery.count})
+                                </div>
+                            </div>
                         </Link>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
-                        <Link to='/video'>
+                        <Link to='/video' className='card border-0'>
                             <img src={video} alt="" className='img-fluid w-100' />
+                            <div className='card-img-overlay p-0'>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                    Video ({countVideo.count})
+                                </div>
+                            </div>
                         </Link>
                     </div>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>

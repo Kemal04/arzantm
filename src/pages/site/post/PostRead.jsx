@@ -8,6 +8,8 @@ import moment from "moment";
 import bookmark from '../../../assets/icons/bookmark.svg'
 import share from '../../../assets/icons/share.svg'
 import like from '../../../assets/icons/like-empty.svg'
+import axios from "axios";
+import { useEffect } from "react";
 
 const PostRead = () => {
 
@@ -21,10 +23,31 @@ const PostRead = () => {
 
     const { postId } = useParams()
 
-    const [post, loading, error] = useFetch(`/api/v1/post/${postId}`, "data");
+    const [post, loading, error] = useFetch(`/api/v1/post/${postId}`, "data", true);
 
     if (error) {
         toast.error(error.message);
+    }
+
+    //VIEWED
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios.post(`/api/v1/post/view`, { id: postId })
+        }
+        fetchData()
+    }, [postId])
+
+    //LIKED
+    const handleLike = async () => {
+        await axios.post(`/api/v1/post/like`, { id: postId }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => {
+            toast.success(res.data.message)
+        }).catch((res) => {
+            toast.error(res.response.data.message);
+        });
     }
 
     return (
@@ -77,7 +100,13 @@ const PostRead = () => {
                                                 <img src={share} alt="" style={{ width: "25px" }} />
                                             </div>
                                             <div>
-                                                <img src={like} alt="" style={{ width: "25px" }} />
+                                                {
+                                                    post.is_liked === 1
+                                                        ?
+                                                        <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "25px" }} />
+                                                        :
+                                                        <img src={like} alt="" style={{ width: "25px", cursor: "pointer" }} onClick={handleLike} />
+                                                }
                                             </div>
                                         </div>
                                         <div className="small mt-4 d-flex align-items-center text-muted">

@@ -6,7 +6,6 @@ import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import moment from 'moment/moment'
 import { ControlBar, CurrentTimeDisplay, ForwardControl, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider, VolumeMenuButton } from 'video-react'
-import Banner from '../../../components/banners/Banner'
 import "video-react/dist/video-react.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +19,7 @@ import grid_big from '../../../assets/icons/grid-big.svg'
 import star from '../../../assets/icons/star.svg'
 import play from '../../../assets/icons/play.svg'
 import useFetch from '../../../hooks/useFetch'
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -40,6 +40,15 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const Video = () => {
+
+    const options = {
+        type: 'loop',
+        perPage: 1,
+        perMove: 1,
+        pagination: true,
+        autoplay: false,
+    };
+
 
     const [modalShow, setModalShow] = useState(false);
     const [videoSrc, setVideoSrc] = useState("");
@@ -90,6 +99,27 @@ const Video = () => {
     //CATEGORIES
     const [categories, loading1] = useFetch("/api/v1/page-category?page_id=3", "data");
 
+    const [filteredBanner, setFilteredBanner] = useState([])
+    const [banners, setBanners] = useState([]);
+
+    //FETCH DATA
+    const fetchBanner = async () => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/banner`).then((res) => {
+            setFilteredBanner(res.data.data);
+            setBanners(res.data.data)
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        fetchBanner();
+    }, []);
+
     //FILTERED DATA
     const changeData = async (e) => {
         const catId = e.target.id
@@ -100,9 +130,13 @@ const Video = () => {
         setActiveCat(catId);
         if (catId === "All") {
             setFilteredData(videos);
+            setFilteredBanner(banners);
         } else {
             const filter = data.filter(video => (video.page_category[0].category?.id) == catId)
             setFilteredData(filter);
+
+            const filterBanner = banners.filter(banner => (banner.page_category[0].category?.id) == catId)
+            setFilteredBanner(filterBanner);
         }
     }
 
@@ -119,6 +153,7 @@ const Video = () => {
         }
         fetchBadge()
     }, [])
+    
 
     return (
         <>
@@ -155,7 +190,31 @@ const Video = () => {
                 </div>
 
                 <div className='my-3'>
-                    <Banner page_number="VIDEO" />
+                    <div className='my-3'>
+                        <div className='container p-0 text-center mt-3'>
+                            <Splide options={options} hasTrack={false}>
+                                <SplideTrack className='row g-0'>
+                                    {
+                                        loading ? (
+                                            <SplideSlide>Loading...</SplideSlide>
+                                        ) : (
+                                            filteredBanner?.map((banner, index) =>
+                                                banner.platform[0].name === "WEB"
+                                                &&
+                                                banner.page_category[0].page.name === "VIDEO"
+                                                &&
+                                                <SplideSlide className='col-lg-12 p-0' key={index} >
+                                                    <Link to={banner.url}>
+                                                        <img src={'http://95.85.126.113/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
+                                                    </Link>
+                                                </SplideSlide>
+                                            )
+                                        )
+                                    }
+                                </SplideTrack>
+                            </Splide>
+                        </div >
+                    </div>
                 </div>
 
                 <div className='row justify-content-center'>

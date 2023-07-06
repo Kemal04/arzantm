@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Outlet, Route, Routes } from "react-router-dom
 import { Toaster } from "react-hot-toast";
 
 //COMPONENTS
-import { Footer, Navbar, ScrollToTop } from "./components";
+import { Footer, Navbar, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
 import { ChosenPosts, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
@@ -50,6 +50,8 @@ const App = () => {
                             <Route path="/" element={<HomeLayout />}>
                                 <Route path="/" element={<Home />} />
 
+                                <Route path="/sms" element={<Sms />} />
+
                                 <Route path="/foto" element={<Foto />} />
                                 <Route path="/foto/:fotoId" element={<FotoRead />} />
 
@@ -60,6 +62,7 @@ const App = () => {
                                 <Route path="/arzanladys/:postId" element={<PostRead />} />
 
                                 <Route path="/top-list" element={<TopList />} />
+                                <Route path="/post-gosmak" element={<PostAdd />} />
 
                                 {
                                     authState.role === "USER"
@@ -68,7 +71,6 @@ const App = () => {
                                         <Route path="/profile" element={<Profile />} />
                                         <Route path="/profile/wallet" element={<ProfileWallet />} />
                                         <Route path="/profile/bloked" element={<ProfileBloked />} />
-                                        <Route path="/post-gosmak" element={<PostAdd />} />
                                     </>
                                 }
 
