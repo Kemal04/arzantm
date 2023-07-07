@@ -11,6 +11,7 @@ const Sms = () => {
 
         await axios.post('/api/v1/account/verify/check', { phone: phone }).then(() => {
             toast.success("Ustunlikli tassyklanyldy, Login edip bilersiniz")
+            localStorage.removeItem("phone")
         }).catch(() => {
             toast.error("Sms bize ugradylmady")
         })

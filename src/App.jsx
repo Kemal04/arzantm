@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Outlet, Route, Routes } from "react-router-dom
 import { Toaster } from "react-hot-toast";
 
 //COMPONENTS
-import { Footer, Navbar, ScrollToTop, Sms } from "./components";
+import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
 import { ChosenPosts, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, TopList, Video } from "./pages/site";
@@ -50,7 +50,14 @@ const App = () => {
                             <Route path="/" element={<HomeLayout />}>
                                 <Route path="/" element={<Home />} />
 
-                                <Route path="/sms" element={<Sms />} />
+                                {
+                                    !authState.status
+                                    &&
+                                    <>
+                                        <Route path="/sms" element={<Sms />} />
+                                        <Route path="/reset-password" element={<ResetPassword />} />
+                                    </>
+                                }
 
                                 <Route path="/foto" element={<Foto />} />
                                 <Route path="/foto/:fotoId" element={<FotoRead />} />

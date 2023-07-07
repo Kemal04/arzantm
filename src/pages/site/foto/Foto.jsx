@@ -119,17 +119,30 @@ const Foto = () => {
         fetchBadge()
     }, [])
 
+    //FOTO COUNTER
+    const [total, setTotal] = useState("")
+
+    useEffect(() => {
+        let jem = 0;
+        galleries?.map((gallery) => {
+            setTotal(jem += gallery.image_count)
+        })
+    }, [galleries])
+
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
                 <Link to='/' className='text-green text-decoration-none'>Baş sahypa</Link>
                 <div className='mx-2'>/</div>
-                <div>Surat</div>
+                <div>Albomlar</div>
             </div>
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Surat <span className='text-green'>( {count.count} )</span></div>
+                    <div className='d-flex align-items-center'>
+                        <div className='h3 me-4'>Albomlar <span className='text-green'>(+{count.count} )</span></div>
+                        <div className='h3'>Suratlaryň jemi <span className='text-green'>( {total} )</span></div>
+                    </div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
                         <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />

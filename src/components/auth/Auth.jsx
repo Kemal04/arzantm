@@ -129,7 +129,7 @@ const Auth = () => {
                                             <label className="form-check-label" htmlFor="exampleCheck1">Ýatda sakla</label>
                                         </div>
                                         <div className='me-2'>
-                                            <Link to='/' className='text-secondary text-decoration-none'>Açar sözi unutdym</Link>
+                                            <Link to='/reset-password' className='text-secondary text-decoration-none'>Açar sözi unutdym</Link>
                                         </div>
                                     </div>
                                     <div className="border-0 d-grid mt-3" style={{ justifyContent: 'unset' }}>

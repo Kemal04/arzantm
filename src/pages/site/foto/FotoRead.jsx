@@ -57,6 +57,8 @@ const FotoRead = () => {
                         </div>
 
                         <div className='container mt-2'>
+                            <div className='h3'>Suratlar <span className='text-green'>( {gallery?.images.length} )</span></div>
+
                             <div className='d-flex align-items-center mb-4'>
                                 <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
                                 <div>{gallery.user.name}</div>

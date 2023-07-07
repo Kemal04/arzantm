@@ -157,10 +157,10 @@ const Home = () => {
                                         <div className='position-absolute p-2 end-0'>
                                             <div className='bg-green text-white small rounded-circle p-2'>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
                                         </div>
-                                        <div className='card-body p-2'>
+                                        <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
+                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
+                                                <div className='small text-secondary me-2'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
                                                 <div className='small text-secondary'>
                                                     <FontAwesomeIcon icon={faEye} className='me-2' />
                                                     {post.viewed_count}

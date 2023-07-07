@@ -57,18 +57,19 @@ const Posts = () => {
         fetchBadge()
     }, [])
 
+    console.log(posts);
 
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
                 <Link to="/" className='text-green text-decoration-none'>Baş sahypa</Link>
                 <div className='mx-2'>/</div>
-                <div>Arzanladyşlar</div>
+                <div>Arzanladyşlar ({posts[0]?.items_full_count})</div>
             </div>
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Arzanladyşlar <span className='text-green'>(+{count.count})</span></div>
+                    <div className='h3'>Arzanladyşlar {count.count !== 0 ? <span className='text-green'>(+{count.count})</span> : ""}</div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {
@@ -84,10 +85,10 @@ const Posts = () => {
                                         <div className='position-absolute p-2 end-0'>
                                             <div className='bg-green text-white small rounded-circle p-2'>{post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%</div>
                                         </div>
-                                        <div className='card-body p-2'>
+                                        <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
+                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
+                                                <div className='small text-secondary me-2'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
                                                 <div className='small text-secondary'>
                                                     <FontAwesomeIcon icon={faEye} className='me-2' />
                                                     {post.viewed_count}
