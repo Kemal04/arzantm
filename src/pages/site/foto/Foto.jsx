@@ -229,7 +229,7 @@ const Foto = () => {
                                             <div className='d-flex align-items-center'>
                                                 <div className='text-secondary d-flex align-items-center me-3'>
                                                     <img src={gallery_img} alt="" className='img-fluid me-1' />
-                                                    <span>{gallery.items_full_count}</span>
+                                                    <span>{gallery.image_count}</span>
                                                 </div>
                                                 <div className='text-secondary d-flex align-items-center'>
                                                     <img src={eye} alt="" className='img-fluid me-1' />

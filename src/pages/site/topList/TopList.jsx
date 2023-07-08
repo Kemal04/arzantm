@@ -72,6 +72,11 @@ const TopList = () => {
                                             Resmiler
                                         </button>
                                     </li>
+                                    <li className="nav-item" role="presentation">
+                                        <button style={{ fontWeight: "500", padding: "10px 110px" }} className="text-dark nav-link bg-light rounded-0 border" id="pills-year-tab" data-bs-toggle="pill" data-bs-target="#pills-year" type="button" role="tab" aria-controls="pills-year" aria-selected="false">
+                                            Resmiler
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
                             <div className='mt-3'>

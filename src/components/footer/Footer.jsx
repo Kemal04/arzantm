@@ -4,8 +4,12 @@ import logo from '../../assets/logo/logo.svg'
 import youtube from '../../assets/icons/youtube.svg'
 import tiktok from '../../assets/icons/tiktok.svg'
 import instagram from '../../assets/icons/instagram.svg'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
+
+    const { t } = useTranslation();
+
     return (
         <>
             <div className='p-5 text-white' style={{ backgroundColor: "#0A0909" }}>
@@ -14,39 +18,39 @@ const Footer = () => {
                         <div className='col-xl-3'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Habarlar</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlar")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Dükan</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("dukan")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Galereýa</Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='col-xl-3'>
-                            <ul className="nav flex-column">
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Top Hasaplar</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Resmiler</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Saýlananlar</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("galereya")}</Link>
                                 </li>
                             </ul>
                         </div>
                         <div className='col-xl-3'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Ulanyş düzgünleri</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Habarlaşmak</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("resmiler")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>Biz barada</Link>
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='col-xl-3'>
+                            <ul className="nav flex-column">
+                                <li className="nav-item">
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("ulanys_duzgunleri")}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlasmak")}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("biz_barada")}</Link>
                                 </li>
                             </ul>
                         </div>

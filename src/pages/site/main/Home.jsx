@@ -76,7 +76,7 @@ const Home = () => {
             <div className='container mt-3'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='h3'>{t('saylananlar')}</div>
-                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>
@@ -85,13 +85,13 @@ const Home = () => {
                     ) : (
                         selectedPosts.map((post, index) => (
                             <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 mb-5 text-decoration-none'>
-                                <div className='position-relative card-about'>
+                                <div className='position-relative card-about w-100'>
                                     <div className='text-center'>
                                         <img src={'http://95.85.126.113/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                     </div>
                                     <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
                                         <div className='h5 text-white'>
-                                            {post.title}
+                                            {post.title.substr(0, 10) + "..."}
                                         </div>
                                         <small className='' style={{ color: "#C4C4C4" }}>{moment(post.created_at).format('DD.MM.YYYY')}</small>
                                     </div>
@@ -142,8 +142,8 @@ const Home = () => {
             {/* CHEAP */}
             <div className='container mt-2'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>Arzanladyşlar</div>
-                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <div className='h3'>{t('arzanladyslar')}</div>
+                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>
@@ -181,8 +181,8 @@ const Home = () => {
             {/* RESMILER */}
             <div className='container mt-3'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>Täze resmiler</div>
-                    <Link to="/" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <div className='h3'>{t('taze_resmiler')}</div>
+                    <Link to="/" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between g-0 mt-3'>

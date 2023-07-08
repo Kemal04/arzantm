@@ -48,7 +48,7 @@ const Posts = () => {
 
     useEffect(() => {
         const fetchBadge = async () => {
-            await axios.get(`/api/v1/post/badge?publication_type_id=1`).then((res) => {
+            await axios.get(`/api/v1/post/badge`).then((res) => {
                 setCount(res.data.data);
             }).catch((res) => {
                 toast.error(res.response.data.error.message)
@@ -57,7 +57,7 @@ const Posts = () => {
         fetchBadge()
     }, [])
 
-    console.log(posts);
+    console.log(count);
 
     return (
         <>
@@ -69,7 +69,7 @@ const Posts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Arzanladyşlar {count.count !== 0 ? <span className='text-green'>(+{count.count})</span> : ""}</div>
+                    <div className='h3'>Arzanladyşlar <span className='text-green'>(+{count.count})</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {
