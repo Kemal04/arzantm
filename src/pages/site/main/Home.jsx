@@ -27,6 +27,7 @@ import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Home = () => {
 
@@ -62,6 +63,8 @@ const Home = () => {
         fetchBadge()
     }, [])
 
+    const { t } = useTranslation();
+
     return (
         <>
             <Banner page_name="HOME" />
@@ -72,7 +75,7 @@ const Home = () => {
             {/* CARDS */}
             <div className='container mt-3'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>Saýlananlar</div>
+                    <div className='h3'>{t('saylananlar')}</div>
                     <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>Hemmesi <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 

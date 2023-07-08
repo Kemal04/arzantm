@@ -19,6 +19,7 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
 import User from '../users/User';
 import Offical from '../users/Offical';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
 
@@ -30,6 +31,15 @@ const Navbar = () => {
     if (error) {
         toast.error(error.message);
     }
+
+    const { t, i18n } = useTranslation();
+
+    //Creating a method to change the language onChnage from select box
+    const changeLanguageHandler = (e) => {
+        const languageValue = e.target.value
+        i18n.changeLanguage(languageValue);
+    }
+
 
     return (
         <>
@@ -72,16 +82,11 @@ const Navbar = () => {
                                 <input className="form-control me-2 rounded-0 ps-5" type="search" placeholder="Gözle..." style={{ background: `url(${search}) no-repeat left`, backgroundPositionX: "20px", width: "500px" }} />
                             </form>
                             <li className="nav-item dropdown me-5 ms-5">
-                                <NavLink to="/" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>
-                                        <img src={globus} alt="" className='img-fluid me-1' />
-                                        Türkmençe
-                                    </span>
-                                </NavLink>
-                                <ul className="dropdown-menu">
-                                    <li><Link to='/' className="dropdown-item text-capitalize">русский</Link></li>
-                                    <li><Link to='/' className="dropdown-item">English</Link></li>
-                                </ul>
+                                <select className="form-select border-0 bg-light" aria-label="Default select example" onChange={changeLanguageHandler}>
+                                    <option value="tm">TM</option>
+                                    <option value="en">EN</option>
+                                    <option value="ru">RU</option>
+                                </select>
                             </li>
                             <div className="dropdown mt-2">
                                 <div className="position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

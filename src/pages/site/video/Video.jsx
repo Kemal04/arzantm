@@ -49,6 +49,14 @@ const Video = () => {
         autoplay: false,
     };
 
+    const option2 = {
+        perPage: 'auto',
+        focus: 0,
+        omitEnd: true,
+        perMove: 1,
+        pagination: false,
+        arrows: false,
+    };
 
     const [modalShow, setModalShow] = useState(false);
     const [videoSrc, setVideoSrc] = useState("");
@@ -133,7 +141,10 @@ const Video = () => {
             setFilteredBanner(banners);
         } else {
             const filter = data.filter(video => (video.page_category[0].category?.id) == catId)
-            setFilteredData(filter);
+            // filter.forEach(item => {
+            //     item['count'] = filter.length
+            // });
+            setFilteredData(filter)
 
             const filterBanner = banners.filter(banner => (banner.page_category[0].category?.id) == catId)
             setFilteredBanner(filterBanner);
@@ -153,7 +164,6 @@ const Video = () => {
         }
         fetchBadge()
     }, [])
-    
 
     return (
         <>
@@ -165,7 +175,7 @@ const Video = () => {
 
             <div className='container my-2'>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Wideo <span className='text-green'>( {count.count} )</span></div>
+                    <div className='h3'>Wideo <span className='text-green'>( +{count.count} )</span></div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
                         <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
@@ -173,20 +183,28 @@ const Video = () => {
                 </div>
 
                 <div className='row mt-2 justify-content-between'>
-                    <div className='col-xl-auto'>
-                        <button className={activeCat == "All" ? `btn bg-green text-white btn-sm rounded px-4` : `btn btn-outline-green btn-sm rounded px-4`} id={"All"} onClick={changeData}>Hemmesi ({videos.length})</button>
-                    </div>
-                    {
-                        loading1 ? (
-                            <div>Loading...</div>
-                        ) : (
-                            categories.map((category, index) => (
-                                <div className='col-xl-auto' key={index}>
-                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white` : `btn bg-light btn-outline-green btn-sm rounded px-4`} id={category.category.id} onClick={changeData}>{category.category.name} ()</button>
-                                </div>
-                            ))
-                        )
-                    }
+                    <Splide options={option2} hasTrack={false}>
+                        <SplideTrack className='row g-0'>
+                            {
+                                loading1 ? (
+                                    <SplideSlide>Loading...</SplideSlide>
+                                ) : (
+                                    <>
+                                        <SplideSlide className='col-xl-auto'>
+                                            <button className={activeCat == "All" ? `btn bg-green text-white btn-sm rounded px-4 me-3` : `btn btn-outline-green btn-sm rounded px-4 me-3`} id={"All"} onClick={changeData}>Hemmesi ({videos[0]?.items_full_count})</button>
+                                        </SplideSlide>
+                                        {
+                                            categories.map((category, index) => (
+                                                <SplideSlide className='col-xl-auto' key={index}>
+                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name}</button>
+                                                </SplideSlide>
+                                            ))
+                                        }
+                                    </>
+                                )
+                            }
+                        </SplideTrack>
+                    </Splide>
                 </div>
 
                 <div className='my-3'>
