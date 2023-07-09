@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import not_see from '../../assets/icons/not-see.svg'
 import key from '../../assets/icons/key.svg'
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
 
@@ -20,6 +21,8 @@ const ResetPassword = () => {
     const toggle3 = () => {
         setVisible3(!isVisible3);
     };
+
+    const navigate = useNavigate()
 
     const [phone, setPhone] = useState("")
 
@@ -78,8 +81,7 @@ const ResetPassword = () => {
         else {
             await axios.post('/api/v1/account/reset-password', { phone: phone, password: pass }).then((res) => {
                 toast.success(res.data.message)
-                setCheckSms(false)
-                setChangePassword(true)
+                navigate('/')
             }).catch((err) => {
                 toast.error(err.response.data.message)
             })

@@ -15,6 +15,8 @@ import { toast } from 'react-hot-toast'
 import useFetch from '../../../hooks/useFetch'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
+import { useTranslation } from 'react-i18next'
+import axios from 'axios'
 
 const Profile = () => {
 
@@ -26,13 +28,42 @@ const Profile = () => {
         toast.error(error.message);
     }
 
+    const [img, setImg] = useState('')
+
     const [image, setImage] = useState(null)
 
     const onImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setImage(URL.createObjectURL(e.target.files[0]));
         }
+        setImg(e.target.files[0])
     }
+
+    //USER AVATAR
+    const handleClick = async () => {
+
+        const formData = new FormData()
+        formData.append('image', img.pictureAsFile === undefined ? img : img.pictureAsFile)
+
+        if (!img) {
+            toast.error("Surat ýerleşdiriň")
+        }
+        else {
+            await axios.post(`/api/v1/user/profile/avatar`, formData, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+            }).then((res) => {
+                toast.success(res.data.message);
+                window.location.reload()
+            }).catch((res) => {
+                console.log(res.response.data.message);
+            });
+        }
+    }
+
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -41,7 +72,7 @@ const Profile = () => {
             ) : (
                 <div className='container mt-4'>
                     <div className='text-center'>
-                        <img src={'http://95.85.126.113:8080/' + user.avatar_image.url === null || image || user_icon} alt="" className='img-fluid' style={{ height: "400px", width: "800px", objectFit: "cover", filter: "blur(4px)" }} />
+                        <img src={'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='img-fluid' style={{ height: "400px", width: "800px", objectFit: "cover", filter: "blur(4px)" }} />
                         <div className='row justify-content-center g-0'>
                             <div className='col-xl-12 position-relative'>
                                 {/* <img src={'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='img-fluid rounded-circle border'/>
@@ -56,9 +87,10 @@ const Profile = () => {
                                         </label>
                                     </div>
                                     <div className="avatar-preview">
-                                        <div id="imagePreview" style={{ backgroundImage: `url(${'http://95.85.126.113:8080/' + user.avatar_image.url === null || image || user_icon})` }}>
+                                        <div id="imagePreview" style={{ backgroundImage: `url(${'http://95.85.126.113:8080/' + user.avatar_image.url})` }}>
                                         </div>
                                     </div>
+                                    {img && <button className='btn btn-green mt-3' onClick={handleClick}>{t('gosmak')}</button>}
                                 </div>
                             </div>
                             <div className='col-xl-12 h5 mt-1 mb-3'>
@@ -74,15 +106,15 @@ const Profile = () => {
                             </div>
                             <div className='col-xl-2 border-end my-3'>
                                 <b>0</b>
-                                <div className='text-muted'>Garaşylýar</div>
+                                <div className='text-muted'>{t('garasylyar')}</div>
                             </div>
                             <div className='col-xl-2 border-end my-3'>
                                 <b>0</b>
-                                <div className='text-muted'>Kabul edilmedi</div>
+                                <div className='text-muted'>{t('kabul_edilmedi')}</div>
                             </div>
                             <div className='col-xl-2 my-3'>
                                 <b>0</b>
-                                <div className='text-muted'>Tassyklandy</div>
+                                <div className='text-muted'>{t('tassyklandy')}</div>
                             </div>
                             <div className='col-xl-12 my-3 d-flex justify-content-center'>
                                 <button className='btn border-green me-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
@@ -90,7 +122,7 @@ const Profile = () => {
                                     {user.coin_balance}
                                 </button>
                                 <button className='btn btn-green ms-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
-                                    Resmi hasap aç
+                                    {t('resmi_hasap_ac')}
                                 </button>
                             </div>
                         </div>

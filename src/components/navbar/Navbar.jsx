@@ -40,7 +40,6 @@ const Navbar = () => {
         i18n.changeLanguage(languageValue);
     }
 
-
     return (
         <>
             <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-white'}`}>

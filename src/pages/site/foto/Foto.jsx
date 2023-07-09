@@ -10,6 +10,7 @@ import grid_big from '../../../assets/icons/grid-big.svg'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
+import { useTranslation } from 'react-i18next'
 
 const Foto = () => {
 
@@ -23,7 +24,7 @@ const Foto = () => {
 
     const option2 = {
         perPage: 'auto',
-        focus  : 0,
+        focus: 0,
         omitEnd: true,
         perMove: 1,
         pagination: false,
@@ -138,19 +139,21 @@ const Foto = () => {
         })
     }, [galleries])
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
-                <Link to='/' className='text-green text-decoration-none'>Baş sahypa</Link>
+                <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                 <div className='mx-2'>/</div>
-                <div>Albomlar</div>
+                <div>{t('albomlar')}</div>
             </div>
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex align-items-center'>
-                        <div className='h3 me-4'>Albomlar <span className='text-green'>(+{count.count} )</span></div>
-                        <div className='h3'>Suratlaryň jemi <span className='text-green'>( {total} )</span></div>
+                        <div className='h3 me-4'>{t('albomlar')} <span className='text-green'>(+{count.count} )</span></div>
+                        <div className='h3'>{t('suratlaryn_jemi')} <span className='text-green'>( {total} )</span></div>
                     </div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />

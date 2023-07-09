@@ -20,6 +20,7 @@ import star from '../../../assets/icons/star.svg'
 import play from '../../../assets/icons/play.svg'
 import useFetch from '../../../hooks/useFetch'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
+import { useTranslation } from 'react-i18next'
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -165,17 +166,19 @@ const Video = () => {
         fetchBadge()
     }, [])
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
-                <Link to='/' className='text-green text-decoration-none'>Baş sahypa</Link>
+                <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                 <div className='mx-2'>/</div>
-                <div>Wideo</div>
+                <div>{t('wideo')}</div>
             </div>
 
             <div className='container my-2'>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>Wideo <span className='text-green'>( +{count.count} )</span></div>
+                    <div className='h3'>{t('wideo')} <span className='text-green'>( +{count.count} )</span></div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
                         <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
@@ -239,13 +242,13 @@ const Video = () => {
                     <div className='col-xl-6'>
                         <div className='d-flex align-items-center justify-content-center border-green' style={{ borderRadius: "10px 0 0 10px" }}>
                             <img src={play} alt="" className='img-fluid' />
-                            Meşhurlar (65)
+                            {t('meshurlar')} (65)
                         </div>
                     </div>
                     <div className='col-xl-6'>
                         <div className='d-flex align-items-center justify-content-center border-green' style={{ borderRadius: "0 10px 10px 0" }}>
                             <img src={star} alt="" className='img-fluid' />
-                            Resmiler (25)
+                            {t('resmiler')} (25)
                         </div>
                     </div>
                 </div>

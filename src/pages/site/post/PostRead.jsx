@@ -10,6 +10,7 @@ import share from '../../../assets/icons/share.svg'
 import like from '../../../assets/icons/like-empty.svg'
 import axios from "axios";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const PostRead = () => {
 
@@ -44,11 +45,13 @@ const PostRead = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
         }).then((res) => {
-            toast.success(res.data.message)
+            window.location.reload()
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
     }
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -59,17 +62,17 @@ const PostRead = () => {
                 ) : (
                     <>
                         <div className='container d-flex align-items-center my-4'>
-                            <div className='text-green'>Baş sahypa</div>
+                            <Link to="/" className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                             <div className='mx-2'>/</div>
-                            <div className='text-green'>Arzanladyşlar</div>
+                            <Link to="/arzanladyslar" className='text-green text-decoration-none'>{t('arzanladyslar')}</Link>
                             <div className='mx-2'>/</div>
-                            <div>{post.title} {post.id}</div>
+                            <div>{post.title}</div>
                         </div>
 
                         <div className="container">
                             <div className="row justify-content-center">
-                                <div className="col-xl-2" style={{ marginTop: "50%" }}>
-                                    <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle px-3 py-2 d-inline">
+                                <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
+                                    <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18" style={{ padding: "5px 9px" }}>
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                     </Link>
                                 </div>
@@ -127,23 +130,29 @@ const PostRead = () => {
                                         <div className="mt-4 h4">
                                             {post.title}
                                         </div>
-                                        <div className="d-flex justify-content-between align-items-center border-top border-bottom py-4 my-3">
-                                            <div>
-                                                <div>
-                                                    <span className="text-green h2">{post.discount}</span><span className="fs-17 fw-black"> manat</span>
-                                                    <span className="fs-17 ms-4 text-muted text-decoration-line-through">{post.price}<span className="fs-17"> manat</span></span>
+                                        {
+                                            !post.price
+                                                ?
+                                                null
+                                                :
+                                                <div className="d-flex justify-content-between align-items-center border-top border-bottom py-4 my-3">
+                                                    <div>
+                                                        <div>
+                                                            <span className="text-green h2">{post.discount}</span><span className="fs-17 fw-black"> manat</span>
+                                                            <span className="fs-17 ms-4 text-muted text-decoration-line-through">{post.price}<span className="fs-17"> manat</span></span>
+                                                        </div>
+                                                        <div className="d-flex align-items-center mt-4 text-muted small">
+                                                            <FontAwesomeIcon icon={faCalendarAlt} />
+                                                            <div className="ms-2">{moment(post.start_date).format('DD.MM.YYYY')} - </div>
+                                                            <div className="ms-2">{moment(post.end_date).format('DD.MM.YYYY')}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-green text-white rounded-circle p-4 h5">
+                                                        {post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%
+                                                    </div>
                                                 </div>
-                                                <div className="d-flex align-items-center mt-4 text-muted small">
-                                                    <FontAwesomeIcon icon={faCalendarAlt} />
-                                                    <div className="ms-2">{moment(post.start_date).format('DD.MM.YYYY')} - </div>
-                                                    <div className="ms-2">{moment(post.end_date).format('DD.MM.YYYY')}</div>
-                                                </div>
-                                            </div>
-                                            <div className="bg-green text-white rounded-circle p-4 h5">
-                                                {post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%
-                                            </div>
-                                        </div>
-                                        <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
+                                        }
+                                        <p className="mt-4" dangerouslySetInnerHTML={{ __html: post.description }}></p>
                                         <div className="row mb-4">
                                             {
                                                 post.tags.map((tag, index) => (
@@ -157,16 +166,16 @@ const PostRead = () => {
                                         </div>
                                         <div className="d-flex align-items-center mb-5">
                                             <button className='btn btn-light border me-3 w-100'>
-                                                Teswirler
+                                                {t('teswirler')}
                                             </button>
                                             <button className='btn btn-outline-danger w-100'>
-                                                Şikaýat et
+                                                {t('sikayet_et')}
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-2 text-end" style={{ marginTop: "50%" }}>
-                                    <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle px-3 py-2 d-inline`}>
+                                <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
+                                    <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
                                         <FontAwesomeIcon icon={faArrowRight} />
                                     </Link>
                                 </div>

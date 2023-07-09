@@ -13,6 +13,7 @@ import calendar from '../../../assets/icons/wallet/calendar.png'
 import { AuthContext } from '../../../context/AuthContext'
 import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
+import { useTranslation } from 'react-i18next'
 
 const ProfileWallet = () => {
 
@@ -23,6 +24,8 @@ const ProfileWallet = () => {
     if (error) {
         toast.error(error.message);
     }
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -54,17 +57,17 @@ const ProfileWallet = () => {
                                 <ul className="nav nav-pills" id="pills-tab" role="tablist">
                                     <li className="nav-item" role="presentation">
                                         <button style={{ borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500", padding: "10px 110px" }} className="text-dark nav-link active  bg-light border" id="pills-day-tab" data-bs-toggle="pill" data-bs-target="#pills-day" type="button" role="tab" aria-controls="pills-day" aria-selected="true">
-                                            Gün
+                                            {t('gun')}
                                         </button>
                                     </li>
                                     <li className="nav-item" role="presentation">
-                                        <button style={{ fontWeight: "500", padding: "10px 110px" }} className="text-dark nav-link bg-light rounded-0 border" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="false">
-                                            Hepde
+                                        <button style={{ fontWeight: "500", padding: "10px 100px" }} className="text-dark nav-link bg-light rounded-0 border" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="false">
+                                            {t('hepde')}
                                         </button>
                                     </li>
                                     <li className="nav-item" role="presentation">
-                                        <button style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", padding: "10px 110px" }} className="text-dark nav-link bg-light border" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false">
-                                            Aý
+                                        <button style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", padding: "10px 100px" }} className="text-dark nav-link bg-light border" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false">
+                                            {t('ay')}
                                         </button>
                                     </li>
                                 </ul>
@@ -76,16 +79,16 @@ const ProfileWallet = () => {
                                             <table className="table table-borderless align-middle">
                                                 <thead className='border-bottom small text-secondary'>
                                                     <tr>
-                                                        <td>Ady</td>
-                                                        <td className='text-end'>Mukdary</td>
-                                                        <td className='text-end'>Ball</td>
+                                                        <td>{t('ady')}</td>
+                                                        <td className='text-end'>{t('mukdary')}</td>
+                                                        <td className='text-end'>{t('ball')}</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={like} alt="" className='img-fluid me-3' />
-                                                            Like
+                                                            {t('like')}
                                                         </td>
                                                         <td className='text-end pe-4'>88</td>
                                                         <td>
@@ -98,7 +101,7 @@ const ProfileWallet = () => {
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={chat} alt="" className='img-fluid me-3' />
-                                                            Teswir
+                                                            {t('teswir')}
                                                         </td>
                                                         <td className='text-end pe-4'>16</td>
                                                         <td>
@@ -111,7 +114,7 @@ const ProfileWallet = () => {
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={footprint} alt="" className='img-fluid me-3' />
-                                                            Myhmanlar
+                                                            {t('myhmanlar')}
                                                         </td>
                                                         <td className='text-end pe-4'>530</td>
                                                         <td>
@@ -124,7 +127,7 @@ const ProfileWallet = () => {
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={users} alt="" className='img-fluid me-3' />
-                                                            Yzarlaýjylar
+                                                            {t('yzarlayjylar')}
                                                         </td>
                                                         <td className='text-end pe-4'>12</td>
                                                         <td>
@@ -137,7 +140,7 @@ const ProfileWallet = () => {
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={user_tick} alt="" className='img-fluid me-3' />
-                                                            Çagyrma
+                                                            {t('cagyrma')}
                                                         </td>
                                                         <td className='text-end pe-4'>11</td>
                                                         <td>
@@ -150,7 +153,7 @@ const ProfileWallet = () => {
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={calendar} alt="" className='img-fluid me-3' />
-                                                            Girilen gün
+                                                            {t('girilen_gun')}
                                                         </td>
                                                         <td className='text-end pe-4'>5</td>
                                                         <td>

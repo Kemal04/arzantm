@@ -1,4 +1,3 @@
-import React from 'react'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import banner from '../../assets/banners/offical/1.png'

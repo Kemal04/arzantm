@@ -83,10 +83,10 @@ const Auth = () => {
                     role: res.data.data.role,
                 });
                 toast.success(res.data.message)
+                window.location.reload()
             }).catch((err) => {
                 toast.error(err.response.data.message);
             })
-
     }
 
     return (
