@@ -2,7 +2,7 @@ import { useState } from 'react'
 import img_icon from '../../../assets/icons/img.svg'
 import phone from '../../../assets/icons/phone-bold.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
@@ -16,9 +16,9 @@ const PostAdd = () => {
     const handleChangeImg = (e) => {
         var files = e.target.files;
         for (let i = 0; i < files.length; i++) {
-            setFormData([...formData, URL.createObjectURL(files[i])])
+            setImg([...formData, files[i]]);
+            // setFormData([...formData, URL.createObjectURL(files[i])])
         }
-        setImg(e.target.files[0])
     };
 
     const handleDelete = async (id) => {
@@ -34,12 +34,14 @@ const PostAdd = () => {
 
     const navigate = useNavigate()
 
-    const [img, setImg] = useState("")
-    const [tags, setTags] = useState([])
+    const [img, setImg] = useState([])
+    console.log(img);
+
     const [discount, setDiscount] = useState({
         title: "",
         description: "",
         category_id: "",
+        sub_category_id: "",
         phone: "",
         price: "",
         discount: "",
@@ -48,8 +50,49 @@ const PostAdd = () => {
     })
 
     const [categories] = useFetch("/api/v1/category/list", "data", true);
+    const [subCategories, setSubCategory] = useState([])
 
-    console.log(img);
+    const filterSubCategory = (e) => {
+        const subId = e.target[e.target.selectedIndex].id
+        setSubCategory(categories[subId]?.sub_categories)
+        setDiscount((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    const [input, setInput] = useState("");
+    const [tags, setTags] = useState([]);
+    const [isKeyReleased, setIsKeyReleased] = useState(false);
+
+    const onChange = (e) => {
+        const { value } = e.target;
+        setInput(value);
+    };
+
+    const onKeyDown = (e) => {
+        const { key } = e;
+        const trimmedInput = input.trim();
+        if (key === " " && trimmedInput.length && !tags.includes(trimmedInput)) {
+            e.preventDefault();
+            setTags((prevState) => [...prevState, trimmedInput]);
+            setInput("");
+        }
+
+        if (key === "Backspace" && !input.length && tags.length && isKeyReleased) {
+            const tagsCopy = [...tags];
+            const poppedTag = tagsCopy.pop();
+            e.preventDefault();
+            setTags(tagsCopy);
+            setInput(poppedTag);
+        }
+
+        setIsKeyReleased(false);
+    };
+
+    const onKeyUp = () => {
+        setIsKeyReleased(true);
+    };
+    const deleteTag = (index) => {
+        setTags((prevState) => prevState.filter((tag, i) => i !== index));
+    };
 
     const handleChange = (e) => {
         setDiscount((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -59,10 +102,11 @@ const PostAdd = () => {
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append('img', img)
+        formData.append('image', img)
         formData.append('title', discount.title)
         formData.append('description', discount.description)
         formData.append('category_id', discount.category_id)
+        formData.append('sub_category_id', discount.sub_category_id)
         formData.append('tags', tags)
         formData.append('phone', discount.phone)
         formData.append('price', discount.price)
@@ -84,6 +128,9 @@ const PostAdd = () => {
         }
         else if (!discount.category_id) {
             toast.error("Category giriziň")
+        }
+        else if (!discount.sub_category_id) {
+            toast.error("Sub category giriziň")
         }
         else if (!discount.price) {
             toast.error("Price giriziň")
@@ -107,10 +154,11 @@ const PostAdd = () => {
                 },
             })
                 .then((res) => {
+                    console.log(res);
                     toast.success(res.data.message)
                     navigate("/profile")
                 }).catch((err) => {
-                    // toast.error(res.response.data.error)
+                    toast.error(err.response.data.message)
                     console.log(err);
                 });
         }
@@ -154,17 +202,35 @@ const PostAdd = () => {
                                 <textarea name='description' onChange={handleChange} className="form-control" id="exampleFormControlTextarea1" rows="4" placeholder={t('doly_maglumaty')} required></textarea>
                             </div>
                             <div className='col-xl-6 mb-4'>
-                                <select name='category_id' onChange={handleChange} className="form-select" required>
+                                <select name='category_id' id='category_id' onChange={(e) => filterSubCategory(e)} className="form-select" required>
                                     <option defaultValue>{t('kategoriya_sayla')}</option>
                                     {categories?.map((category, index) => (
-                                        <option key={index} value={category.id}>
+                                        <option key={index} value={category.id} id={index}>
                                             {category.name}
                                         </option>
                                     ))}
                                 </select>
                             </div>
-                            <div className="col-xl-12 mb-4">
-                                <input name='tags' onChange={(e) => setTags(e.target.value)} type="text" className="form-control" placeholder={t('taglar')} required />
+                            <div className='col-xl-6 mb-4'>
+                                <select name='sub_category_id' id='sub_category_id' onChange={handleChange} className="form-select" required>
+                                    <option defaultValue>{t('kategoriya_sayla')}</option>
+                                    {subCategories?.map((subCategory, index) => (
+                                        <option key={index} value={subCategory.id}>
+                                            {subCategory.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <input type="text" className="form-control" id="title" name="title" value={input} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+                            <div className="tags-container mt-3">
+                                {tags.map((tag, index) => (
+                                    <div key={index} className="tag" onClick={() => deleteTag(index)}>
+                                        <span>
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </span>
+                                        {tag}
+                                    </div>
+                                ))}
                             </div>
                             <div className='col-xl-12 mb-4'>
                                 <div className='d-flex align-items-center'>
