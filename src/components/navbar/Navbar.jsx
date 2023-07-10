@@ -1,25 +1,23 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ThemeContext } from '../../context/ThemeContext';
 import { Link, NavLink } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 //COMPONENTS
 import Auth from '../auth/Auth';
-// import User from '../users/User';
-// import Offical from '../users/Offical';
+import User from '../users/User';
+import Offical from '../users/Offical';
 
 //IMAGES
 import logo from '../../assets/logo/logo.svg'
 import location from '../../assets/icons/location.svg'
 import search from '../../assets/icons/search.svg'
-import globus from '../../assets/icons/globus.svg'
 import bell from '../../assets/icons/bell.svg'
 import logo_circle from '../../assets/icons/logo-circle.svg'
-import useFetch from '../../hooks/useFetch';
-import { toast } from 'react-hot-toast';
-import { AuthContext } from '../../context/AuthContext';
-import User from '../users/User';
-import Offical from '../users/Offical';
-import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const Navbar = () => {
 
@@ -32,12 +30,23 @@ const Navbar = () => {
         toast.error(error.message);
     }
 
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
 
     //Creating a method to change the language onChnage from select box
     const changeLanguageHandler = (e) => {
         const languageValue = e.target.value
         i18n.changeLanguage(languageValue);
+    }
+
+    const [searchBar, setSearchBar] = useState([])
+
+    const fetchData = async () => {
+        await axios.get(`/api/v1/post?query=${searchBar}`)
+            .then((res) => {
+
+            }).catch((err) => {
+                
+            })
     }
 
     return (
@@ -90,9 +99,9 @@ const Navbar = () => {
                             <div className="dropdown mt-2">
                                 <div className="position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src={bell} alt="" className='me-1' style={{ width: "20px" }} />
-                                    <span className="position-absolute translate-middle badge rounded-circle px-1 bg-danger" style={{ top: "6px", left: "22px" }}>
+                                    {/* <span className="position-absolute translate-middle badge rounded-circle px-1 bg-danger" style={{ top: "6px", left: "22px" }}>
                                         23
-                                    </span>
+                                    </span> */}
                                 </div>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><Link to="/" className="dropdown-item">Action</Link></li>

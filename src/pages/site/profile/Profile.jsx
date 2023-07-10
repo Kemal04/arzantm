@@ -1,45 +1,32 @@
-import banner from '../../../assets/banners/profile/1.png'
 import phone from '../../../assets/icons/phone-bold.svg'
 import location from '../../../assets/icons/location.svg'
 import coin from '../../../assets/icons/coin.svg'
-import user_icon from '../../../assets/icons/user-icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPenAlt } from '@fortawesome/free-solid-svg-icons'
 
-import cheap_1 from '../../../assets/cards/cheap/1.png'
-import cheap_2 from '../../../assets/cards/cheap/2.png'
-import cheap_3 from '../../../assets/cards/cheap/3.png'
-import cheap_4 from '../../../assets/cards/cheap/4.png'
-import cheap_5 from '../../../assets/cards/cheap/5.png'
 import { toast } from 'react-hot-toast'
 import useFetch from '../../../hooks/useFetch'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 const Profile = () => {
 
+    //CONTEXT
     const { authState } = useContext(AuthContext)
 
-    const [user, loading, error] = useFetch("/api/v1/user/profile/" + authState.id, "data");
-
-    if (error) {
-        toast.error(error.message);
-    }
-
-    const [img, setImg] = useState('')
-
-    const [image, setImage] = useState(null)
-
-    const onImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setImage(URL.createObjectURL(e.target.files[0]));
-        }
-        setImg(e.target.files[0])
-    }
+    //CURRENT USER FETCH
+    const [user, loading] = useFetch("/api/v1/user/profile/" + authState.id, "data");
+    const [postWaiting] = useFetch(`/api/v1/post?user_id=${authState.id}&status=waiting`, "data");
+    const [postDeclined] = useFetch(`/api/v1/post?user_id=${authState.id}&status=declined`, "data");
+    const [postApproved] = useFetch(`/api/v1/post?user_id=${authState.id}&status=approved`, "data");
 
     //USER AVATAR
+    const [img, setImg] = useState('')
+
     const handleClick = async () => {
 
         const formData = new FormData()
@@ -62,8 +49,43 @@ const Profile = () => {
         }
     }
 
+    const [image, setImage] = useState(null)
+    const onImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setImage(URL.createObjectURL(e.target.files[0]));
+        }
+        setImg(e.target.files[0])
+    }
+
 
     const { t } = useTranslation();
+
+
+    const [activePosts, setActivePosts] = useState([])
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            await axios.get(`/api/v1/post?user_id=${authState.id}&status=waiting`).then((res) => {
+                setActivePosts(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        };
+        fetchData();
+
+    }, [authState.id]);
+
+
+    const changeStatus = async (name) => {
+
+        await axios.get(`/api/v1/post?user_id=${authState.id}&status=${name}`)
+            .then((res) => {
+                setActivePosts(res.data.data)
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
 
     return (
         <>
@@ -72,7 +94,7 @@ const Profile = () => {
             ) : (
                 <div className='container mt-4'>
                     <div className='text-center'>
-                        <img src={'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='img-fluid' style={{ height: "400px", width: "800px", objectFit: "cover", filter: "blur(4px)" }} />
+                        <img src={image === null ? 'http://95.85.126.113:8080/' + user.avatar_image.url : image} alt="" className='img-fluid' style={{ height: "400px", width: "800px", objectFit: "cover", filter: "blur(4px)" }} />
                         <div className='row justify-content-center g-0'>
                             <div className='col-xl-12 position-relative'>
                                 {/* <img src={'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='img-fluid rounded-circle border'/>
@@ -87,7 +109,7 @@ const Profile = () => {
                                         </label>
                                     </div>
                                     <div className="avatar-preview">
-                                        <div id="imagePreview" style={{ backgroundImage: `url(${'http://95.85.126.113:8080/' + user.avatar_image.url})` }}>
+                                        <div id="imagePreview" style={{ backgroundImage: `url(${image === null ? 'http://95.85.126.113:8080/' + user.avatar_image.url : image})` }}>
                                         </div>
                                     </div>
                                     {img && <button className='btn btn-green mt-3' onClick={handleClick}>{t('gosmak')}</button>}
@@ -105,16 +127,16 @@ const Profile = () => {
                                 Ashgabat
                             </div>
                             <div className='col-xl-2 border-end my-3'>
-                                <b>0</b>
-                                <div className='text-muted'>{t('garasylyar')}</div>
+                                <b>{postWaiting?.length}</b>
+                                <div style={{ cursor: "pointer" }} onClick={() => changeStatus("waiting")} className='text-muted'>{t('garasylyar')}</div>
                             </div>
                             <div className='col-xl-2 border-end my-3'>
-                                <b>0</b>
-                                <div className='text-muted'>{t('kabul_edilmedi')}</div>
+                                <b>{postDeclined?.length}</b>
+                                <div style={{ cursor: "pointer" }} onClick={() => changeStatus("declined")} className='text-muted'>{t('kabul_edilmedi')}</div>
                             </div>
                             <div className='col-xl-2 my-3'>
-                                <b>0</b>
-                                <div className='text-muted'>{t('tassyklandy')}</div>
+                                <b>{postApproved?.length}</b>
+                                <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
                             </div>
                             <div className='col-xl-12 my-3 d-flex justify-content-center'>
                                 <button className='btn border-green me-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
@@ -133,98 +155,36 @@ const Profile = () => {
                     <div className='container mt-2'>
                         <div className='d-flex justify-content-center'>
                             <div className='w-75'>
-                                <div className='h3'>Pending</div>
+                                <div className='h3'>Posts</div>
                                 <div className='row mt-3'>
-                                    <div className='col-xl-4 mb-3'>
-                                        <div className='card rounded-1'>
-                                            <img src={cheap_1} alt="" className='img-fluid' />
-                                            <div className='position-absolute p-2 end-0'>
-                                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                            </div>
-                                            <div className='card-body p-2'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                    <div className='small text-secondary'>19.02.2022</div>
-                                                    <div className='small text-secondary'>
-                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                        121
+                                    {
+                                        loading ? (
+                                            <div>Loading...</div>
+                                        ) : (
+                                            activePosts?.map((post, index) =>
+                                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-4 col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
+                                                    <div className='card rounded-1 h-100 w-100'>
+                                                        <div className='text-center'>
+                                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                                        </div>
+                                                        <div className='position-absolute p-2 end-0 text-center'>
+                                                            <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
+                                                        </div>
+                                                        <div className='card-body p-2 position-relative pb-5'>
+                                                            <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
+                                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
+                                                                <div className='small text-secondary me-2'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
+                                                                <div className='small text-secondary'>
+                                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
+                                                                    {post.viewed_count}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-xl-4 mb-3'>
-                                        <div className='card rounded-1'>
-                                            <img src={cheap_2} alt="" className='img-fluid' />
-                                            <div className='position-absolute p-2 end-0'>
-                                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                            </div>
-                                            <div className='card-body p-2'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                    <div className='small text-secondary'>19.02.2022</div>
-                                                    <div className='small text-secondary'>
-                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                        121
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-xl-4 mb-3'>
-                                        <div className='card rounded-1'>
-                                            <img src={cheap_3} alt="" className='img-fluid' />
-                                            <div className='position-absolute p-2 end-0'>
-                                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                            </div>
-                                            <div className='card-body p-2'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                    <div className='small text-secondary'>19.02.2022</div>
-                                                    <div className='small text-secondary'>
-                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                        121
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-xl-4 mb-3'>
-                                        <div className='card rounded-1'>
-                                            <img src={cheap_4} alt="" className='img-fluid' />
-                                            <div className='position-absolute p-2 end-0'>
-                                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                            </div>
-                                            <div className='card-body p-2'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                    <div className='small text-secondary'>19.02.2022</div>
-                                                    <div className='small text-secondary'>
-                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                        121
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-xl-4 mb-3'>
-                                        <div className='card rounded-1'>
-                                            <img src={cheap_5} alt="" className='img-fluid' />
-                                            <div className='position-absolute p-2 end-0'>
-                                                <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                            </div>
-                                            <div className='card-body p-2'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                                <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                    <div className='small text-secondary'>19.02.2022</div>
-                                                    <div className='small text-secondary'>
-                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                        121
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                </Link>
+                                            )
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>

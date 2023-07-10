@@ -13,6 +13,7 @@ const Banner = ({ page_name }) => {
         perMove: 1,
         pagination: true,
         autoplay: false,
+        arrows:false
     };
 
     const [banners, loading, error] = useFetch("/api/v1/banner", "data");

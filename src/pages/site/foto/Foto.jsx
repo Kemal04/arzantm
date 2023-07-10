@@ -20,6 +20,7 @@ const Foto = () => {
         perMove: 1,
         pagination: true,
         autoplay: false,
+        arrows: false,
     };
 
     const option2 = {
@@ -227,9 +228,9 @@ const Foto = () => {
                                         <div className='text-center'>
                                             <img src={'http://95.85.126.113:8080/' + gallery.avatar_image.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                         </div>
-                                        <div className='card-body'>
+                                        <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{gallery.title}</div>
-                                            <div className='d-flex align-items-center'>
+                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
                                                 <div className='text-secondary d-flex align-items-center me-3'>
                                                     <img src={gallery_img} alt="" className='img-fluid me-1' />
                                                     <span>{gallery.image_count}</span>

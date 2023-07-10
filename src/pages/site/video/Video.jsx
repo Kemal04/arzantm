@@ -10,7 +10,6 @@ import "video-react/dist/video-react.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
-import download from '../../../assets/icons/download.svg'
 import eye from '../../../assets/icons/eye.png'
 import like from '../../../assets/icons/like.svg'
 import like_empty from '../../../assets/icons/like-empty.svg'
@@ -25,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 function MyVerticallyCenteredModal(props) {
     return (
         <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
-            <Player>
+            <Player autoPlay>
                 <source src={'http://95.85.126.113:8080/' + props.src} />
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1} />
@@ -48,6 +47,7 @@ const Video = () => {
         perMove: 1,
         pagination: true,
         autoplay: false,
+        arrows: false,
     };
 
     const option2 = {
@@ -142,9 +142,6 @@ const Video = () => {
             setFilteredBanner(banners);
         } else {
             const filter = data.filter(video => (video.page_category[0].category?.id) == catId)
-            // filter.forEach(item => {
-            //     item['count'] = filter.length
-            // });
             setFilteredData(filter)
 
             const filterBanner = banners.filter(banner => (banner.page_category[0].category?.id) == catId)
@@ -167,6 +164,7 @@ const Video = () => {
     }, [])
 
     const { t } = useTranslation();
+
 
     return (
         <>
@@ -262,36 +260,30 @@ const Video = () => {
                         ) : (
                             filteredData?.map((video, index) => (
                                 <div key={index} className={`col-xl-4 mb-3 ${grid === true ? "col-xl-6" : null}`}>
-                                    <div onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }}>
-                                        <div className='card rounded-21'>
-                                            <div className='card-body d-flex align-items-center'>
-                                                <img src={'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                                                <div>{video.user.name}</div>
+                                    <div className='card rounded-21 h-100'>
+                                        <div className='card-body d-flex align-items-center'>
+                                            <img src={'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <div>{video.user.name}</div>
+                                        </div>
+                                        <div style={{ cursor: "pointer" }} onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }} className='position-relative d-flex justify-content-center align-items-center text-center'>
+                                            <img src={'http://95.85.126.113:8080/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                            <div className='card-img-overlay' style={{ top: "40%", left: "0%" }}>
+                                                <FontAwesomeIcon icon={faPlayCircle} className='h1 opacity-75 text-white' />
                                             </div>
-                                            <div className='position-relative d-flex justify-content-center align-items-center text-center'>
-                                                <img src={'http://95.85.126.113:8080/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
-                                                <div className='card-img-overlay' style={{ top: "40%", left: "0%" }}>
-                                                    <FontAwesomeIcon icon={faPlayCircle} className='h1 opacity-75 text-white' />
+                                        </div>
+                                        <div className='card-body p-2 position-relative pb-5'>
+                                            <div className='card-title' style={{ fontWeight: "500" }}>{video.title}</div>
+                                            <div className='d-flex align-items-center justify-content-between small text-secondary position-absolute bottom-0 mb-2'>
+                                                <div className='d-flex justify-content-between align-items-center'>
+                                                    <div>{moment(video.created_at).format('DD.MM.YYYY')}</div>
+                                                    <div className='text-secondary d-flex align-items-center ms-3'>
+                                                        <img src={eye} alt="" className='img-fluid me-1' />
+                                                        <span>{video.viewed_count}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className='card-body'>
-                                                <div className='card-title' style={{ fontWeight: "500" }}>{video.title}</div>
-                                                <div className='d-flex align-items-center justify-content-between small text-secondary'>
-                                                    <div className='d-flex justify-content-between align-items-center'>
-                                                        <div>{moment(video.created_at).format('DD.MM.YYYY')}</div>
-                                                        <div className='d-flex align-items-center ms-3'>
-                                                            <img src={download} alt="" className='img-fluid' />
-                                                            <span>{video.items_full_count}</span>
-                                                        </div>
-                                                        <div className='text-secondary d-flex align-items-center ms-3'>
-                                                            <img src={eye} alt="" className='img-fluid me-1' />
-                                                            <span>{video.viewed_count}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='d-flex align-items-center me-3'>
-                                                        <span>{video.likes_count}</span>
-                                                        <img src={like} alt="" className='img-fluid ms-1' />
-                                                    </div>
+                                                <div className='d-flex align-items-center' style={{ marginLeft: "240px" }}>
+                                                    <span>{video.like_count === null ? 0 : video.like_count}</span>
+                                                    <img src={like} alt="" className='img-fluid ms-1' />
                                                 </div>
                                             </div>
                                         </div>
