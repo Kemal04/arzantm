@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../../context/ThemeContext';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
@@ -17,12 +17,12 @@ import location from '../../assets/icons/location.svg'
 import search from '../../assets/icons/search.svg'
 import bell from '../../assets/icons/bell.svg'
 import logo_circle from '../../assets/icons/logo-circle.svg'
-import axios from 'axios';
 
 const Navbar = () => {
 
     const { darkMode } = useContext(ThemeContext)
     const { authState } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const [locations, loading, error] = useFetch("/api/v1/location/list", "data");
 
@@ -38,16 +38,18 @@ const Navbar = () => {
         i18n.changeLanguage(languageValue);
     }
 
-    const [searchBar, setSearchBar] = useState([])
+    const [value, setValue] = useState('');
 
-    const fetchData = async () => {
-        await axios.get(`/api/v1/post?query=${searchBar}`)
-            .then((res) => {
+    const onChange = (e) => {
+        setValue(e.target.value);
+    };
 
-            }).catch((err) => {
-                
-            })
-    }
+    const handleClick = async (e) => {
+        e.preventDefault();
+
+        navigate('/gozle', { state: value })
+    };
+
 
     return (
         <>
@@ -86,9 +88,11 @@ const Navbar = () => {
                                     }
                                 </ul>
                             </li>
-                            <form className="d-flex ms-5">
-                                <input className="form-control me-2 rounded-0 ps-5" type="search" placeholder="Gözle..." style={{ background: `url(${search}) no-repeat left`, backgroundPositionX: "20px", width: "500px" }} />
-                            </form>
+                            <div className='position-relative'>
+                                <form className="d-flex ms-5" onSubmit={handleClick}>
+                                    <input value={value} onChange={onChange} className="form-control me-2 rounded-0 ps-5" type="search" placeholder="Gözle..." style={{ background: `url(${search}) no-repeat left`, backgroundPositionX: "20px", width: "500px" }} />
+                                </form>
+                            </div>
                             <li className="nav-item dropdown me-5 ms-5">
                                 <select className="form-select border-0 bg-light" aria-label="Default select example" onChange={changeLanguageHandler}>
                                     <option value="tm">TM</option>
