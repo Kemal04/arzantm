@@ -311,8 +311,8 @@ const Video = () => {
                     <nav className='col-xl-12 d-flex justify-content-center mt-5'>
                         {
                             <ReactPaginate
-                                previousLabel="Yza"
-                                nextLabel="Öňe"
+                                previousLabel={t('yza')}
+                                nextLabel={t('one')}
                                 pageCount={pages}
                                 onPageChange={changePage}
                                 containerClassName={"pagination"}
