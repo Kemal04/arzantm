@@ -139,10 +139,10 @@ const Profile = () => {
                                 <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
                             </div>
                             <div className='col-xl-12 my-3 d-flex justify-content-center'>
-                                <button className='btn border-green me-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
+                                <Link to='/toleg' className='btn border-green me-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
                                     <img src={coin} alt="" className='img-fluid me-2' />
                                     {user.coin_balance}
-                                </button>
+                                </Link>
                                 <button className='btn btn-green ms-2' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
                                     {t('resmi_hasap_ac')}
                                 </button>

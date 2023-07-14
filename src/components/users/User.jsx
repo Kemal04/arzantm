@@ -11,10 +11,15 @@ import bell from '../../assets/icons/bell.svg'
 import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import useFetch from '../../hooks/useFetch'
 
 const User = () => {
 
+    //CONTEXT
     const { authState, setAuthState } = useContext(AuthContext)
+
+    //CURRENT USER FETCH
+    const [user, loading] = useFetch("/api/v1/user/profile/" + authState.id, "data");
 
     const navigate = useNavigate()
 
@@ -29,7 +34,7 @@ const User = () => {
     return (
         <div className="dropdown ms-5">
             <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={profile} alt="" className='me-1' style={{ width: "40px" }} />
+                <img src={'http://95.85.126.113:8080/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
             </div>
             <ul className="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
                 <li>

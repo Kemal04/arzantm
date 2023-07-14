@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import user_icon from '../../../assets/icons/mikki.png'
 import location from '../../../assets/icons/location.svg'
 import coin from '../../../assets/icons/coin.svg'
 
@@ -37,7 +36,7 @@ const ProfileWallet = () => {
                         <div style={{ width: "60%" }}>
                             <div className='row justify-content-between align-items-center mb-4'>
                                 <div className='col-xl-6 d-flex align-items-center'>
-                                    <img src={user_icon} alt="" className='img-fluid' style={{ width: "100px" }} />
+                                    <img src={'http://95.85.126.113:8080/' + user?.avatar_image.url} alt="" className='img-fluid rounded-circle' style={{ width: "100px", height: "100px", objectFit:"cover" }} />
                                     <div className='ms-4'>
                                         <div className='h5'>{user.name}</div>
                                         <div className='d-flex align-items-center text-secondary'>

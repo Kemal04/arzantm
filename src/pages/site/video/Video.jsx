@@ -8,7 +8,7 @@ import moment from 'moment/moment'
 import { ControlBar, CurrentTimeDisplay, ForwardControl, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider, VolumeMenuButton } from 'video-react'
 import "video-react/dist/video-react.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faEye, faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
 import eye from '../../../assets/icons/eye.png'
 import like from '../../../assets/icons/like.svg'
@@ -24,6 +24,22 @@ import { useTranslation } from 'react-i18next'
 function MyVerticallyCenteredModal(props) {
     return (
         <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+            <div className='position-absolute text-white text-center' style={{ zIndex: "1", bottom: "30%", right: "-70px" }}>
+                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
+                    <FontAwesomeIcon icon={faEye} className='text-white fs-17' />
+                </div>
+                23
+                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-3' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
+                    <FontAwesomeIcon icon={faHeart} className='text-white fs-17' />
+                </div>
+                23
+                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-5' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
+                    <FontAwesomeIcon icon={faChevronUp} />
+                </div>
+                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-3' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                </div>
+            </div>
             <Player autoPlay>
                 <source src={'http://95.85.126.113:8080/' + props.src} />
                 <ControlBar>

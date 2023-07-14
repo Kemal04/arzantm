@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { ChosenPosts, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, Search, TopList, Video } from "./pages/site";
+import { ChosenPosts, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileWallet, Search, TopList, Video } from "./pages/site";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -58,6 +58,14 @@ const App = () => {
                                     <>
                                         <Route path="/sms" element={<Sms />} />
                                         <Route path="/reset-password" element={<ResetPassword />} />
+                                    </>
+                                }
+                                
+                                {
+                                    authState.status
+                                    &&
+                                    <>
+                                        <Route path="/toleg" element={<Payment />} />
                                     </>
                                 }
 
