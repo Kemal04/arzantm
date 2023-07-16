@@ -33,7 +33,7 @@ const Banner = ({ page_name }) => {
                             banners.map((banner, index) =>
                                 banner.platform[0].name === "WEB"
                                 &&
-                                banner.page_category[0].page.name === page_name
+                                banner?.page_category[0].page?.name === page_name
                                 &&
                                 <SplideSlide className='col-lg-12 p-0' key={index} >
                                     <Link target='_blank' to={banner.url}>

@@ -79,7 +79,7 @@ const PostRead = () => {
                                 <div className="col-xl-8">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={'http://95.85.126.113:8080/' + post.user.image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={'http://95.85.126.113:8080/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{post.user.name}</div>
                                         </div>
                                         <Splide options={options} hasTrack={false}>
@@ -90,7 +90,7 @@ const PostRead = () => {
                                                     ) : (
                                                         post.images.map((image, index) =>
                                                             <SplideSlide key={index} >
-                                                                <img src={'http://95.85.126.113/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={post.title} />
+                                                                <img src={image === null ? "" : 'http://95.85.126.113/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={post.title} />
                                                             </SplideSlide>
                                                         )
                                                     )
@@ -158,7 +158,7 @@ const PostRead = () => {
                                                 post.tags.map((tag, index) => (
                                                     <div key={index} className="col-auto">
                                                         <div className="bg-green-opacity-50 text-green fw-black px-2 py-1 rounded">
-                                                            #{tag.name}
+                                                            #{tag === null ? " " : tag.name}
                                                         </div>
                                                     </div>
                                                 ))
@@ -175,9 +175,12 @@ const PostRead = () => {
                                     </div>
                                 </div>
                                 <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
-                                    <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
-                                        <FontAwesomeIcon icon={faArrowRight} />
-                                    </Link>
+                                    {
+                                        post.next_id !== null &&
+                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
+                                            <FontAwesomeIcon icon={faArrowRight} />
+                                        </Link>
+                                    }
                                 </div>
                             </div>
                         </div>
