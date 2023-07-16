@@ -49,7 +49,7 @@ const ChosenPosts = () => {
 
     useEffect(() => {
         const fetchBadge = async () => {
-            await axios.get(`/api/v1/post/badge`).then((res) => {
+            await axios.get(`/api/v1/post/badge?publication_type_id=3`).then((res) => {
                 setCount(res.data.data);
             }).catch((res) => {
                 toast.error(res.response.data.error.message)
