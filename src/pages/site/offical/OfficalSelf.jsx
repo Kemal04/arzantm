@@ -1,16 +1,8 @@
-import React from 'react'
-
 import profile from '../../../assets/cards/offical/circle/100haryt.png'
 import phone from '../../../assets/icons/phone-bold.svg'
 import location from '../../../assets/icons/location.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
-
-import cheap_1 from '../../../assets/cards/cheap/1.png'
-import cheap_2 from '../../../assets/cards/cheap/2.png'
-import cheap_3 from '../../../assets/cards/cheap/3.png'
-import cheap_4 from '../../../assets/cards/cheap/4.png'
-import cheap_5 from '../../../assets/cards/cheap/5.png'
 
 import coin from '../../../assets/icons/coin.svg'
 import OfficalBanner from '../../../components/banners/OfficalBanner'
@@ -72,7 +64,7 @@ const OfficalSelf = () => {
                 <div className='d-flex justify-content-center'>
                     <div className='w-75'>
                         <div className='h3'>Pending</div>
-                        <div className='row mt-3'>
+                        {/* <div className='row mt-3'>
                             <div className='col-xl-4 mb-3'>
                                 <div className='card rounded-1'>
                                     <img src={cheap_1} alt="" className='img-fluid' />
@@ -163,7 +155,7 @@ const OfficalSelf = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

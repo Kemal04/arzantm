@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 
 //IMAGES
-import profile from '../../assets/icons/mikki.png'
+import logoImg from '../../assets/arzanTm.png'
 import user_bold from '../../assets/icons/user-bold.svg'
 import wallet from '../../assets/icons/wallet.svg'
 import plus from '../../assets/icons/plus.svg'
@@ -34,7 +34,7 @@ const User = () => {
     return (
         <div className="dropdown ms-5">
             <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={'http://95.85.126.113:8080/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                <img src={user?.avatar_image === null ? logoImg : 'http://95.85.126.113:8080/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
             </div>
             <ul className="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
                 <li>
