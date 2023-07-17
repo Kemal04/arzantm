@@ -1,5 +1,3 @@
-import React from 'react'
-
 import banner2 from '../../../assets/banners/offical/3.png'
 import profile from '../../../assets/cards/offical/circle/100haryt.png'
 import phone from '../../../assets/icons/phone-bold.svg'

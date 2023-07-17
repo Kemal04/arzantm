@@ -9,10 +9,6 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 
-import { Stories } from '../../../components'
-
-import Banner from '../../../components/banners/Banner'
-import konkurs from '../../../assets/cards/others/konkurs.png'
 import top from '../../../assets/cards/others/top.png'
 import foto from '../../../assets/cards/others/foto.png'
 import video from '../../../assets/cards/others/video.png'

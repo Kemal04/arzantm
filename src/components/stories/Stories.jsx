@@ -1,7 +1,3 @@
-import haryt100 from '../../assets/cards/posts/100haryt.png'
-import ynamdar from '../../assets/cards/posts/ynamdar.png'
-import giper from '../../assets/cards/posts/giper.png'
-import balary from '../../assets/cards/posts/balary.png'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 
 const Stories = () => {
@@ -21,36 +17,9 @@ const Stories = () => {
         }
     };
 
-    const stories = [
-        {
-            id: 1,
-            img: haryt100,
-            name: "100haryt.com",
-            number: 23
-        },
-        {
-            id: 1,
-            img: ynamdar,
-            name: "Ynamdar",
-            number: 23
-        },
-        {
-            id: 1,
-            img: giper,
-            name: "giper",
-            number: 23
-        },
-        {
-            id: 1,
-            img: balary,
-            name: "Balary",
-            number: 23
-        },
-    ]
-
     return (
         <div className='container mt-4'>
-            <Splide options={option} hasTrack={false}>
+            {/* <Splide options={option} hasTrack={false}>
                 <SplideTrack>
                     {
                         stories.map((story, index) => (
@@ -66,7 +35,7 @@ const Stories = () => {
                         ))
                     }
                 </SplideTrack>
-            </Splide>
+            </Splide> */}
         </div >
     )
 }
