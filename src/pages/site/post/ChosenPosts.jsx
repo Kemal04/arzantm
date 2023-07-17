@@ -44,20 +44,6 @@ const ChosenPosts = () => {
         setLoading(false);
     };
 
-    //DATA BADGES
-    const [count, setCount] = useState({});
-
-    useEffect(() => {
-        const fetchBadge = async () => {
-            await axios.get(`/api/v1/post/badge?publication_type_id=3`).then((res) => {
-                setCount(res.data.data);
-            }).catch((res) => {
-                toast.error(res.response.data.error.message)
-            })
-        }
-        fetchBadge()
-    }, [])
-
     const { t } = useTranslation();
 
     return (
@@ -70,7 +56,7 @@ const ChosenPosts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>{t('saylananlar')} <span className='text-green'>(+{count.count})</span></div>
+                    <div className='h3'>{t('saylananlar')} <span className='text-green'>({posts.length})</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {
@@ -80,8 +66,9 @@ const ChosenPosts = () => {
                             posts?.map((post, index) => (
                                 <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100' style={{ width: "230px" }}>
-                                        <div className='text-center'>
-                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                        <div className='text-center overflow-hidden position-relative'>
+                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
+                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain", zIndex: 9, position: "relative" }} />
                                         </div>
                                         <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>

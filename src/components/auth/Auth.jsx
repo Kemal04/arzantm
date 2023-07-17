@@ -65,7 +65,7 @@ const Auth = () => {
     }
 
     //LOGIN
-    const [login_phone, setLogin_phone] = useState("")
+    const [login_phone, setLogin_phone] = useState("+993")
     const [login_pass, setLogin_Password] = useState("")
 
     const loginUser = async (e) => {
@@ -123,11 +123,7 @@ const Auth = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className='d-flex justify-content-between align-items-center'>
-                                        <div className="ms-2">
-                                            <input type="checkbox" className="form-check-input me-2 p-2" id="exampleCheck1" />
-                                            <label className="form-check-label" htmlFor="exampleCheck1">Ýatda sakla</label>
-                                        </div>
+                                    <div className='d-flex justify-content-end align-items-center'>
                                         <div className='me-2'>
                                             <Link to='/reset-password' className='text-secondary text-decoration-none'>Açar sözi unutdym</Link>
                                         </div>

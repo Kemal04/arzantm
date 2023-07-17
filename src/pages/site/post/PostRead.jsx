@@ -7,10 +7,11 @@ import { faCalendarAlt, faComment, faEye, faHeart, faArrowLeft, faArrowRight } f
 import moment from "moment";
 import bookmark from '../../../assets/icons/bookmark.svg'
 import share from '../../../assets/icons/share.svg'
-import like from '../../../assets/icons/like-empty.svg'
+import like_img from '../../../assets/icons/like-empty.svg'
 import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const PostRead = () => {
 
@@ -21,14 +22,11 @@ const PostRead = () => {
         pagination: true,
         autoplay: false,
     };
+    
+    const { t } = useTranslation();
+    const { postId } = useParams();
 
-    const { postId } = useParams()
-
-    const [post, loading, error] = useFetch(`/api/v1/post/${postId}`, "data", true);
-
-    if (error) {
-        toast.error(error.message);
-    }
+    const [post, loading] = useFetch(`/api/v1/post/${postId}`, "data", true);
 
     //VIEWED
     useEffect(() => {
@@ -39,20 +37,26 @@ const PostRead = () => {
     }, [postId])
 
     //LIKED
+    const [like, setLike] = useState(0);
+
+    useEffect(() => {
+        if (post) {
+            setLike(post.is_liked)
+        }
+    }, [post])
+
     const handleLike = async () => {
         await axios.post(`/api/v1/post/like`, { id: postId }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-        }).then((res) => {
-            window.location.reload()
+        }).then(() => {
+            setLike(like + 1);
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
     }
-
-    const { t } = useTranslation();
-
+    
     return (
         <>
             {
@@ -104,11 +108,11 @@ const PostRead = () => {
                                             </div>
                                             <div>
                                                 {
-                                                    post.is_liked === 1
+                                                    like === 1
                                                         ?
                                                         <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "25px" }} />
                                                         :
-                                                        <img src={like} alt="" style={{ width: "25px", cursor: "pointer" }} onClick={handleLike} />
+                                                        <img src={like_img} alt="" style={{ width: "25px", cursor: "pointer" }} onClick={handleLike} />
                                                 }
                                             </div>
                                         </div>

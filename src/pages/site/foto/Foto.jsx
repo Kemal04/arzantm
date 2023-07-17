@@ -153,8 +153,7 @@ const Foto = () => {
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex align-items-center'>
-                        <div className='h3 me-4'>{t('albomlar')} <span className='text-green'>(+{count.count} )</span></div>
-                        <div className='h3'>{t('suratlaryn_jemi')} <span className='text-green'>( {total} )</span></div>
+                        <div className='h3 me-4'>{t('albomlar')} <span className='text-green'>({galleries.length} / {total})</span></div>
                     </div>
                     <div className='d-flex align-items-center'>
                         <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />

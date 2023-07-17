@@ -48,6 +48,7 @@ const Navbar = () => {
         e.preventDefault();
 
         navigate('/gozle', { state: value })
+        setValue('')
     };
 
 

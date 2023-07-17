@@ -1,5 +1,3 @@
-import React from 'react'
-
 import banner from '../../../assets/banners/profile/1.png'
 import profile from '../../../assets/icons/mikki-big.png'
 import danger from '../../../assets/icons/danger.svg'

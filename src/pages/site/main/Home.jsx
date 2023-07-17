@@ -1,15 +1,22 @@
-import Banner from '../../../components/banners/Banner'
-
+import moment from 'moment/moment'
+import useFetch from '../../../hooks/useFetch'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 
+import { Stories } from '../../../components'
+
+import Banner from '../../../components/banners/Banner'
 import konkurs from '../../../assets/cards/others/konkurs.png'
 import top from '../../../assets/cards/others/top.png'
 import foto from '../../../assets/cards/others/foto.png'
 import video from '../../../assets/cards/others/video.png'
 import offical from '../../../assets/cards/others/offical.png'
-
 import offical_1 from '../../../assets/cards/offical/1.png'
 import offical_2 from '../../../assets/cards/offical/2.png'
 import offical_3 from '../../../assets/cards/offical/3.png'
@@ -18,27 +25,21 @@ import offical_5 from '../../../assets/cards/offical/5.png'
 import offical_6 from '../../../assets/cards/offical/6.png'
 import offical_7 from '../../../assets/cards/offical/7.png'
 import offical_8 from '../../../assets/cards/offical/8.png'
-
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
-import { Stories } from '../../../components'
-import moment from 'moment/moment'
-import useFetch from '../../../hooks/useFetch'
-import axios from 'axios'
-import { toast } from 'react-hot-toast'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 
 const Home = () => {
 
     const option2 = {
-        perPage: 'auto',
+        type: 'loop',
+        perPage: 5,
         focus: 0,
         omitEnd: true,
         perMove: 1,
         pagination: false,
         arrows: false,
+        autoplay: true,
+        autoplaySpeed: 1,
+        speed: 1000,
     };
 
     const [posts, loading] = useFetch("/api/v1/post?publication_type_id=1&limit=10", "data");
@@ -73,6 +74,35 @@ const Home = () => {
         fetchBadge()
     }, [])
 
+    //DATA BADGES
+    const [countChosenPost, setCountChosenPost] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/post/badge?publication_type_id=3`).then((res) => {
+                setCountChosenPost(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
+
+    //DATA BADGES
+    const [countPost, setCountPost] = useState({});
+
+    useEffect(() => {
+        const fetchBadge = async () => {
+            await axios.get(`/api/v1/post/badge`).then((res) => {
+                setCountPost(res.data.data);
+            }).catch((res) => {
+                toast.error(res.response.data.error.message)
+            })
+        }
+        fetchBadge()
+    }, [])
+
+
     const { t } = useTranslation();
 
     return (
@@ -84,7 +114,7 @@ const Home = () => {
             {/* CARDS */}
             <div className='container mt-5'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='fw-black' style={{ fontSize: "30px" }}>{t('saylananlar')}</div>
+                    <div className='fw-black' style={{ fontSize: "30px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
                     <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
@@ -164,7 +194,7 @@ const Home = () => {
             {/* CHEAP */}
             <div className='container mt-2'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>{t('arzanladyslar')}</div>
+                    <div className='h3'>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
                     <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
@@ -176,10 +206,11 @@ const Home = () => {
                             posts.map((post, index) =>
                                 <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100' style={{ width: "230px" }}>
-                                        <div className='text-center'>
-                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                        <div className='text-center overflow-hidden position-relative'>
+                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
+                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain", zIndex: 9, position: "relative" }} />
                                         </div>
-                                        <div className='position-absolute p-2 end-0 text-center'>
+                                        <div className='position-absolute p-2 end-0 text-center mt-2' style={{ zIndex: 10 }}>
                                             <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
                                         </div>
                                         <div className='card-body p-2 position-relative pb-5'>
