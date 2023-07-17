@@ -22,6 +22,7 @@ import offical_6 from '../../../assets/cards/offical/6.png'
 import offical_7 from '../../../assets/cards/offical/7.png'
 import offical_8 from '../../../assets/cards/offical/8.png'
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
+import Banner from '../../../components/banners/Banner'
 
 const Home = () => {
 
