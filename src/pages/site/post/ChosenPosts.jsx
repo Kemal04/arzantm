@@ -7,8 +7,11 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from 'react-i18next';
+import useFetch from '../../../hooks/useFetch';
 
 const ChosenPosts = () => {
+
+    const [selectedPosts] = useFetch("/api/v1/post?publication_type_id=3&limit=1000000000", "data");
 
     const [pages, setPages] = useState();
     const [page, setPage] = useState(1);
@@ -56,7 +59,7 @@ const ChosenPosts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>{t('saylananlar')} <span className='text-green'>({posts.length})</span></div>
+                    <div className='h3'>{t('saylananlar')} <span className='text-green'>({selectedPosts?.length})</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {

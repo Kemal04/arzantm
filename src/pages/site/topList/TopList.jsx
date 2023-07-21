@@ -1,20 +1,52 @@
 import banner from '../../../assets/banners/top-list/top-list.png'
-import { Link, NavLink } from 'react-router-dom'
-
 import coin from '../../../assets/icons/coin.svg'
 import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
+import logo_img from '../../../assets/arzanTm.png'
+import axios from 'axios'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const TopList = () => {
 
-    const [users, loading, error] = useFetch("/api/v1/user/profile?limit=50", "data");
-
-    if (error) {
-        toast.error(error.message);
-    }
-
     const { t } = useTranslation();
+
+    const [userOfficals] = useFetch("/api/v1/user/profile?limit=50&subscription_type_id=2", "data");
+
+    const [users, setUsers] = useState([]);
+    const [urlParams, setUrlParams] = useState({
+        limit: 50,
+        subscription_type_id: 1
+    });
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetchData(urlParams);
+    }, [urlParams]);
+
+    const fetchData = async (data) => {
+        setLoading(true);
+
+        await axios.get(`/api/v1/user/profile?` + new URLSearchParams(data)).then((res) => {
+            setUsers(res.data.data);
+        }).catch((res) => {
+            toast.error(res.response.data.error.message)
+        })
+
+        setLoading(false);
+    };
+
+    const sortUser = async (value) => {
+
+        await axios.get(`/api/v1/user/profile?limit=50&sort=${value}`)
+            .then((res) => {
+                setUsers(res.data.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+
+    }
 
     return (
         <>
@@ -28,17 +60,13 @@ const TopList = () => {
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='h3'>{t('top_hasaplar')}</div>
                     <div className='d-flex align-items-center'>
-                        <div className="dropdown">
-                            <NavLink to="/" className="nav-link dropdown-toggle border py-1 px-4 bg-light rounded" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sort
-                            </NavLink>
-                            <ul className="dropdown-menu">
-                                <li><Link to='/' className="dropdown-item">Bal boýunça</Link></li>
-                                <li><Link to='/' className="dropdown-item">Agza bolan wagty boýunça</Link></li>
-                                <li><Link to='/' className="dropdown-item">Arzanladyş sany boýunça</Link></li>
-                                <li><Link to='/' className="dropdown-item">Like sany boýunça</Link></li>
-                            </ul>
-                        </div>
+                        <select className="form-select" onChange={(e) => sortUser(e.target.value)}>
+                            <option defaultValue>Sort</option>
+                            <option value="coin">Bal boýunça</option>
+                            <option value="created">Agza bolan wagty boýunça</option>
+                            <option value="post">Arzanladyş sany boýunça</option>
+                            <option value="like">Like sany boýunça</option>
+                        </select>
                     </div>
                 </div>
 
@@ -78,10 +106,38 @@ const TopList = () => {
                                             users?.map((user, index) => (
                                                 <div className='col-xl-12 mb-3 d-flex justify-content-center' key={index}>
                                                     <div className='w-45'>
-                                                        <div className='border border-2 rounded border-warning py-2 px-3 d-flex justify-content-between align-items-center'>
+                                                        <div className={`border rounded py-2 px-3 d-flex justify-content-between align-items-center ${index < 3 ? "border-warning" : null}`}>
                                                             <div className='d-flex align-items-center fs-18 fw-black'>
                                                                 <div className='pe-3'>{index + 1}</div>
-                                                                <img src={'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                                <img src={user.avatar_image.url === null ? logo_img : 'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                                <div className='ps-3'>{user.name}</div>
+                                                            </div>
+                                                            <div className='d-flex align-items-center'>
+                                                                <div className='text-warning fw-black me-3'>{user.coin_balance || user.like_count || user.post_count}</div>
+                                                                <img src={coin} alt="" style={{ width: "20px" }} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )
+                                    }
+
+                                </div>
+                            </div>
+                            <div className="tab-pane fade" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab" tabIndex="0">
+                                <div className='row justify-content-center'>
+                                    {
+                                        loading ? (
+                                            <div>Loading...</div>
+                                        ) : (
+                                            userOfficals?.map((user, index) => (
+                                                <div className='col-xl-12 mb-3 d-flex justify-content-center' key={index}>
+                                                    <div className='w-45'>
+                                                        <div className={`border rounded py-2 px-3 d-flex justify-content-between align-items-center ${index < 3 ? "border-warning" : null}`}>
+                                                            <div className='d-flex align-items-center fs-18 fw-black'>
+                                                                <div className='pe-3'>{index + 1}</div>
+                                                                <img src={user.avatar_image.url === null ? logo_img : 'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                                                 <div className='ps-3'>{user.name}</div>
                                                             </div>
                                                             <div className='d-flex align-items-center'>
@@ -96,9 +152,6 @@ const TopList = () => {
                                     }
 
                                 </div>
-                            </div>
-                            <div className="tab-pane fade" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab" tabIndex="0">
-                                2
                             </div>
                             <div className="tab-pane fade" id="pills-year" role="tabpanel" aria-labelledby="pills-year-tab" tabIndex="0">
                                 3

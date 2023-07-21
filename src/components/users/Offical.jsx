@@ -20,7 +20,7 @@ const Offical = () => {
 
     return (
         <>
-            <div className="dropdown ms-5">
+            <li className="dropdown ms-5">
                 <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src={haryt100} alt="" className='me-1' style={{ width: "40px" }} />
                 </div>
@@ -83,7 +83,7 @@ const Offical = () => {
                         </div>
                     </li>
                 </ul>
-            </div>
+            </li>
 
             {/* GUESTS  */}
             <div className="modal fade" id="staticBackdrop" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

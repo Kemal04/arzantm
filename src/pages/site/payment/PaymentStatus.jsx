@@ -1,8 +1,11 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const PaymentStatus = () => {
+
     const orderId = localStorage.getItem("orderId")
+
+    const [status, setStatus] = useState()
 
     //PAYMENT CHECK
     useEffect(() => {
@@ -12,9 +15,11 @@ const PaymentStatus = () => {
                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 },
             }).then((res) => {
-                console.log(res);
+                setStatus(res.data.data);
+                localStorage.removeItem("orderId")
             }).catch((err) => {
                 console.log(err);
+                localStorage.removeItem("orderId")
             })
         }
         checkCoin()
@@ -22,7 +27,7 @@ const PaymentStatus = () => {
 
     return (
         <div>
-            Payments
+            Payments {status}
         </div>
     )
 }

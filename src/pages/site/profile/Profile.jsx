@@ -170,6 +170,9 @@ const Profile = () => {
                                                         <div className='position-absolute p-2 end-0 text-center'>
                                                             <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
                                                         </div>
+                                                        {/* <div className='position-absolute p-2 end-0 start-0'>
+                                                            <FontAwesomeIcon icon={faBars}/>
+                                                        </div> */}
                                                         <div className='card-body p-2 position-relative pb-5'>
                                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
                                                             <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>

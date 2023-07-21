@@ -101,7 +101,7 @@ const Navbar = () => {
                                     <option value="ru">RU</option>
                                 </select>
                             </li>
-                            <div className="dropdown mt-2">
+                            <li className="dropdown mt-2">
                                 <div className="position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src={bell} alt="" className='me-1' style={{ width: "20px" }} />
                                     {/* <span className="position-absolute translate-middle badge rounded-circle px-1 bg-danger" style={{ top: "6px", left: "22px" }}>
@@ -113,7 +113,7 @@ const Navbar = () => {
                                     <li><Link to="/" className="dropdown-item">Another action</Link></li>
                                     <li><Link to="/" className="dropdown-item">Something else here</Link></li>
                                 </ul>
-                            </div>
+                            </li>
 
                             <>
 
@@ -121,11 +121,11 @@ const Navbar = () => {
                                     authState.status === false
                                     &&
                                     <>
-                                        <div className="ms-5">
+                                        <li className="ms-5">
                                             <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
                                             </div>
-                                        </div>
+                                        </li>
                                         <Auth />
                                     </>
                                 }

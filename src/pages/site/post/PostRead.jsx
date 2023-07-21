@@ -22,7 +22,7 @@ const PostRead = () => {
         pagination: true,
         autoplay: false,
     };
-    
+
     const { t } = useTranslation();
     const { postId } = useParams();
 
@@ -56,7 +56,7 @@ const PostRead = () => {
             toast.error(res.response.data.message);
         });
     }
-    
+
     return (
         <>
             {
@@ -76,9 +76,12 @@ const PostRead = () => {
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
-                                    <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18" style={{ padding: "5px 9px" }}>
-                                        <FontAwesomeIcon icon={faArrowLeft} />
-                                    </Link>
+                                    {
+                                        post.next_id !== null &&
+                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
+                                            <FontAwesomeIcon icon={faArrowLeft} />
+                                        </Link>
+                                    }
                                 </div>
                                 <div className="col-xl-8">
                                     <div className='card border-0'>
@@ -151,7 +154,7 @@ const PostRead = () => {
                                                             <div className="ms-2">{moment(post.end_date).format('DD.MM.YYYY')}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="bg-green text-white rounded-circle p-4 h5">
+                                                    <div className="bg-green text-white rounded-circle h5 d-flex justify-content-center align-items-center" style={{ width: "70px", height: "70px" }}>
                                                         {post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%
                                                     </div>
                                                 </div>
@@ -180,8 +183,8 @@ const PostRead = () => {
                                 </div>
                                 <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
                                     {
-                                        post.next_id !== null &&
-                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
+                                        post.prev_id !== null &&
+                                        <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18" style={{ padding: "5px 9px" }}>
                                             <FontAwesomeIcon icon={faArrowRight} />
                                         </Link>
                                     }

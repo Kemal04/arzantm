@@ -158,8 +158,13 @@ const Home = () => {
                         <img src={konkurs} alt="" className='img-fluid w-100' />
                     </div> */}
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
-                        <Link to='/top-list'>
+                        <Link to='/top-list' className='card border-0'>
                             <img src={top} alt="" className='img-fluid w-100' />
+                            <div className='card-img-overlay p-0'>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                    {t('top_hasaplar')}
+                                </div>
+                            </div>
                         </Link>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
@@ -177,13 +182,20 @@ const Home = () => {
                             <img src={video} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
-                                    Video ({countVideo.count})
+                                    {t('wideo')} ({countVideo.count})
                                 </div>
                             </div>
                         </Link>
                     </div>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
-                        <img src={offical} alt="" className='img-fluid w-100' />
+                        <Link to='/' className='card border-0'>
+                            <img src={offical} alt="" className='img-fluid w-100' />
+                            <div className='card-img-overlay p-0'>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                    {t('resmiler')}
+                                </div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

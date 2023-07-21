@@ -219,6 +219,7 @@ const PostAdd = () => {
         discount: "",
         start_date: "",
         end_date: "",
+        read: "",
     })
 
     //SUB CATEGORY FILTERED IN CATEGORY
@@ -352,6 +353,9 @@ const PostAdd = () => {
         else if (!discount.end_date) {
             toast.error("Cykys wagty giriziň")
         }
+        else if (!discount.read) {
+            toast.error("Düzgünleri okadym")
+        }
         else {
             await axios.post(`/api/v1/post/create`, formData, {
                 headers: {
@@ -366,6 +370,25 @@ const PostAdd = () => {
                 });
         }
     }
+
+    const [showPhone, setShowPhone] = useState(false)
+
+    const showPhoneChange = () => {
+        setShowPhone(!showPhone);
+    };
+
+    const [showDiscount, setShowDiscount] = useState(false)
+
+    const showDiscountChange = () => {
+        setShowDiscount(!showDiscount);
+    };
+
+    const [showDate, setShowDate] = useState(false)
+
+    const showDateChange = () => {
+        setShowDate(!showDate);
+    };
+
 
     return (
         <>
@@ -624,32 +647,32 @@ const PostAdd = () => {
                             </div>
                             <div className='col-xl-12 my-4'>
                                 <div className='d-flex align-items-center'>
-                                    <input className="form-check-input me-3" type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
-                                    <input name='phone' onChange={handleChange} className="form-control ps-5" type="text" placeholder={t('telefon_belgi')} style={{ background: `url(${phone}) no-repeat left`, backgroundPositionX: "20px" }} required />
+                                    <input className="form-check-input me-3" checked={showPhone} onChange={showPhoneChange} type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
+                                    <input name='phone' disabled={showPhone === true ? false : true} onChange={handleChange} className={`form-control ps-5 ${showPhone === true ? "bg-white" : "bg-secondary-lighter"}`} type="text" placeholder={t('telefon_belgi')} style={{ background: `url(${phone}) no-repeat left`, backgroundPositionX: "20px" }} required />
                                 </div>
                             </div>
                             <div className='col-xl-6 mb-3'>
                                 <div className='d-flex align-items-center'>
-                                    <input className="form-check-input me-3" type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
+                                    <input className="form-check-input me-3" checked={showDiscount} onChange={showDiscountChange} type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
                                     <input name='price' onChange={handleChange} type="text" className="form-control" placeholder={t('baha')} required />
                                 </div>
                             </div>
                             <div className='col-xl-6 mb-3'>
-                                <input name='discount' onChange={handleChange} type="text" className="form-control" placeholder={t('arzanladys')} required />
+                                <input name='discount' disabled={showDiscount === true ? false : true} onChange={handleChange} type="text" className="form-control" placeholder={t('arzanladys')} required />
                             </div>
                             <div className='ms-4 ps-3 mb-1'>{t('mahabat_dowri')}</div>
                             <div className='col-xl-6 mb-4'>
                                 <div className='d-flex align-items-center'>
-                                    <input className="form-check-input me-3" type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
-                                    <input name='start_date' onChange={handleChange} type="date" className="form-control" required />
+                                    <input className="form-check-input me-3" checked={showDate} onChange={showDateChange} type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} required />
+                                    <input name='start_date' disabled={showDate === true ? false : true} onChange={handleChange} type="date" className="form-control" required />
                                 </div>
                             </div>
                             <div className='col-xl-6 mb-5'>
-                                <input name='end_date' onChange={handleChange} type="date" className="form-control" />
+                                <input name='end_date' disabled={showDate === true ? false : true} onChange={handleChange} type="date" className="form-control" />
                             </div>
                             <div className='col-xl-12 d-flex justify-content-between align-items-center mb-4'>
                                 <div className='d-flex align-items-center'>
-                                    <input className="form-check-input me-3" type="checkbox" value="" style={{ width: "20px", height: "20px", borderRadius: "3px" }} id="flexCheckDefault" required />
+                                    <input className="form-check-input me-3" name='read' onChange={handleChange} type="checkbox" style={{ width: "20px", height: "20px", borderRadius: "3px" }} id="flexCheckDefault" required />
                                     <label className="form-check-label" htmlFor="flexCheckDefault">
                                         {t('duzgunleri_okadym')}
                                     </label>

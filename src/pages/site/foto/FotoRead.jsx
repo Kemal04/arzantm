@@ -29,19 +29,21 @@ const FotoRead = () => {
     }, [fotoId])
 
     //LIKED
-    const handleLike = async () => {
-        await axios.post(`/api/v1/gallery/like`, { id: fotoId }, {
+    const handleLike = async (id) => {
+        await axios.post(`/api/v1/gallery/like`, { id: id }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
         }).then((res) => {
             toast.success(res.data.message)
+            window.location.reload()
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
     }
 
     const { t } = useTranslation();
+
 
     return (
         <>
@@ -86,11 +88,11 @@ const FotoRead = () => {
                                                             </div>
                                                             <div className='px-2 rounded d-flex align-items-center' style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                                                                 {
-                                                                    gallery.is_liked === 1
+                                                                    image.is_liked
                                                                         ?
-                                                                        <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "25px" }} />
+                                                                        <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "15px" }} />
                                                                         :
-                                                                        <img src={like} alt="" style={{ width: "13px", cursor: "pointer" }} onClick={handleLike} />
+                                                                        <img src={like} alt="" style={{ width: "13px", cursor: "pointer" }} onClick={() => handleLike(image.id)} />
                                                                 }
                                                                 {image.like_count}
                                                             </div>
