@@ -2,7 +2,7 @@ import phone from '../../../assets/icons/phone-bold.svg'
 import location from '../../../assets/icons/location.svg'
 import coin from '../../../assets/icons/coin.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faPenAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faPenAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { toast } from 'react-hot-toast'
 import useFetch from '../../../hooks/useFetch'
@@ -10,7 +10,7 @@ import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
 const Profile = () => {
@@ -85,6 +85,21 @@ const Profile = () => {
             }).catch((err) => {
                 console.log(err);
             })
+    }
+
+    const navigate = useNavigate()
+
+    const handleDelete = async (id) => {
+        await axios.delete(`/api/post/delete/${id}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => {
+            console.log(res);
+            navigate("/profile")
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
 
     return (
@@ -167,12 +182,9 @@ const Profile = () => {
                                                         <div className='text-center'>
                                                             <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                                         </div>
-                                                        <div className='position-absolute p-2 end-0 text-center'>
-                                                            <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
+                                                        <div className='position-absolute p-2 end-0 start-0'>
+                                                            <button className='btn btn-sm btn-danger mx-1' onClick={() => handleDelete(post.id)}><FontAwesomeIcon icon={faTrash} /></button>
                                                         </div>
-                                                        {/* <div className='position-absolute p-2 end-0 start-0'>
-                                                            <FontAwesomeIcon icon={faBars}/>
-                                                        </div> */}
                                                         <div className='card-body p-2 position-relative pb-5'>
                                                             <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
                                                             <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
