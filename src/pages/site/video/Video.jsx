@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp, faEye, faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
 import eye from '../../../assets/icons/eye.png'
-import like from '../../../assets/icons/like.svg'
 import like_empty from '../../../assets/icons/like-empty.svg'
 import grid_little from '../../../assets/icons/grid-little.svg'
 import grid_big from '../../../assets/icons/grid-big.svg'
@@ -20,6 +19,7 @@ import play from '../../../assets/icons/play.svg'
 import useFetch from '../../../hooks/useFetch'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 import { useTranslation } from 'react-i18next'
+import logo from '../../../assets/arzanTm.png'
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -181,6 +181,19 @@ const Video = () => {
 
     const { t } = useTranslation();
 
+    //LIKED
+    const handleLike = async (id) => {
+        await axios.post(`/api/v1/video/like`, { id: id }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => {
+            toast.success(res.data.message)
+            window.location.reload()
+        }).catch((res) => {
+            toast.error(res.response.data.message);
+        });
+    }
 
     return (
         <>
@@ -213,7 +226,7 @@ const Video = () => {
                                         {
                                             categories.map((category, index) => (
                                                 <SplideSlide className='col-xl-auto' key={index}>
-                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name}</button>
+                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name} ({category.statistics.video_count})</button>
                                                 </SplideSlide>
                                             ))
                                         }
@@ -278,7 +291,7 @@ const Video = () => {
                                 <div key={index} className={`col-xl-4 mb-3 ${grid === true ? "col-xl-6" : null}`}>
                                     <div className='card rounded-21 h-100'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={video.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{video.user.name}</div>
                                         </div>
                                         <div style={{ cursor: "pointer" }} onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }} className='position-relative d-flex justify-content-center align-items-center text-center'>
@@ -289,17 +302,23 @@ const Video = () => {
                                         </div>
                                         <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{video.title}</div>
-                                            <div className='d-flex align-items-center justify-content-between small text-secondary position-absolute bottom-0 mb-2'>
-                                                <div className='d-flex justify-content-between align-items-center'>
+                                            <div className='row align-items-center justify-content-between small text-secondary position-absolute bottom-0 mb-2 w-100'>
+                                                <div className='col-xl-6 d-flex align-items-center'>
                                                     <div>{moment(video.created_at).format('DD.MM.YYYY')}</div>
                                                     <div className='text-secondary d-flex align-items-center ms-3'>
                                                         <img src={eye} alt="" className='img-fluid me-1' />
                                                         <span>{video.viewed_count}</span>
                                                     </div>
                                                 </div>
-                                                <div className='d-flex align-items-center' style={{ marginLeft: "240px" }}>
-                                                    <span>{video.like_count === null ? 0 : video.like_count}</span>
-                                                    <img src={like} alt="" className='img-fluid ms-1' />
+                                                <div className='col-xl-6 d-flex align-items-center text-end justify-content-end'>
+                                                    <span className='me-2'>{video.like_count === null ? 0 : video.like_count}</span>
+                                                    {
+                                                        video.is_liked
+                                                            ?
+                                                            <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "15px" }} />
+                                                            :
+                                                            <img src={like_empty} alt="" style={{ width: "18px", cursor: "pointer" }} onClick={() => handleLike(video.id)} />
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

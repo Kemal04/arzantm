@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import like from '../../../assets/icons/like-empty.svg'
 import { useTranslation } from 'react-i18next'
+import logo from '../../../assets/arzanTm.png'
 
 const FotoRead = () => {
 
@@ -44,7 +45,6 @@ const FotoRead = () => {
 
     const { t } = useTranslation();
 
-
     return (
         <>
             {
@@ -56,7 +56,7 @@ const FotoRead = () => {
                         <div className='container d-flex align-items-center my-4'>
                             <Link to="/" className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                             <div className='mx-2'>/</div>
-                            <Link to="/foto" className='text-green text-decoration-none'>{t('surat')}</Link>
+                            <Link to="/foto" className='text-green text-decoration-none'>{t('albomlar')}</Link>
                             <div className='mx-2'>/</div>
                             <div>{gallery.title}</div>
                         </div>
@@ -65,7 +65,7 @@ const FotoRead = () => {
                             <div className='h3'>{t('suratlar')} <span className='text-green'>( {gallery?.images.length} )</span></div>
 
                             <div className='d-flex align-items-center mb-4'>
-                                <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
+                                <img src={gallery.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
                                 <div>{gallery.user.name}</div>
                             </div>
 

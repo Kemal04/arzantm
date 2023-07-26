@@ -1,10 +1,6 @@
-import React from 'react'
-
 import profile from '../../../assets/cards/offical/circle/100haryt.png'
 import phone from '../../../assets/icons/phone-bold.svg'
 import location from '../../../assets/icons/location.svg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
 
 import { Link } from 'react-router-dom'
 import OfficalBanner from '../../../components/banners/OfficalBanner'

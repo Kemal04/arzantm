@@ -37,6 +37,12 @@ const Home = () => {
         autoplay: true,
         autoplaySpeed: 1,
         speed: 1000,
+        breakpoints:
+        {
+            991: { perPage: 3, gap: '1.5rem', },
+            768: { perPage: 2, gap: '1.5rem', },
+            575: { perPage: 1, gap: '1rem', },
+        }
     };
 
     const [posts, loading] = useFetch("/api/v1/post?publication_type_id=1&limit=10", "data");
@@ -118,7 +124,7 @@ const Home = () => {
                 <div className='row justify-content-between mt-3 mb-5'>
 
                     <Splide options={option2} hasTrack={false}>
-                        <SplideTrack className='row g-0'>
+                        <SplideTrack>
                             {
                                 loading1 ? (
                                     <SplideSlide>Loading...</SplideSlide>
@@ -127,9 +133,9 @@ const Home = () => {
                                         {
                                             selectedPosts.map((post, index) => (
                                                 <SplideSlide key={index}>
-                                                    <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-2 col-md-4 col-sm-6 col-6 mb-5 text-decoration-none'>
+                                                    <Link to={`/arzanladys/${post.id}`} key={index} className='mb-5 text-decoration-none'>
                                                         <div className='position-relative card border-0' style={{ width: "240px", marginRight: "23px" }}>
-                                                            <div className='text-center'>
+                                                            <div className='text-center d-flex'>
                                                                 <img src={'http://95.85.126.113/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                                             </div>
                                                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
@@ -167,7 +173,7 @@ const Home = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/foto' className='card border-0'>
                             <img src={foto} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
@@ -177,7 +183,7 @@ const Home = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-4'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/video' className='card border-0'>
                             <img src={video} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
@@ -213,7 +219,7 @@ const Home = () => {
                             <div>Loading...</div>
                         ) : (
                             posts.map((post, index) =>
-                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
+                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100' style={{ width: "230px" }}>
                                         <div className='text-center overflow-hidden position-relative'>
                                             <img src={'http://95.85.126.113/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />

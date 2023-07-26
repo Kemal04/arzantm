@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 import { useTranslation } from 'react-i18next'
+import logo from '../../../assets/arzanTm.png'
 
 const Foto = () => {
 
@@ -175,7 +176,7 @@ const Foto = () => {
                                         {
                                             categories.map((category, index) => (
                                                 <SplideSlide className='col-xl-auto' key={index}>
-                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name}</button>
+                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name} ({category.statistics.gallery_count})</button>
                                                 </SplideSlide>
                                             ))
                                         }
@@ -221,7 +222,7 @@ const Foto = () => {
                                 <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-4 mb-3 text-decoration-none text-dark ${grid === true ? "col-xl-6" : null}`}>
                                     <div className='card rounded-2 h-100'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={gallery.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{gallery.user.name}</div>
                                         </div>
                                         <div className='text-center'>

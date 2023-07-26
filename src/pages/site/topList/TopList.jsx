@@ -7,6 +7,7 @@ import logo_img from '../../../assets/arzanTm.png'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const TopList = () => {
 
@@ -51,7 +52,7 @@ const TopList = () => {
     return (
         <>
             <div className='container d-flex align-items-center my-4'>
-                <div className='text-green'>{t('bas_sahypa')}</div>
+                <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                 <div className='mx-2'>/</div>
                 <div>{t('top_hasaplar')}</div>
             </div>
