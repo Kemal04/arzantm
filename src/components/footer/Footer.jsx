@@ -18,39 +18,39 @@ const Footer = () => {
                         <div className='col-xl-3'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlar")}</Link>
+                                    <Link to='/' className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlar")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("dukan")}</Link>
+                                    <Link to='/' className="nav-link" style={{ color: "#AAAAAA" }}>{t("dukan")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("galereya")}</Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='col-xl-3'>
-                            <ul className="nav flex-column">
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("resmiler")}</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>
+                                    <Link to='/foto' className="nav-link" style={{ color: "#AAAAAA" }}>{t("galereya")}</Link>
                                 </li>
                             </ul>
                         </div>
                         <div className='col-xl-3'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("ulanys_duzgunleri")}</Link>
+                                    <Link to='/top-list' className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlasmak")}</Link>
+                                    <Link to='/resmiler' className="nav-link" style={{ color: "#AAAAAA" }}>{t("resmiler")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" style={{ color: "#AAAAAA" }}>{t("biz_barada")}</Link>
+                                    <Link to='/saylananlar' className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='col-xl-3'>
+                            <ul className="nav flex-column">
+                                <li className="nav-item">
+                                    <Link to='/ulanys-kadalary' className="nav-link" style={{ color: "#AAAAAA" }}>{t("ulanys_duzgunleri")}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to='/habarlasmak' className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlasmak")}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to='/biz-barada' className="nav-link" style={{ color: "#AAAAAA" }}>{t("biz_barada")}</Link>
                                 </li>
                             </ul>
                         </div>

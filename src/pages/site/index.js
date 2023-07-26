@@ -31,3 +31,8 @@ export { default as NotificationRead } from "./notification/NotificationRead"
 export { default as Notices } from "./notice/Notices"
 export { default as NoticeRead } from "./notice/NoticeRead"
 export { default as NoticeCreate } from "./notice/NoticeCreate"
+
+export { default as About } from "./others/About"
+export { default as Contact } from "./others/Contact"
+export { default as FAQ } from "./others/FAQ"
+export { default as TermsOfUse } from "./others/TermsOfUse"
