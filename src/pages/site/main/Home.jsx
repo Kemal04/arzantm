@@ -41,7 +41,7 @@ const Home = () => {
         {
             991: { perPage: 3, gap: '1.5rem', },
             768: { perPage: 2, gap: '1.5rem', },
-            575: { perPage: 1, gap: '1rem', },
+            575: { perPage: 1.3, gap: '1rem', },
         }
     };
 
@@ -105,7 +105,6 @@ const Home = () => {
         fetchBadge()
     }, [])
 
-
     const { t } = useTranslation();
 
     return (
@@ -165,7 +164,7 @@ const Home = () => {
                     </div> */}
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <Link to='/top-list' className='card border-0'>
-                            <img src={top} alt="" className='img-fluid w-100' />
+                            <img src={top} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('top_hasaplar')}
@@ -175,7 +174,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/foto' className='card border-0'>
-                            <img src={foto} alt="" className='img-fluid w-100' />
+                            <img src={foto} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     Foto ({countGallery.count})
@@ -185,7 +184,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/video' className='card border-0'>
-                            <img src={video} alt="" className='img-fluid w-100' />
+                            <img src={video} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('wideo')} ({countVideo.count})
@@ -195,7 +194,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <Link to='/' className='card border-0'>
-                            <img src={offical} alt="" className='img-fluid w-100' />
+                            <img src={offical} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('resmiler')}

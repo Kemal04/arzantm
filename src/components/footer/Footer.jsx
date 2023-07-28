@@ -55,14 +55,16 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5 text-end'>
-                            <img src={logo} alt="" className='img-fluid' />
-                            <div className='mt-3' style={{ color: "#747474", fontSize: "12px" }}>@2023 ArzanTM, Turkmenistan. All rights reserved.</div>
+                            <Link to='https://arzan.info/' className='text-decoration-none'>
+                                <img src={logo} alt="" className='img-fluid' />
+                                <div className='mt-3' style={{ color: "#747474", fontSize: "12px" }}>@2023 ArzanTM, Turkmenistan. All rights reserved.</div>
+                            </Link>
                         </div>
                         <div className='col-xl-12 text-center mt-5'>
                             <div className='d-flex justify-content-center align-items-center'>
-                                <img src={youtube} alt="" className='img-fluid px-3' />
-                                <img src={tiktok} alt="" className='img-fluid px-3' />
-                                <img src={instagram} alt="" className='img-fluid px-3' />
+                                <Link to='https://www.youtube.com/channel/UC87LcYTNsVhadgUsdP08LfQ' target='_blank'><img src={youtube} alt="" className='img-fluid px-3' /></Link>
+                                <Link to='https://www.tiktok.com/@arzan_tm' target='_blank'><img src={tiktok} alt="" className='img-fluid px-3' /></Link>
+                                <Link to='https://www.instagram.com/arzan_tm/' target='_blank'><img src={instagram} alt="" className='img-fluid px-3' /></Link>
                             </div>
                         </div>
                     </div>
