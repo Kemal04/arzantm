@@ -12,15 +12,6 @@ import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 import top from '../../../assets/cards/others/top.png'
 import foto from '../../../assets/cards/others/foto.png'
 import video from '../../../assets/cards/others/video.png'
-import offical from '../../../assets/cards/others/offical.png'
-import offical_1 from '../../../assets/cards/offical/1.png'
-import offical_2 from '../../../assets/cards/offical/2.png'
-import offical_3 from '../../../assets/cards/offical/3.png'
-import offical_4 from '../../../assets/cards/offical/4.png'
-import offical_5 from '../../../assets/cards/offical/5.png'
-import offical_6 from '../../../assets/cards/offical/6.png'
-import offical_7 from '../../../assets/cards/offical/7.png'
-import offical_8 from '../../../assets/cards/offical/8.png'
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import Banner from '../../../components/banners/Banner'
 
@@ -117,7 +108,7 @@ const Home = () => {
             <div className='container mt-5'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='fw-black' style={{ fontSize: "30px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
-                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3 mb-5'>
@@ -192,16 +183,6 @@ const Home = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
-                        <Link to='/' className='card border-0'>
-                            <img src={offical} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
-                            <div className='card-img-overlay p-0'>
-                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
-                                    {t('resmiler')}
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
                 </div>
             </div>
 
@@ -209,7 +190,7 @@ const Home = () => {
             <div className='container mt-2'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='h3'>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
-                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row justify-content-between mt-3'>
@@ -242,41 +223,6 @@ const Home = () => {
                             )
                         )
                     }
-                </div>
-            </div>
-
-            {/* RESMILER */}
-            <div className='container mt-3'>
-                <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>{t('taze_resmiler')}</div>
-                    <Link to="/" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
-                </div>
-
-                <div className='row justify-content-between g-0 mt-3'>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_1} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_2} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_3} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_4} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_5} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_6} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_7} alt="" className='img-fluid' />
-                    </div>
-                    <div className='col-auto mb-3'>
-                        <img src={offical_8} alt="" className='img-fluid' />
-                    </div>
                 </div>
             </div>
 

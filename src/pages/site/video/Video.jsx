@@ -197,7 +197,7 @@ const Video = () => {
 
     return (
         <>
-            <div className='container d-flex align-items-center my-4'>
+            <div className='container d-flex align-items-center my-4 small-sm'>
                 <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                 <div className='mx-2'>/</div>
                 <div>{t('wideo')}</div>
@@ -253,7 +253,7 @@ const Video = () => {
                                                 &&
                                                 <SplideSlide className='col-lg-12 p-0' key={index} >
                                                     <Link to={banner.url}>
-                                                        <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
+                                                        <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid w-100' title={banner.title} />
                                                     </Link>
                                                 </SplideSlide>
                                             )
@@ -266,13 +266,13 @@ const Video = () => {
                 </div>
 
                 <div className='row justify-content-center'>
-                    <div className='col-xl-6'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-6'>
                         <div className='d-flex align-items-center justify-content-center border-green' style={{ borderRadius: "10px 0 0 10px" }}>
                             <img src={play} alt="" className='img-fluid' />
                             {t('meshurlar')} (65)
                         </div>
                     </div>
-                    <div className='col-xl-6'>
+                    <div className='col-xl-6 col-lg-6 col-md-6 col-6'>
                         <div className='d-flex align-items-center justify-content-center border-green' style={{ borderRadius: "0 10px 10px 0" }}>
                             <img src={star} alt="" className='img-fluid' />
                             {t('resmiler')} (25)

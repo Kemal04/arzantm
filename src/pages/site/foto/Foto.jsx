@@ -145,7 +145,7 @@ const Foto = () => {
 
     return (
         <>
-            <div className='container d-flex align-items-center my-4'>
+            <div className='container d-flex align-items-center my-4 small-sm'>
                 <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                 <div className='mx-2'>/</div>
                 <div>{t('albomlar')}</div>
@@ -162,7 +162,7 @@ const Foto = () => {
                     </div>
                 </div>
 
-                <div className='row mt-2 justify-content-between'>
+                <div className='row mt-3 justify-content-between'>
                     <Splide options={option2} hasTrack={false}>
                         <SplideTrack className='row g-0'>
                             {
@@ -202,7 +202,7 @@ const Foto = () => {
                                             &&
                                             <SplideSlide className='col-lg-12 p-0' key={index} >
                                                 <Link to={banner.url}>
-                                                    <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
+                                                    <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid w-100' title={banner.title} />
                                                 </Link>
                                             </SplideSlide>
                                         )

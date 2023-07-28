@@ -53,7 +53,7 @@ const FotoRead = () => {
                     <div>Loading...</div>
                 ) : (
                     <>
-                        <div className='container d-flex align-items-center my-4'>
+                        <div className='container d-flex align-items-center my-4 small-sm'>
                             <Link to="/" className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                             <div className='mx-2'>/</div>
                             <Link to="/foto" className='text-green text-decoration-none'>{t('albomlar')}</Link>

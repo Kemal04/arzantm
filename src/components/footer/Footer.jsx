@@ -18,10 +18,10 @@ const Footer = () => {
                         <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <Link to='/' className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlar")}</Link>
+                                    <Link to='/arzanladyslar' className="nav-link" style={{ color: "#AAAAAA" }}>{t("arzanladyslar")}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to='/' className="nav-link" style={{ color: "#AAAAAA" }}>{t("dukan")}</Link>
+                                    <Link to='/video' className="nav-link" style={{ color: "#AAAAAA" }}>{t("wideo")}</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/foto' className="nav-link" style={{ color: "#AAAAAA" }}>{t("galereya")}</Link>
@@ -32,9 +32,6 @@ const Footer = () => {
                             <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <Link to='/top-list' className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to='/resmiler' className="nav-link" style={{ color: "#AAAAAA" }}>{t("resmiler")}</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/saylananlar' className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>

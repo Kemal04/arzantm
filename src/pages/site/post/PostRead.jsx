@@ -66,7 +66,7 @@ const PostRead = () => {
                     <div>Loading...</div>
                 ) : (
                     <>
-                        <div className='container d-flex align-items-center my-4'>
+                        <div className='container d-flex align-items-center my-4 small-sm'>
                             <Link to="/" className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
                             <div className='mx-2'>/</div>
                             <Link to="/arzanladyslar" className='text-green text-decoration-none'>{t('arzanladyslar')}</Link>
@@ -76,15 +76,15 @@ const PostRead = () => {
 
                         <div className="container">
                             <div className="row justify-content-center">
-                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center" style={{ marginTop: "50%" }}>
+                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center mt-50" style={{ zIndex: "1" }}>
                                     {
                                         post.next_id !== null &&
-                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
+                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow`} style={{ padding: "5px 9px" }}>
                                             <FontAwesomeIcon icon={faArrowLeft} />
                                         </Link>
                                     }
                                 </div>
-                                <div className="col-xl-8 col-lg-8 col-md-8 col-8">
+                                <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
                                             <img src={post.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
@@ -182,10 +182,10 @@ const PostRead = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center" style={{ marginTop: "50%" }}>
+                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center mt-50" style={{ zIndex: "1" }}>
                                     {
                                         post.prev_id !== null &&
-                                        <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18" style={{ padding: "5px 9px" }}>
+                                        <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18 shadow" style={{ padding: "5px 9px" }}>
                                             <FontAwesomeIcon icon={faArrowRight} />
                                         </Link>
                                     }
