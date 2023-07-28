@@ -15,7 +15,7 @@ const Footer = () => {
             <div className='p-5 text-white' style={{ backgroundColor: "#0A0909" }}>
                 <div className='container'>
                     <div className='row align-items-center'>
-                        <div className='col-xl-3'>
+                        <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <Link to='/' className="nav-link" style={{ color: "#AAAAAA" }}>{t("habarlar")}</Link>
@@ -28,7 +28,7 @@ const Footer = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className='col-xl-3'>
+                        <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <Link to='/top-list' className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
@@ -41,7 +41,7 @@ const Footer = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className='col-xl-3'>
+                        <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
                             <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <Link to='/ulanys-kadalary' className="nav-link" style={{ color: "#AAAAAA" }}>{t("ulanys_duzgunleri")}</Link>
@@ -54,7 +54,7 @@ const Footer = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className='col-xl-3 text-end'>
+                        <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5 text-end'>
                             <img src={logo} alt="" className='img-fluid' />
                             <div className='mt-3' style={{ color: "#747474", fontSize: "12px" }}>@2023 ArzanTM, Turkmenistan. All rights reserved.</div>
                         </div>

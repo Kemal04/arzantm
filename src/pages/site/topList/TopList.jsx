@@ -105,8 +105,8 @@ const TopList = () => {
                                             <div>Loading...</div>
                                         ) : (
                                             users?.map((user, index) => (
-                                                <div className='col-xl-12 mb-3 d-flex justify-content-center' key={index}>
-                                                    <div className='w-45'>
+                                                <div className='col-xl-8 col-12 mb-3 d-flex justify-content-center' key={index}>
+                                                    <div className='w-100'>
                                                         <div className={`border rounded py-2 px-3 d-flex justify-content-between align-items-center ${index < 3 ? "border-warning" : null}`}>
                                                             <div className='d-flex align-items-center fs-18 fw-black'>
                                                                 <div className='pe-3'>{index + 1}</div>

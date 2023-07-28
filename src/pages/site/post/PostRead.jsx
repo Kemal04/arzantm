@@ -12,6 +12,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import logo from '../../../assets/arzanTm.png'
 
 const PostRead = () => {
 
@@ -75,7 +76,7 @@ const PostRead = () => {
 
                         <div className="container">
                             <div className="row justify-content-center">
-                                <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
+                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center" style={{ marginTop: "50%" }}>
                                     {
                                         post.next_id !== null &&
                                         <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18`} style={{ padding: "5px 9px" }}>
@@ -83,10 +84,10 @@ const PostRead = () => {
                                         </Link>
                                     }
                                 </div>
-                                <div className="col-xl-8">
+                                <div className="col-xl-8 col-lg-8 col-md-8 col-8">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={'http://95.85.126.113:8080/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={post.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{post.user.name}</div>
                                         </div>
                                         <Splide options={options} hasTrack={false}>
@@ -97,7 +98,7 @@ const PostRead = () => {
                                                     ) : (
                                                         post.images.map((image, index) =>
                                                             <SplideSlide key={index} >
-                                                                <img src={image === null ? "" : 'http://95.85.126.113/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={post.title} />
+                                                                <img src={image === null ? "" : 'http://95.85.126.113/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover" }} title={post.title} />
                                                             </SplideSlide>
                                                         )
                                                     )
@@ -181,7 +182,7 @@ const PostRead = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-2 text-center" style={{ marginTop: "50%" }}>
+                                <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center" style={{ marginTop: "50%" }}>
                                     {
                                         post.prev_id !== null &&
                                         <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18" style={{ padding: "5px 9px" }}>
