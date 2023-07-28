@@ -105,7 +105,7 @@ const TopList = () => {
                                                         <div className={`border rounded py-2 px-3 d-flex justify-content-between align-items-center ${index < 3 ? "border-warning" : null}`}>
                                                             <div className='d-flex align-items-center fs-18 fw-black'>
                                                                 <div className='pe-3'>{index + 1}</div>
-                                                                <img src={user.avatar_image.url === null ? logo_img : 'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                                <img src={user.avatar_image.url === null ? logo_img : 'https://arzan.info/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                                                 <div className='ps-3'>{user.name}</div>
                                                             </div>
                                                             <div className='d-flex align-items-center'>
@@ -133,7 +133,7 @@ const TopList = () => {
                                                         <div className={`border rounded py-2 px-3 d-flex justify-content-between align-items-center ${index < 3 ? "border-warning" : null}`}>
                                                             <div className='d-flex align-items-center fs-18 fw-black'>
                                                                 <div className='pe-3'>{index + 1}</div>
-                                                                <img src={user.avatar_image.url === null ? logo_img : 'http://95.85.126.113:8080/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                                <img src={user.avatar_image.url === null ? logo_img : 'https://arzan.info/' + user.avatar_image.url} alt="" className='rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                                                 <div className='ps-3'>{user.name}</div>
                                                             </div>
                                                             <div className='d-flex align-items-center'>

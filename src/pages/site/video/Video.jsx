@@ -41,7 +41,7 @@ function MyVerticallyCenteredModal(props) {
                 </div>
             </div>
             <Player autoPlay>
-                <source src={'http://95.85.126.113:8080/' + props.src} />
+                <source src={'https://arzan.info/' + props.src} />
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1} />
                     <ForwardControl seconds={30} order={1.2} />
@@ -291,11 +291,11 @@ const Video = () => {
                                 <div key={index} className={`col-xl-4 mb-3 ${grid === true ? "col-xl-6" : null}`}>
                                     <div className='card rounded-21 h-100'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={video.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={video.user.avatar_image.url === null ? logo : 'https://arzan.info/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{video.user.name}</div>
                                         </div>
                                         <div style={{ cursor: "pointer" }} onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }} className='position-relative d-flex justify-content-center align-items-center text-center'>
-                                            <img src={'http://95.85.126.113:8080/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                            <img src={'https://arzan.info/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                             <div className='card-img-overlay' style={{ top: "40%", left: "0%" }}>
                                                 <FontAwesomeIcon icon={faPlayCircle} className='h1 opacity-75 text-white' />
                                             </div>

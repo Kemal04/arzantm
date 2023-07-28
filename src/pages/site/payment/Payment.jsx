@@ -56,7 +56,7 @@ const Payment = () => {
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div className="d-flex align-items-center">
                                         <div className="d-flex justify-content-center align-items-center" style={{ background: "linear-gradient(270deg, rgba(249, 217, 54, 0) 17.19%, rgba(255, 237, 78, 0.55) 100%)", width: "90px", height: "60px" }}>
-                                            <img src={'http://95.85.126.113:8080/' + coin.image} alt="" className="img-fluid" style={{ width: "30px" }} />
+                                            <img src={'https://arzan.info/' + coin.image} alt="" className="img-fluid" style={{ width: "30px" }} />
                                         </div>
                                         <div className="h5 mt-1 ms-2">{coin.amount} ball</div>
                                     </div>

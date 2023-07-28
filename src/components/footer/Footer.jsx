@@ -26,20 +26,16 @@ const Footer = () => {
                                 <li className="nav-item">
                                     <Link to='/foto' className="nav-link" style={{ color: "#AAAAAA" }}>{t("galereya")}</Link>
                                 </li>
-                            </ul>
-                        </div>
-                        <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
-                            <ul className="nav flex-column">
                                 <li className="nav-item">
                                     <Link to='/top-list' className="nav-link" style={{ color: "#AAAAAA" }}>{t("top_hasaplar")}</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to='/saylananlar' className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>
-                                </li>
                             </ul>
                         </div>
                         <div className='col-xl-3 col-lg-3 col-md-6 col-6 mb-5'>
                             <ul className="nav flex-column">
+                                <li className="nav-item">
+                                    <Link to='/saylananlar' className="nav-link" style={{ color: "#AAAAAA" }}>{t("saylananlar")}</Link>
+                                </li>
                                 <li className="nav-item">
                                     <Link to='/ulanys-kadalary' className="nav-link" style={{ color: "#AAAAAA" }}>{t("ulanys_duzgunleri")}</Link>
                                 </li>
@@ -57,7 +53,7 @@ const Footer = () => {
                                 <div className='mt-3' style={{ color: "#747474", fontSize: "12px" }}>@2023 ArzanTM, Turkmenistan. All rights reserved.</div>
                             </Link>
                         </div>
-                        <div className='col-xl-12 text-center mt-5'>
+                        <div className='col-xl-3 mb-5'>
                             <div className='d-flex justify-content-center align-items-center'>
                                 <Link to='https://www.youtube.com/channel/UC87LcYTNsVhadgUsdP08LfQ' target='_blank'><img src={youtube} alt="" className='img-fluid px-3' /></Link>
                                 <Link to='https://www.tiktok.com/@arzan_tm' target='_blank'><img src={tiktok} alt="" className='img-fluid px-3' /></Link>

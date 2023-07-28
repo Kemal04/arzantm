@@ -34,7 +34,7 @@ const User = () => {
     return (
         <li className="dropdown ms-5">
             <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={user?.avatar_image === null ? logoImg : 'http://95.85.126.113:8080/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                <img src={user?.avatar_image === null ? logoImg : 'https://arzan.info/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
             </div>
             <ul className="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
                 <li>

@@ -1,4 +1,4 @@
-import { faEye, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleDown, faAngleDown, faAngleUp, faArrowDown, faEye, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import axios from "axios";
@@ -17,7 +17,7 @@ function MyVerticallyCenteredModal(props) {
     return (
         <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
             <Player autoPlay>
-                <source src={'http://95.85.126.113:8080/' + props.src} />
+                <source src={'https://arzan.info/' + props.src} />
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1} />
                     <ForwardControl seconds={30} order={1.2} />
@@ -87,40 +87,54 @@ const Search = () => {
         searchVideo()
     }, [state])
 
+    const [hiddenPosts, setHiddenPosts] = useState(true)
+    const [hiddenPhotos, setHiddenPhotos] = useState(true)
+    const [hiddenVideos, setHiddenVideos] = useState(true)
+
+    const handlePostHidden = () => {
+        if (hiddenPosts) {
+            setHiddenPosts(false)
+        } else {
+            setHiddenPosts(true)
+        }
+    }
 
     return (
         <div className="container my-5">
-            <div className="h4">Postlar <span className="text-green">({posts?.length})</span></div>
-            <Splide options={option2} hasTrack={false}>
-                <SplideTrack>
-                    {
-                        posts?.map((post, index) => (
-                            <SplideSlide key={index}>
-                                <Link to={`/arzanladys/${post.id}`} key={index} className='d-flex justify-content-center mb-3 text-decoration-none text-dark'>
-                                    <div className='card rounded-1 h-100 w-100 me-4'>
-                                        <div className='text-center'>
-                                            <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
-                                        </div>
-                                        {/* <div className='position-absolute p-2 end-0 text-center'>
+            <div className="h4">Postlar <FontAwesomeIcon icon={hiddenPosts ? faAngleDown : faAngleUp} onClick={handlePostHidden} style={{ cursor: "pointer" }} /><span className="text-green">({posts?.length})</span></div>
+            {
+                hiddenPosts &&
+                <Splide options={option2} hasTrack={false}>
+                    <SplideTrack>
+                        {
+                            posts?.map((post, index) => (
+                                <SplideSlide key={index}>
+                                    <Link to={`/arzanladys/${post.id}`} key={index} className='d-flex justify-content-center mb-3 text-decoration-none text-dark'>
+                                        <div className='card rounded-1 h-100 w-100 me-4'>
+                                            <div className='text-center'>
+                                                <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                            </div>
+                                            {/* <div className='position-absolute p-2 end-0 text-center'>
                                             <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
                                         </div> */}
-                                        <div className='card-body p-2 position-relative pb-5'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
-                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
-                                                <div className='small text-secondary me-2'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    {post.viewed_count}
+                                            <div className='card-body p-2 position-relative pb-5'>
+                                                <div className='card-title' style={{ fontWeight: "500" }}>{post.title}</div>
+                                                <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
+                                                    <div className='small text-secondary me-2'>{moment(post.created_at).format('DD.MM.YYYY')}</div>
+                                                    <div className='small text-secondary'>
+                                                        <FontAwesomeIcon icon={faEye} className='me-2' />
+                                                        {post.viewed_count}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            </SplideSlide>
-                        ))
-                    }
-                </SplideTrack>
-            </Splide>
+                                    </Link>
+                                </SplideSlide>
+                            ))
+                        }
+                    </SplideTrack>
+                </Splide>
+            }
 
             <div className="h4 mt-5">Gallerylar <span className="text-green">({galleries?.length})</span></div>
             <div className="row">
@@ -129,11 +143,11 @@ const Search = () => {
                         <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-3 mb-3 text-decoration-none text-dark`}>
                             <div className='card rounded-2 h-100'>
                                 <div className='card-body d-flex align-items-center'>
-                                    <img src={'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                    <img src={'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                     <div>{gallery.user.name}</div>
                                 </div>
                                 <div className='text-center'>
-                                    <img src={'http://95.85.126.113:8080/' + gallery.avatar_image.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                    <img src={'https://arzan.info/' + gallery.avatar_image.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                 </div>
                                 <div className='card-body p-2 position-relative pb-5'>
                                     <div className='card-title' style={{ fontWeight: "500" }}>{gallery.title}</div>
@@ -163,11 +177,11 @@ const Search = () => {
                         <div key={index} className={`col-xl-3 mb-3`}>
                             <div className='card rounded-21 h-100'>
                                 <div className='card-body d-flex align-items-center'>
-                                    <img src={'http://95.85.126.113:8080/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                    <img src={'https://arzan.info/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                     <div>{video.user.name}</div>
                                 </div>
                                 <div style={{ cursor: "pointer" }} onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }} className='position-relative d-flex justify-content-center align-items-center text-center'>
-                                    <img src={'http://95.85.126.113:8080/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                    <img src={'https://arzan.info/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                     <div className='card-img-overlay' style={{ top: "40%", left: "0%" }}>
                                         <FontAwesomeIcon icon={faPlayCircle} className='h1 opacity-75 text-white' />
                                     </div>

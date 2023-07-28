@@ -87,7 +87,7 @@ const PostRead = () => {
                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={post.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <img src={post.user.avatar_image.url === null ? logo : 'https://arzan.info/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{post.user.name}</div>
                                         </div>
                                         <Splide options={options} hasTrack={false}>

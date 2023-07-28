@@ -107,7 +107,7 @@ const Home = () => {
             {/* CARDS */}
             <div className='container mt-5'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='fw-black' style={{ fontSize: "30px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
+                    <div className='fw-black' style={{ fontSize: "26px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
                     <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
@@ -148,7 +148,7 @@ const Home = () => {
             </div>
 
             {/* OTHERS */}
-            <div className='container'>
+            <div className='container mt-5'>
                 <div className='row text-center'>
                     {/* <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={konkurs} alt="" className='img-fluid w-100' />
@@ -187,9 +187,9 @@ const Home = () => {
             </div>
 
             {/* CHEAP */}
-            <div className='container mt-2'>
+            <div className='container mt-5'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='h3'>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
+                    <div className='fw-black' style={{ fontSize: '26px' }}>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
                     <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
@@ -199,8 +199,8 @@ const Home = () => {
                             <div>Loading...</div>
                         ) : (
                             posts.map((post, index) =>
-                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
-                                    <div className='card rounded-1 h-100' style={{ width: "230px" }}>
+                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-4 justify-content-center text-decoration-none text-dark'>
+                                    <div className='card rounded-1 h-100' style={{ width: "240px" }}>
                                         <div className='text-center overflow-hidden position-relative'>
                                             <img src={'https://arzan.info/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
                                             <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain", zIndex: 9, position: "relative" }} />
@@ -228,7 +228,7 @@ const Home = () => {
 
             {/* MOBILE BANNER */}
             <div className='container-fluid mt-5 p-0'>
-                <img src={mobile_banner} alt="" className='img-fluid w-100' />
+                <Link to="https://play.google.com/store/apps/details?id=arzan.tm" target='_blank'><img src={mobile_banner} alt="" className='img-fluid w-100' /></Link>
             </div>
         </>
     )

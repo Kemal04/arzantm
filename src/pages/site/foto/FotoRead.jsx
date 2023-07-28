@@ -65,7 +65,7 @@ const FotoRead = () => {
                             <div className='h3'>{t('suratlar')} <span className='text-green'>( {gallery?.images.length} )</span></div>
 
                             <div className='d-flex align-items-center mb-4'>
-                                <img src={gallery.user.avatar_image.url === null ? logo : 'http://95.85.126.113:8080/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
+                                <img src={gallery.user.avatar_image.url === null ? logo : 'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
                                 <div>{gallery.user.name}</div>
                             </div>
 
@@ -78,7 +78,7 @@ const FotoRead = () => {
                                             <div className='col-xl-3 mb-3' key={index}>
                                                 <div className='card border-0'>
                                                     <SlideshowLightbox>
-                                                        <img src={'http://95.85.126.113:8080/' + image.url} alt="" className='img-fluid' />
+                                                        <img src={'https://arzan.info/' + image.url} alt="" className='img-fluid' />
                                                     </SlideshowLightbox>
                                                     <div className='position-absolute px-3 py-2 bottom-0 text-white small w-100'>
                                                         <div className='d-flex justify-content-between align-items-center'>
