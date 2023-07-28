@@ -98,7 +98,7 @@ const PostRead = () => {
                                                     ) : (
                                                         post.images.map((image, index) =>
                                                             <SplideSlide key={index} >
-                                                                <img src={image === null ? "" : 'http://95.85.126.113/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover" }} title={post.title} />
+                                                                <img src={image === null ? "" : 'https://arzan.info/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover" }} title={post.title} />
                                                             </SplideSlide>
                                                         )
                                                     )

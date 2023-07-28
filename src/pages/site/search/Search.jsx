@@ -99,7 +99,7 @@ const Search = () => {
                                 <Link to={`/arzanladys/${post.id}`} key={index} className='d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100 w-100 me-4'>
                                         <div className='text-center'>
-                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                            <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                         </div>
                                         {/* <div className='position-absolute p-2 end-0 text-center'>
                                             <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>

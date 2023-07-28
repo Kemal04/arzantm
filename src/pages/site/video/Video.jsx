@@ -253,7 +253,7 @@ const Video = () => {
                                                 &&
                                                 <SplideSlide className='col-lg-12 p-0' key={index} >
                                                     <Link to={banner.url}>
-                                                        <img src={'http://95.85.126.113/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
+                                                        <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid' style={{ height: "430px" }} title={banner.title} />
                                                     </Link>
                                                 </SplideSlide>
                                             )

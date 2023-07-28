@@ -180,7 +180,7 @@ const Profile = () => {
                                                 <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-4 col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                                     <div className='card rounded-1 h-100 w-100'>
                                                         <div className='text-center'>
-                                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                                            <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                                         </div>
                                                         <div className='position-absolute p-2 end-0 start-0'>
                                                             <button className='btn btn-sm btn-danger mx-1' onClick={() => handleDelete(post.id)}><FontAwesomeIcon icon={faTrash} /></button>

@@ -39,7 +39,7 @@ const Banner = ({ page_name }) => {
                                 &&
                                 <SplideSlide className='col-lg-12 p-0' key={index} >
                                     <Link target='_blank' to={banner.url}>
-                                        <img src={'http://95.85.126.113/' + banner.image.url} alt="banner" className='img-fluid px-2' title={banner.title} />
+                                        <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid px-2' title={banner.title} />
                                     </Link>
                                 </SplideSlide>
                             )

@@ -41,7 +41,7 @@ const Home = () => {
         {
             991: { perPage: 3, gap: '1.5rem', },
             768: { perPage: 2, gap: '1.5rem', },
-            575: { perPage: 1.3, gap: '1rem', },
+            575: { perPage: 1, gap: '1rem', },
         }
     };
 
@@ -132,11 +132,11 @@ const Home = () => {
                                     <>
                                         {
                                             selectedPosts.map((post, index) => (
-                                                <SplideSlide key={index} className='pe-4'>
+                                                <SplideSlide key={index}>
                                                     <Link to={`/arzanladys/${post.id}`} key={index} className='mb-5 text-decoration-none'>
-                                                        <div className='position-relative card border-0'>
+                                                        <div className='position-relative card border-0' style={{ width: "240px", marginRight: "23px" }}>
                                                             <div className='text-center d-flex'>
-                                                                <img src={'http://95.85.126.113/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
+                                                                <img src={'https://arzan.info/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                                             </div>
                                                             <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
                                                                 <div className='h5 text-white'>
@@ -165,7 +165,7 @@ const Home = () => {
                     </div> */}
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <Link to='/top-list' className='card border-0'>
-                            <img src={top} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
+                            <img src={top} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('top_hasaplar')}
@@ -175,7 +175,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/foto' className='card border-0'>
-                            <img src={foto} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
+                            <img src={foto} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     Foto ({countGallery.count})
@@ -185,7 +185,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4'>
                         <Link to='/video' className='card border-0'>
-                            <img src={video} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
+                            <img src={video} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('wideo')} ({countVideo.count})
@@ -195,7 +195,7 @@ const Home = () => {
                     </div>
                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <Link to='/' className='card border-0'>
-                            <img src={offical} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
+                            <img src={offical} alt="" className='img-fluid w-100' />
                             <div className='card-img-overlay p-0'>
                                 <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
                                     {t('resmiler')}
@@ -222,8 +222,8 @@ const Home = () => {
                                 <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100' style={{ width: "230px" }}>
                                         <div className='text-center overflow-hidden position-relative'>
-                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
-                                            <img src={'http://95.85.126.113/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain", zIndex: 9, position: "relative" }} />
+                                            <img src={'https://arzan.info/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
+                                            <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain", zIndex: 9, position: "relative" }} />
                                         </div>
                                         <div className='position-absolute p-2 end-0 text-center mt-2' style={{ zIndex: 10 }}>
                                             <div className='bg-green text-white small rounded-circle pt-2' style={{ width: "40px", height: "40px" }}>{Math.floor(100 - (post.discount * 100 / post.price))}%</div>
