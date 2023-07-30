@@ -20,9 +20,6 @@ const Profile = () => {
 
     //CURRENT USER FETCH
     const [user, loading] = useFetch("/api/v1/user/profile/" + authState.id, "data");
-    const [postWaiting] = useFetch(`/api/v1/post?user_id=${authState.id}&status=waiting`, "data");
-    const [postDeclined] = useFetch(`/api/v1/post?user_id=${authState.id}&status=declined`, "data");
-    const [postApproved] = useFetch(`/api/v1/post?user_id=${authState.id}&status=approved`, "data");
 
     //USER AVATAR
     const [img, setImg] = useState('')
@@ -102,6 +99,8 @@ const Profile = () => {
         })
     }
 
+    console.log(user);
+
     return (
         <>
             {loading ? (
@@ -142,15 +141,15 @@ const Profile = () => {
                                 Ashgabat
                             </div>
                             <div className='col-xl-2 border-end my-3'>
-                                <b>{postWaiting?.length}</b>
+                                <b>{user.post_waiting_count}</b>
                                 <div style={{ cursor: "pointer" }} onClick={() => changeStatus("waiting")} className='text-muted'>{t('garasylyar')}</div>
                             </div>
                             <div className='col-xl-2 border-end my-3'>
-                                <b>{postDeclined?.length}</b>
+                                <b>{user.post_declined_count}</b>
                                 <div style={{ cursor: "pointer" }} onClick={() => changeStatus("declined")} className='text-muted'>{t('kabul_edilmedi')}</div>
                             </div>
                             <div className='col-xl-2 my-3'>
-                                <b>{postApproved?.length}</b>
+                                <b>{user.post_approved_count}</b>
                                 <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
                             </div>
                             <div className='col-xl-12 my-3 d-flex justify-content-center'>

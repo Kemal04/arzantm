@@ -25,7 +25,7 @@ const Banner = ({ page_name }) => {
     }
 
     return (
-        <div className='container p-0 text-center mt-3'>
+        <div className='container px-5 text-center mt-3'>
             <Splide options={options} hasTrack={false}>
                 <SplideTrack className='row g-0'>
                     {

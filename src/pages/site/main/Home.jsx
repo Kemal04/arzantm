@@ -105,13 +105,13 @@ const Home = () => {
             {/* <Stories /> */}
 
             {/* CARDS */}
-            <div className='container mt-5'>
+            <div className='container mt-2 px-5'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='fw-black' style={{ fontSize: "26px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
                     <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
-                <div className='row justify-content-between mt-3 mb-5'>
+                <div className='row justify-content-between mt-3'>
 
                     <Splide options={option2} hasTrack={false}>
                         <SplideTrack>
@@ -124,7 +124,7 @@ const Home = () => {
                                             selectedPosts.map((post, index) => (
                                                 <SplideSlide key={index}>
                                                     <Link to={`/arzanladys/${post.id}`} key={index} className='mb-5 text-decoration-none'>
-                                                        <div className='position-relative card border-0' style={{ width: "240px", marginRight: "23px" }}>
+                                                        <div className='position-relative card border-0' style={{ width: "230px" }}>
                                                             <div className='text-center d-flex'>
                                                                 <img src={'https://arzan.info/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                                             </div>
@@ -148,7 +148,7 @@ const Home = () => {
             </div>
 
             {/* OTHERS */}
-            <div className='container mt-5'>
+            <div className='container mt-4 px-5'>
                 <div className='row text-center'>
                     {/* <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={konkurs} alt="" className='img-fluid w-100' />
@@ -187,19 +187,19 @@ const Home = () => {
             </div>
 
             {/* CHEAP */}
-            <div className='container mt-5'>
+            <div className='container px-5'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='fw-black' style={{ fontSize: '26px' }}>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
                     <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
-                <div className='row justify-content-between mt-3'>
+                <div className='row gx-1 justify-content-between mt-3'>
                     {
                         loading ? (
                             <div>Loading...</div>
                         ) : (
                             posts.map((post, index) =>
-                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-4 justify-content-center text-decoration-none text-dark'>
+                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-2 justify-content-center text-decoration-none text-dark'>
                                     <div className='card rounded-1 h-100' style={{ width: "240px" }}>
                                         <div className='text-center overflow-hidden position-relative'>
                                             <img src={'https://arzan.info/' + post.image} alt="" style={{ height: "250px", width: "100%", zIndex: 0, filter: "blur(19px)", position: "absolute" }} />
@@ -227,7 +227,7 @@ const Home = () => {
             </div>
 
             {/* MOBILE BANNER */}
-            <div className='container-fluid mt-5 p-0'>
+            <div className='container-fluid mt-2 p-0'>
                 <Link to="https://play.google.com/store/apps/details?id=arzan.tm" target='_blank'><img src={mobile_banner} alt="" className='img-fluid w-100' /></Link>
             </div>
         </>

@@ -13,7 +13,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
-import moment from 'moment/moment'
+import { Link } from 'react-router-dom'
 
 const ProfileWallet = () => {
 
@@ -47,10 +47,10 @@ const ProfileWallet = () => {
                                     </div>
                                 </div>
                                 <div className='col-xl-6 d-flex justify-content-end'>
-                                    <div className='btn-coin'>
-                                        <div className=''>1285</div>
+                                    <Link to='/toleg' className='btn-coin text-decoration-none'>
+                                        <div className=''>{user.coin_balance}</div>
                                         <img src={coin} alt="" className='img-fluid ms-2' style={{ width: "18px" }} />
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
                             <div className='d-flex justify-content-center'>
@@ -155,7 +155,7 @@ const ProfileWallet = () => {
                                                             <img src={calendar} alt="" className='img-fluid me-3' />
                                                             {t('girilen_gun')}
                                                         </td>
-                                                        <td className='text-end pe-4'>{moment(user.last_login).format('DD-MM-YYYY')} ý.</td>
+                                                        <td className='text-end pe-4'>{user.day_streak.day_streak}</td>
                                                         <td>
                                                             <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
                                                                 0
