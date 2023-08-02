@@ -1,4 +1,4 @@
-import { faAngleDoubleDown, faAngleDown, faAngleUp, faArrowDown, faEye, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp, faEye, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import axios from "axios";
@@ -17,7 +17,7 @@ function MyVerticallyCenteredModal(props) {
     return (
         <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
             <Player autoPlay>
-                <source src={'https://arzan.info/' + props.src} />
+                <source src={'http://95.85.126.113:8080/' + props.src} />
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1} />
                     <ForwardControl seconds={30} order={1.2} />
@@ -117,7 +117,7 @@ const Search = () => {
 
     return (
         <div className="container my-5">
-            <div className="h4">Postlar <FontAwesomeIcon icon={hiddenPosts ? faAngleDown : faAngleUp} onClick={handlePostHidden} style={{ cursor: "pointer" }} /><span className="text-green">({posts?.length})</span></div>
+            <div className="h4">Postlar <FontAwesomeIcon icon={hiddenPosts ? faAngleDown : faAngleUp} onClick={handlePostHidden} style={{ cursor: "pointer" }} /><span className="text-green"> ({posts?.length})</span></div>
             {
                 hiddenPosts &&
                 <Splide options={option2} hasTrack={false}>
@@ -152,7 +152,7 @@ const Search = () => {
                 </Splide>
             }
 
-            <div className="h4 mt-5">Gallerylar <FontAwesomeIcon icon={hiddenPhotos ? faAngleDown : faAngleUp} onClick={handlePhotoHidden} style={{ cursor: "pointer" }} /><span className="text-green">({galleries?.length})</span></div>
+            <div className="h4 mt-5">Gallerylar <FontAwesomeIcon icon={hiddenPhotos ? faAngleDown : faAngleUp} onClick={handlePhotoHidden} style={{ cursor: "pointer" }} /><span className="text-green"> ({galleries?.length})</span></div>
             <div className="row">
                 {
                     hiddenPhotos &&
@@ -188,7 +188,7 @@ const Search = () => {
 
             <MyVerticallyCenteredModal src={videoSrc} show={modalShow} onHide={() => setModalShow(false)} />
 
-            <div className="h4 mt-5">Wideolar<FontAwesomeIcon icon={hiddenVideos ? faAngleDown : faAngleUp} onClick={handleVideoHidden} style={{ cursor: "pointer" }} /> <span className="text-green">({videos?.length})</span></div>
+            <div className="h4 mt-5">Wideolar <FontAwesomeIcon icon={hiddenVideos ? faAngleDown : faAngleUp} onClick={handleVideoHidden} style={{ cursor: "pointer" }} /> <span className="text-green"> ({videos?.length})</span></div>
             <div className="row">
                 {
                     hiddenVideos &&

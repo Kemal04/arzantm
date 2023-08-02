@@ -41,7 +41,7 @@ function MyVerticallyCenteredModal(props) {
                 </div>
             </div>
             <Player autoPlay>
-                <source src={'https://arzan.info/' + props.src} />
+                <source src={'http://95.85.126.113:8080/' + props.src} />
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1} />
                     <ForwardControl seconds={30} order={1.2} />

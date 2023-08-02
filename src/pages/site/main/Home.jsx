@@ -111,40 +111,37 @@ const Home = () => {
                     <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
-                <div className='row justify-content-between mt-3'>
-
-                    <Splide options={option2} hasTrack={false}>
-                        <SplideTrack>
-                            {
-                                loading1 ? (
-                                    <SplideSlide>Loading...</SplideSlide>
-                                ) : (
-                                    <>
-                                        {
-                                            selectedPosts.map((post, index) => (
-                                                <SplideSlide key={index}>
-                                                    <Link to={`/arzanladys/${post.id}`} key={index} className='mb-5 text-decoration-none'>
-                                                        <div className='position-relative card border-0' style={{ width: "230px" }}>
-                                                            <div className='text-center d-flex'>
-                                                                <img src={'https://arzan.info/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
-                                                            </div>
-                                                            <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
-                                                                <div className='h5 text-white'>
-                                                                    {post.title.substr(0, 10) + "..."}
-                                                                </div>
-                                                                <small className='' style={{ color: "#C4C4C4" }}>{moment(post.created_at).format('DD.MM.YYYY')}</small>
-                                                            </div>
+                <Splide options={option2} hasTrack={false}>
+                    <SplideTrack className='row justify-content-center mt-3'>
+                        {
+                            loading1 ? (
+                                <SplideSlide>Loading...</SplideSlide>
+                            ) : (
+                                <>
+                                    {
+                                        selectedPosts.map((post, index) => (
+                                            <SplideSlide key={index} className='d-flex justify-content-center'>
+                                                <Link to={`/arzanladys/${post.id}`} key={index} className='mb-3 text-decoration-none'>
+                                                    <div className='position-relative card border-0' style={{ width: "230px" }}>
+                                                        <div className='text-center d-flex'>
+                                                            <img src={'https://arzan.info/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                                         </div>
-                                                    </Link>
-                                                </SplideSlide>
-                                            ))
-                                        }
-                                    </>
-                                )
-                            }
-                        </SplideTrack>
-                    </Splide>
-                </div>
+                                                        <div className='position-absolute bottom-0 start-0 w-100 footer-rgba px-3 py-2'>
+                                                            <div className='h5 text-white'>
+                                                                {post.title.substr(0, 10) + "..."}
+                                                            </div>
+                                                            <small className='' style={{ color: "#C4C4C4" }}>{moment(post.created_at).format('DD.MM.YYYY')}</small>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            </SplideSlide>
+                                        ))
+                                    }
+                                </>
+                            )
+                        }
+                    </SplideTrack>
+                </Splide>
             </div>
 
             {/* OTHERS */}

@@ -55,7 +55,7 @@ const Navbar = () => {
     return (
         <>
             <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-white'}`}>
-                <div className="container">
+                <div className="container px-5">
 
                     {/* LOGO */}
                     <Link to="/" className="navbar-brand ps-2">
