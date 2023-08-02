@@ -88,14 +88,30 @@ const Search = () => {
     }, [state])
 
     const [hiddenPosts, setHiddenPosts] = useState(true)
-    const [hiddenPhotos, setHiddenPhotos] = useState(true)
     const [hiddenVideos, setHiddenVideos] = useState(true)
+    const [hiddenPhotos, setHiddenPhotos] = useState(true)
 
     const handlePostHidden = () => {
         if (hiddenPosts) {
             setHiddenPosts(false)
         } else {
             setHiddenPosts(true)
+        }
+    }
+
+    const handleVideoHidden = () => {
+        if (hiddenVideos) {
+            setHiddenVideos(false)
+        } else {
+            setHiddenVideos(true)
+        }
+    }
+
+    const handlePhotoHidden = () => {
+        if (hiddenPhotos) {
+            setHiddenPhotos(false)
+        } else {
+            setHiddenPhotos(true)
         }
     }
 
@@ -136,9 +152,11 @@ const Search = () => {
                 </Splide>
             }
 
-            <div className="h4 mt-5">Gallerylar <span className="text-green">({galleries?.length})</span></div>
+            <div className="h4 mt-5">Gallerylar <FontAwesomeIcon icon={hiddenPhotos ? faAngleDown : faAngleUp} onClick={handlePhotoHidden} style={{ cursor: "pointer" }} /><span className="text-green">({galleries?.length})</span></div>
             <div className="row">
                 {
+                    hiddenPhotos &&
+
                     galleries?.map((gallery, index) => (
                         <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-3 mb-3 text-decoration-none text-dark`}>
                             <div className='card rounded-2 h-100'>
@@ -170,9 +188,10 @@ const Search = () => {
 
             <MyVerticallyCenteredModal src={videoSrc} show={modalShow} onHide={() => setModalShow(false)} />
 
-            <div className="h4 mt-5">Wideolar <span className="text-green">({videos?.length})</span></div>
+            <div className="h4 mt-5">Wideolar<FontAwesomeIcon icon={hiddenVideos ? faAngleDown : faAngleUp} onClick={handleVideoHidden} style={{ cursor: "pointer" }} /> <span className="text-green">({videos?.length})</span></div>
             <div className="row">
                 {
+                    hiddenVideos &&
                     videos?.map((video, index) => (
                         <div key={index} className={`col-xl-3 mb-3`}>
                             <div className='card rounded-21 h-100'>
