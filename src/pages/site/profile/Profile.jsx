@@ -108,7 +108,7 @@ const Profile = () => {
             ) : (
                 <div className='container mt-4'>
                     <div className='text-center'>
-                        <img src={image === null ? 'https://arzan.info/' + user.avatar_image.url : image} alt="" className='img-fluid' style={{ height: "400px", width: "800px", objectFit: "cover", filter: "blur(4px)" }} />
+                        <img src={image === null ? 'https://arzan.info/' + user.avatar_image.url : image} alt="" className='img-fluid' style={{ height: "500px", width: "1000px", objectFit: "cover", filter: "blur(4px)" }} />
                         <div className='row justify-content-center g-0'>
                             <div className='col-xl-12 position-relative'>
                                 {/* <img src={'https://arzan.info/' + user.avatar_image.url} alt="" className='img-fluid rounded-circle border'/>

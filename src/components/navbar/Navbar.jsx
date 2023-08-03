@@ -59,7 +59,7 @@ const Navbar = () => {
 
                     {/* LOGO */}
                     <Link to="/" className="navbar-brand ps-2">
-                        <img src={logo} alt="" style={{ width: "120px" }} />
+                        <img src={logo} alt="" className='img-fluid' />
                     </Link>
 
                     {/* RESPONSOVE BUTTON */}

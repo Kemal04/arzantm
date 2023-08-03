@@ -61,7 +61,7 @@ const Video = () => {
         type: 'loop',
         perPage: 1,
         perMove: 1,
-        pagination: true,
+        pagination: false,
         autoplay: false,
         arrows: false,
     };
@@ -189,7 +189,8 @@ const Video = () => {
             },
         }).then((res) => {
             toast.success(res.data.message)
-            window.location.reload()
+            // window.location.reload()
+            console.log(res);
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
@@ -249,10 +250,10 @@ const Video = () => {
                                             filteredBanner?.map((banner, index) =>
                                                 banner.platform[0].name === "WEB"
                                                 &&
-                                                banner.page_category[0].page.name === "VIDEO"
+                                                banner.page_category[0].page?.name === "VIDEO"
                                                 &&
                                                 <SplideSlide className='col-lg-12 p-0' key={index} >
-                                                    <Link to={banner.url}>
+                                                    <Link to={banner.url} target='_blank'>
                                                         <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid w-100' title={banner.title} />
                                                     </Link>
                                                 </SplideSlide>

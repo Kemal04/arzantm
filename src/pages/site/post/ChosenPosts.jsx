@@ -59,7 +59,7 @@ const ChosenPosts = () => {
 
             <div className='container mt-2 '>
                 <div className='d-flex align-items-center justify-content-between'>
-                    <div className='h3'>{t('saylananlar')} <span className='text-green'>({selectedPosts?.length})</span></div>
+                    <div className='h3'>{t('saylananlar')} <span className='text-green small'>({selectedPosts?.length})</span></div>
                 </div>
                 <div className='row my-5 gx-3'>
                     {

@@ -55,9 +55,9 @@ const Footer = () => {
                         </div>
                         <div className='col-xl-3 mb-5'>
                             <div className='d-flex justify-content-center align-items-center'>
-                                <Link to='https://www.youtube.com/channel/UC87LcYTNsVhadgUsdP08LfQ' target='_blank'><img src={youtube} alt="" className='img-fluid px-3' /></Link>
-                                <Link to='https://www.tiktok.com/@arzan_tm' target='_blank'><img src={tiktok} alt="" className='img-fluid px-3' /></Link>
-                                <Link to='https://www.instagram.com/arzan_tm/' target='_blank'><img src={instagram} alt="" className='img-fluid px-3' /></Link>
+                                <Link to='https://www.youtube.com/channel/UC87LcYTNsVhadgUsdP08LfQ' target='_blank'><img src={youtube} alt="" className='img-fluid px-3' style={{ width: "55px" }} /></Link>
+                                <Link to='https://www.tiktok.com/@arzan_tm' target='_blank'><img src={tiktok} alt="" className='img-fluid px-3' style={{ width: "55px" }} /></Link>
+                                <Link to='https://www.instagram.com/arzan_tm/' target='_blank'><img src={instagram} alt="" className='img-fluid px-3' style={{ width: "55px" }} /></Link>
                             </div>
                         </div>
                     </div>

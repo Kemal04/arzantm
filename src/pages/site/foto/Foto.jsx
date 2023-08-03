@@ -19,7 +19,7 @@ const Foto = () => {
         type: 'loop',
         perPage: 1,
         perMove: 1,
-        pagination: true,
+        pagination: false,
         autoplay: false,
         arrows: false,
     };
@@ -198,7 +198,7 @@ const Foto = () => {
                                         filteredBanner?.map((banner, index) =>
                                             banner.platform[0].name === "WEB"
                                             &&
-                                            banner.page_category[0].page.name === "PHOTO"
+                                            banner.page_category[0].page?.name === "PHOTO"
                                             &&
                                             <SplideSlide className='col-lg-12 p-0' key={index} >
                                                 <Link to={banner.url}>

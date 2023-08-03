@@ -32,7 +32,7 @@ const Home = () => {
         {
             991: { perPage: 3, gap: '1.5rem', },
             768: { perPage: 2, gap: '1.5rem', },
-            575: { perPage: 1.3, gap: '1rem', },
+            575: { perPage: 1.4, gap: '1rem', },
         }
     };
 
@@ -105,10 +105,10 @@ const Home = () => {
             {/* <Stories /> */}
 
             {/* CARDS */}
-            <div className='container mt-2 px-5'>
+            <div className='container mt-2 px-xl-5 px-lg-0 px-md-0 px-sm-0 px-0'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='fw-black' style={{ fontSize: "26px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
-                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/saylananlar" style={{ fontSize: "18px" }} className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <Splide options={option2} hasTrack={false}>
@@ -120,9 +120,9 @@ const Home = () => {
                                 <>
                                     {
                                         selectedPosts.map((post, index) => (
-                                            <SplideSlide key={index} className='d-flex justify-content-center'>
+                                            <SplideSlide key={index} className='d-flex justify-content-lg-center justify-content-between'>
                                                 <Link to={`/arzanladys/${post.id}`} key={index} className='mb-3 text-decoration-none'>
-                                                    <div className='position-relative card border-0' style={{ width: "230px" }}>
+                                                    <div className='position-relative card border-0' style={{ width: "220px" }}>
                                                         <div className='text-center d-flex'>
                                                             <img src={'https://arzan.info/' + post.image} alt="About Us" className='img-fluid w-100' style={{ height: "300px", objectFit: "cover" }} />
                                                         </div>
@@ -145,7 +145,7 @@ const Home = () => {
             </div>
 
             {/* OTHERS */}
-            <div className='container mt-4 px-5'>
+            <div className='container mt-4 px-xl-5 px-lg-0 px-md-0 px-sm-0 px-0'>
                 <div className='row text-center'>
                     {/* <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4'>
                         <img src={konkurs} alt="" className='img-fluid w-100' />
@@ -184,10 +184,10 @@ const Home = () => {
             </div>
 
             {/* CHEAP */}
-            <div className='container px-5'>
+            <div className='container px-xl-5 px-lg-0 px-md-0 px-sm-0 px-0'>
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='fw-black' style={{ fontSize: '26px' }}>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
-                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none small'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <Link to="/arzanladyslar"style={{ fontSize: "18px" }} className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row gx-1 justify-content-between mt-3'>
