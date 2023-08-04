@@ -99,8 +99,6 @@ const Profile = () => {
         })
     }
 
-    console.log(user);
-
     return (
         <>
             {loading ? (
@@ -153,7 +151,7 @@ const Profile = () => {
                                 <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
                             </div>
                             <div className='col-xl-12 my-3 d-flex justify-content-center'>
-                                <Link to='/toleg' className='btn border-green me-2 pt-sm-100 w-sm-100'>
+                                <Link to='/profile/wallet' className='btn border-green me-2 pt-sm-100 w-sm-100'>
                                     <img src={coin} alt="" className='img-fluid me-2' />
                                     {user.coin_balance}
                                 </Link>
@@ -176,7 +174,7 @@ const Profile = () => {
                                             <div>Loading...</div>
                                         ) : (
                                             activePosts?.map((post, index) =>
-                                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-4 col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
+                                                <div key={index} className='col-xl-4 col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-3 text-decoration-none text-dark'>
                                                     <div className='card rounded-1 h-100 w-100'>
                                                         <div className='text-center'>
                                                             <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
@@ -195,7 +193,7 @@ const Profile = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </Link>
+                                                </div>
                                             )
                                         )
                                     }
