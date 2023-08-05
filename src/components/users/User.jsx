@@ -44,7 +44,7 @@ const User = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/profile/wallet" className="dropdown-item d-flex align-items-center mb-2">
+                    <Link to="/profile/gapjyk" className="dropdown-item d-flex align-items-center mb-2">
                         <img src={wallet} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
                         {t('gapjyk')}
                     </Link>

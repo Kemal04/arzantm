@@ -12,6 +12,7 @@ export { default as Video } from "./video/Video"
 export { default as Profile } from "./profile/Profile"
 export { default as ProfileBloked } from "./profile/ProfileBloked"
 export { default as ProfileWallet } from "./profile/ProfileWallet"
+export { default as ProfileStatistika } from "./profile/ProfileStatistika"
 
 export { default as Offical } from "./offical/Offical"
 export { default as OfficalSelf } from "./offical/OfficalSelf"

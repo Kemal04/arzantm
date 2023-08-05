@@ -2,13 +2,10 @@ import { useContext } from 'react'
 
 import location from '../../../assets/icons/location.svg'
 import coin from '../../../assets/icons/coin.svg'
-
-import like from '../../../assets/icons/wallet/like.png'
-import chat from '../../../assets/icons/wallet/chat.png'
-import footprint from '../../../assets/icons/wallet/footprint.png'
-import users from '../../../assets/icons/wallet/users.png'
-import user_tick from '../../../assets/icons/wallet/user-tick.png'
-import calendar from '../../../assets/icons/wallet/calendar.png'
+import chat_icon from '../../../assets/icons/chat.svg'
+import shoping_bag from '../../../assets/icons/shoping-bag-green.svg'
+import coins from '../../../assets/icons/coins.svg'
+import get_coin from '../../../assets/icons/get-coin.svg'
 import { AuthContext } from '../../../context/AuthContext'
 import useFetch from '../../../hooks/useFetch'
 import { toast } from 'react-hot-toast'
@@ -32,9 +29,10 @@ const ProfileWallet = () => {
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <div className='container mt-5'>
+                <div className='container mt-5 px-5'>
+                    <div className='h3 mb-4'>{t('gapjyk')}</div>
                     <div className='d-flex justify-content-center'>
-                        <div style={{ width: "60%" }}>
+                        <div style={{ width: "63%" }}>
                             <div className='row justify-content-between align-items-center mb-4'>
                                 <div className='col-xl-6 d-flex align-items-center'>
                                     <img src={'https://arzan.info/' + user?.avatar_image.url} alt="" className='img-fluid rounded-circle' style={{ width: "100px", height: "100px", objectFit: "cover" }} />
@@ -46,132 +44,57 @@ const ProfileWallet = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='col-xl-6 d-flex justify-content-end'>
+                                <div className='col-xl-6 d-flex justify-content-end align-items-center'>
+                                    <div className='me-4 position-relative'>
+                                        <img src={chat_icon} alt="" />
+                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            2
+                                        </span>
+                                    </div>
                                     <Link to='/toleg' className='btn-coin text-decoration-none'>
                                         <div className=''>{user.coin_balance}</div>
                                         <img src={coin} alt="" className='img-fluid ms-2' style={{ width: "18px" }} />
                                     </Link>
                                 </div>
                             </div>
-                            <div className='d-flex justify-content-center'>
-                                <ul className="nav nav-pills" id="pills-tab" role="tablist">
-                                    <li className="nav-item" role="presentation">
-                                        <button style={{ borderTopRightRadius: "0", borderEndEndRadius: "0", fontWeight: "500", padding: "10px 110px" }} className="text-dark nav-link active  bg-light border" id="pills-day-tab" data-bs-toggle="pill" data-bs-target="#pills-day" type="button" role="tab" aria-controls="pills-day" aria-selected="true">
-                                            {t('gun')}
-                                        </button>
-                                    </li>
-                                    <li className="nav-item" role="presentation">
-                                        <button style={{ fontWeight: "500", padding: "10px 100px" }} className="text-dark nav-link bg-light rounded-0 border" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="false">
-                                            {t('hepde')}
-                                        </button>
-                                    </li>
-                                    <li className="nav-item" role="presentation">
-                                        <button style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", fontWeight: "500", padding: "10px 100px" }} className="text-dark nav-link bg-light border" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="false">
-                                            {t('ay')}
-                                        </button>
-                                    </li>
-                                </ul>
+                            <div className='row gx-2 align-items-center my-3'>
+                                <div className='col-xl-4 mb-3'>
+                                    <div className='border rounded-1 d-flex align-items-center justify-content-between p-4'>
+                                        <img src={shoping_bag} alt="" className='img-fluid' style={{ width: "43px" }} />
+                                        <div className='fw-black'>Ball satyn almak</div>
+                                    </div>
+                                </div>
+                                <div className='col-xl-4 mb-3'>
+                                    <div className='border rounded-1 d-flex align-items-center justify-content-between p-4'>
+                                        <img src={get_coin} alt="" className='img-fluid' style={{ width: "40px" }} />
+                                        <div className='fw-black'>Ball soramak</div>
+                                    </div>
+                                </div>
+                                <div className='col-xl-4 mb-3'>
+                                    <div className='border rounded-1 d-flex align-items-center justify-content-between p-4'>
+                                        <img src={coins} alt="" className='img-fluid' style={{ width: "44px" }} />
+                                        <div className='fw-black'>Ball geçirmek</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='mt-3'>
-                                <div className="tab-content" id="pills-tabContent">
-                                    <div className="tab-pane fade show active" id="pills-day" role="tabpanel" aria-labelledby="pills-day-tab" tabIndex="0">
-                                        <div className='table-responsive'>
-                                            <table className="table table-borderless align-middle">
-                                                <thead className='border-bottom small text-secondary'>
-                                                    <tr>
-                                                        <td>{t('ady')}</td>
-                                                        <td className='text-end'>{t('mukdary')}</td>
-                                                        <td className='text-end'>{t('ball')}</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={like} alt="" className='img-fluid me-3' />
-                                                            {t('like')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>{user.like_count}</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={chat} alt="" className='img-fluid me-3' />
-                                                            {t('teswir')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>0</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={footprint} alt="" className='img-fluid me-3' />
-                                                            {t('myhmanlar')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>0</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={users} alt="" className='img-fluid me-3' />
-                                                            {t('yzarlayjylar')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>{user.follower_count}</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={user_tick} alt="" className='img-fluid me-3' />
-                                                            {t('cagyrma')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>11</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
-                                                        <td className='d-flex align-items-center'>
-                                                            <img src={calendar} alt="" className='img-fluid me-3' />
-                                                            {t('girilen_gun')}
-                                                        </td>
-                                                        <td className='text-end pe-4'>{user.day_streak.day_streak}</td>
-                                                        <td>
-                                                            <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
-                                                                <img src={coin} alt="" className='img-fluid ms-2' />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                            <div className='d-grid mb-4'>
+                                <button className='btn btn-green'>Resmi hasap aç</button>
+                            </div>
+                            <div className='d-flex justify-content-between align-items-center mb-2'>
+                                <div className='fs-18 fw-black'>Geçirimler</div>
+                                <div className='small text-green fw-black'>Hemmesi</div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-xl-12 mb-3'>
+                                    <div className='bg-light py-2 px-3'>
+                                        <div className='d-flex justify-content-between align-items-center mb-2'>
+                                            <div className='text-secondary small'>Ball geçirmek</div>
+                                            <div className='text-secondary small'>16.01.2023</div>
                                         </div>
-                                    </div>
-                                    <div className="tab-pane fade" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab" tabIndex="0">
-                                        2
-                                    </div>
-                                    <div className="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab" tabIndex="0">
-                                        3
+                                        <div className='d-flex justify-content-between align-items-center'>
+                                            <div className='fw-black'>Billie Eilish</div>
+                                            <div className='fw-black text-warning d-flex align-items-center'>200 <img src={coin} alt="" className='ms-1' /></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
