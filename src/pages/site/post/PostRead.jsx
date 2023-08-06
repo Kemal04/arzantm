@@ -38,11 +38,13 @@ const PostRead = () => {
     }, [postId])
 
     //LIKED
-    const [like, setLike] = useState(0);
+    const [likes, setLikes] = useState()
+    const [isClicked, setIsClicked] = useState(0);
 
     useEffect(() => {
+        setLikes(Number(post?.like_count))
         if (post) {
-            setLike(post.is_liked)
+            setIsClicked(post.is_liked)
         }
     }, [post])
 
@@ -52,7 +54,8 @@ const PostRead = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
         }).then(() => {
-            setLike(like + 1);
+            setIsClicked(isClicked + 1);
+            setLikes(likes + 1);
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
@@ -112,7 +115,7 @@ const PostRead = () => {
                                             </div>
                                             <div>
                                                 {
-                                                    like === 1
+                                                    isClicked === 1
                                                         ?
                                                         <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "25px" }} />
                                                         :
@@ -128,7 +131,7 @@ const PostRead = () => {
                                             </div>
                                             <div className='ms-3'>
                                                 <FontAwesomeIcon icon={faHeart} className='me-2' />
-                                                {post.like_count}
+                                                {likes}
                                             </div>
                                             <div className='ms-3'>
                                                 <FontAwesomeIcon icon={faComment} className='me-2' />
