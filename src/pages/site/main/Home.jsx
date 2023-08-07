@@ -107,8 +107,8 @@ const Home = () => {
             {/* CARDS */}
             <div className='container mt-2 px-xl-5 px-lg-0 px-md-0 px-sm-0 px-0'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='fw-black' style={{ fontSize: "26px" }}>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
-                    <Link to="/saylananlar" style={{ fontSize: "26px" }} className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <div className='fw-black fs-18 ps-2'>{t('saylananlar')} <span className='text-green'> (+{countChosenPost.count})</span></div>
+                    <Link to="/saylananlar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <Splide options={option2} hasTrack={false}>
@@ -186,8 +186,8 @@ const Home = () => {
             {/* CHEAP */}
             <div className='container px-xl-5 px-lg-0 px-md-0 px-sm-0 px-0'>
                 <div className='d-flex justify-content-between align-items-center'>
-                    <div className='fw-black' style={{ fontSize: '26px' }}>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
-                    <Link to="/arzanladyslar"style={{ fontSize: "26px" }} className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
+                    <div className='fw-black fs-18'>{t('arzanladyslar')} <span className='text-green'> (+{countPost.count})</span></div>
+                    <Link to="/arzanladyslar" className='bg-green text-white py-1 px-3 rounded-4 text-decoration-none'>{t('hemmesi')} <FontAwesomeIcon icon={faArrowRight} /></Link>
                 </div>
 
                 <div className='row gx-1 justify-content-between mt-3'>
