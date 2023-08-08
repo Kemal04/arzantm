@@ -154,7 +154,7 @@ const Home = () => {
                         <Link to='/top-list' className='card border-0'>
                             <img src={top} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
-                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white fw-black' style={{ width: "140px", height: "40px" }}>
                                     {t('top_hasaplar')}
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ const Home = () => {
                         <Link to='/foto' className='card border-0'>
                             <img src={foto} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
-                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white fw-black' style={{ width: "140px", height: "40px" }}>
                                     Foto ({countGallery.count})
                                 </div>
                             </div>
@@ -174,7 +174,7 @@ const Home = () => {
                         <Link to='/video' className='card border-0'>
                             <img src={video} alt="" className='img-fluid w-100' style={{ height: "100px", objectFit: "cover" }} />
                             <div className='card-img-overlay p-0'>
-                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white h5' style={{ width: "170px", height: "55px" }}>
+                                <div className='bg-green rounded d-flex justify-content-center align-items-center text-white fw-black' style={{ width: "140px", height: "40px" }}>
                                     {t('wideo')} ({countVideo.count})
                                 </div>
                             </div>
