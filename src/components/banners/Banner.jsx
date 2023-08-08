@@ -12,7 +12,7 @@ const Banner = ({ page_name }) => {
         perPage: 1,
         perMove: 1,
         pagination: true,
-        arrows: false,
+        arrows: true,
         autoplay: true,
         autoplaySpeed: 1,
         speed: 1000,

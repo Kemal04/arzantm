@@ -69,7 +69,7 @@ const Navbar = () => {
 
                     {/* NAVBAR */}
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ms-4">
+                        <ul className="navbar-nav ms-4 align-items-center">
                             <li className="nav-item dropdown me-5">
                                 <NavLink to="/" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>
@@ -89,11 +89,11 @@ const Navbar = () => {
                                     }
                                 </ul>
                             </li>
-                            <div className='position-relative'>
+                            <li className='nav-item position-relative'>
                                 <form className="d-flex ms-5" onSubmit={handleClick}>
                                     <input value={value} onChange={onChange} className="form-control me-2 rounded-0 ps-5" type="search" placeholder="Gözle..." style={{ background: `url(${search}) no-repeat left`, backgroundPositionX: "20px", width: "500px" }} />
                                 </form>
-                            </div>
+                            </li>
                             <li className="nav-item dropdown me-5 ms-5">
                                 <select className="form-select border-0 bg-light" aria-label="Default select example" onChange={changeLanguageHandler}>
                                     <option value="tm">TM</option>
@@ -101,7 +101,7 @@ const Navbar = () => {
                                     <option value="ru">RU</option>
                                 </select>
                             </li>
-                            <li className="dropdown mt-2">
+                            <li className="nav-item dropdown mx-2">
                                 <div className="position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src={bell} alt="" className='me-1' style={{ width: "20px" }} />
                                     {/* <span className="position-absolute translate-middle badge rounded-circle px-1 bg-danger" style={{ top: "6px", left: "22px" }}>
@@ -121,7 +121,7 @@ const Navbar = () => {
                                     authState.status === false
                                     &&
                                     <>
-                                        <li className="ms-5">
+                                        <li className="nav-item ms-5">
                                             <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
                                             </div>
