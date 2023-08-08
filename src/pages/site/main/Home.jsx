@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faEye } from '@fortawesome/free-solid-svg-icons'
 
-import top from '../../../assets/cards/others/top.png'
-import foto from '../../../assets/cards/others/foto.png'
-import video from '../../../assets/cards/others/video.png'
+import top from '../../../assets/cards/others/top.jpg'
+import foto from '../../../assets/cards/others/foto.jpg'
+import video from '../../../assets/cards/others/video.jpg'
 import mobile_banner from '../../../assets/banners/home/mobile-banner.png'
 import Banner from '../../../components/banners/Banner'
 
