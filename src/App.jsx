@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileStatistika, ProfileWallet, Search, TermsOfUse, TopList, Video } from "./pages/site";
+import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileStatistika, ProfileWallet, Search, TermsOfUse, TopList, Video } from "./pages";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -94,6 +94,7 @@ const App = () => {
                                         <Route path="/profile/bloked" element={<ProfileBloked />} />
                                         <Route path="/profile/statistika" element={<ProfileStatistika />} />
                                         <Route path="/profile/gapjyk" element={<ProfileWallet />} />
+                                        <Route path="/profile/resmi-hasap-ac" element={<ProfileOpenOffical />} />
                                     </>
                                 }
 
