@@ -89,7 +89,8 @@ const Profile = () => {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
         }).then((res) => {
-            console.log(res);
+            const newList = activePosts.filter((x) => x.id !== id)
+            setActivePosts(newList)
             navigate("/profile")
         }).catch((err) => {
             console.log(err);

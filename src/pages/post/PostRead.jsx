@@ -112,7 +112,7 @@ const PostRead = () => {
                                         {
                                             post.images.map((image, index) => (
                                                 <div key={index} className="modal fade" id={`exampleModalPostImg${image.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div className="modal-dialog">
+                                                    <div className="modal-dialog modal-dialog-centered">
                                                         <div className="modal-content">
                                                             <div className="modal-body p-0 d-flex justify-content-center">
                                                                 <img src={image === null ? "" : 'https://arzan.info/' + image.url} alt="" className="img-fluid" />
