@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
-import { Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import moment from 'moment/moment'
-import { ControlBar, CurrentTimeDisplay, ForwardControl, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider, VolumeMenuButton } from 'video-react'
-import "video-react/dist/video-react.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp, faEye, faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+import {  faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
 import eye from '../../assets/icons/eye.png'
-import like_empty from '../../assets/icons/like-empty.svg'
 import grid_little from '../../assets/icons/grid-little.svg'
 import grid_big from '../../assets/icons/grid-big.svg'
 import star from '../../assets/icons/star.svg'
@@ -20,40 +16,6 @@ import useFetch from '../../hooks/useFetch'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide'
 import { useTranslation } from 'react-i18next'
 import logo from '../../assets/arzanTm.png'
-
-function MyVerticallyCenteredModal(props) {
-    return (
-        <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
-            <div className='position-absolute text-white text-center' style={{ zIndex: "1", bottom: "30%", right: "-70px" }}>
-                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
-                    <FontAwesomeIcon icon={faEye} className='text-white fs-17' />
-                </div>
-                23
-                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-3' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
-                    <FontAwesomeIcon icon={faHeart} className='text-white fs-17' />
-                </div>
-                23
-                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-5' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
-                    <FontAwesomeIcon icon={faChevronUp} />
-                </div>
-                <div className='bg-dark rounded-circle d-flex align-items-center justify-content-center mt-3' style={{ width: "45px", height: "45px", cursor: "pointer" }}>
-                    <FontAwesomeIcon icon={faChevronDown} />
-                </div>
-            </div>
-            <Player autoPlay>
-                <source src={'http://95.85.126.113:8080/' + props.src} />
-                <ControlBar>
-                    <ReplayControl seconds={10} order={1.1} />
-                    <ForwardControl seconds={30} order={1.2} />
-                    <CurrentTimeDisplay order={4.1} />
-                    <TimeDivider order={4.2} />
-                    <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
-                    <VolumeMenuButton disabled />
-                </ControlBar>
-            </Player>
-        </Modal>
-    );
-}
 
 const Video = () => {
 
@@ -74,9 +36,6 @@ const Video = () => {
         pagination: false,
         arrows: false,
     };
-
-    const [modalShow, setModalShow] = useState(false);
-    const [videoSrc, setVideoSrc] = useState("");
 
     //DESIGN GRIDS
     const [grid, setGrid] = useState(false)
@@ -181,21 +140,6 @@ const Video = () => {
 
     const { t } = useTranslation();
 
-    //LIKED
-    const handleLike = async (id) => {
-        await axios.post(`/api/v1/video/like`, { id: id }, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-        }).then((res) => {
-            toast.success(res.data.message)
-            // window.location.reload()
-            console.log(res);
-        }).catch((res) => {
-            toast.error(res.response.data.message);
-        });
-    }
-
     return (
         <>
             <div className='container d-flex align-items-center my-4 small-sm'>
@@ -281,8 +225,6 @@ const Video = () => {
                     </div>
                 </div>
 
-                <MyVerticallyCenteredModal src={videoSrc} show={modalShow} onHide={() => setModalShow(false)} />
-
                 <div className='row mb-5 mt-4 gx-3'>
                     {
                         loading ? (
@@ -295,12 +237,12 @@ const Video = () => {
                                             <img src={video.user.avatar_image.url === null ? logo : 'https://arzan.info/' + video.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                             <div>{video.user.name}</div>
                                         </div>
-                                        <div style={{ cursor: "pointer" }} onClick={() => { setModalShow(true); setVideoSrc(video.video.url) }} className='position-relative d-flex justify-content-center align-items-center text-center'>
+                                        <Link className='' to={`/video/${video.id}`}>
                                             <img src={'https://arzan.info/' + video.thumbnail.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
                                             <div className='card-img-overlay' style={{ top: "40%", left: "0%" }}>
                                                 <FontAwesomeIcon icon={faPlayCircle} className='h1 opacity-75 text-white' />
                                             </div>
-                                        </div>
+                                        </Link>
                                         <div className='card-body p-2 position-relative pb-5'>
                                             <div className='card-title' style={{ fontWeight: "500" }}>{video.title}</div>
                                             <div className='row align-items-center justify-content-between small text-secondary position-absolute bottom-0 mb-2 w-100'>
@@ -313,13 +255,7 @@ const Video = () => {
                                                 </div>
                                                 <div className='col-xl-6 d-flex align-items-center text-end justify-content-end'>
                                                     <span className='me-2'>{video.like_count === null ? 0 : video.like_count}</span>
-                                                    {
-                                                        video.is_liked
-                                                            ?
-                                                            <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "15px" }} />
-                                                            :
-                                                            <img src={like_empty} alt="" style={{ width: "18px", cursor: "pointer" }} onClick={() => handleLike(video.id)} />
-                                                    }
+                                                    <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "15px" }} />
                                                 </div>
                                             </div>
                                         </div>

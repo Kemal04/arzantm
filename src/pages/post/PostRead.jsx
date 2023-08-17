@@ -74,15 +74,15 @@ const PostRead = () => {
                             <div className='mx-2'>/</div>
                             <Link to="/arzanladyslar" className='text-green text-decoration-none'>{t('arzanladyslar')}</Link>
                             <div className='mx-2'>/</div>
-                            <div>{post.title}</div>
+                            <div>{post?.title}</div>
                         </div>
 
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center mt-50" style={{ zIndex: "1" }}>
                                     {
-                                        post.next_id !== null &&
-                                        <Link to={'/arzanladys/' + post.next_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow`} style={{ padding: "5px 9px" }}>
+                                        post?.next_id !== null &&
+                                        <Link to={'/arzanladys/' + post?.next_id} className={`bg-green text-white rounded-circle d-inline fs-18 shadow`} style={{ padding: "5px 9px" }}>
                                             <FontAwesomeIcon icon={faArrowLeft} />
                                         </Link>
                                     }
@@ -90,8 +90,8 @@ const PostRead = () => {
                                 <div className="col-xl-8 col-lg-8 col-md-8 col-12">
                                     <div className='card border-0'>
                                         <div className='card-body d-flex align-items-center'>
-                                            <img src={post.user.avatar_image.url === null ? logo : 'https://arzan.info/' + post.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                                            <div>{post.user.name}</div>
+                                            <img src={post?.user.avatar_image.url === null ? logo : 'https://arzan.info/' + post?.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                            <div>{post?.user.name}</div>
                                         </div>
                                         <Splide options={options} hasTrack={false}>
                                             <SplideTrack className='text-center'>
@@ -99,7 +99,7 @@ const PostRead = () => {
                                                     loading ? (
                                                         <SplideSlide>Loading...</SplideSlide>
                                                     ) : (
-                                                        post.images.map((image, index) =>
+                                                        post?.images.map((image, index) =>
                                                             <SplideSlide key={index} >
                                                                 <img src={image === null ? "" : 'https://arzan.info/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover", cursor: "pointer" }} title={post.title} data-bs-toggle="modal" data-bs-target={`#exampleModalPostImg${image.id}`} />
                                                             </SplideSlide>
@@ -110,7 +110,7 @@ const PostRead = () => {
                                         </Splide>
 
                                         {
-                                            post.images.map((image, index) => (
+                                            post?.images.map((image, index) => (
                                                 <div key={index} className="modal fade" id={`exampleModalPostImg${image.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div className="modal-dialog modal-dialog-centered">
                                                         <div className="modal-content">
@@ -139,10 +139,10 @@ const PostRead = () => {
                                             </div>
                                         </div>
                                         <div className="small mt-4 d-flex align-items-center text-muted">
-                                            <span>{moment(post.created_at).format('DD.MM.YYYY')}</span>
+                                            <span>{moment(post?.created_at).format('DD.MM.YYYY')}</span>
                                             <div className='ms-3'>
                                                 <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                {post.viewed_count}
+                                                {post?.viewed_count}
                                             </div>
                                             <div className='ms-3'>
                                                 <FontAwesomeIcon icon={faHeart} className='me-2' />
@@ -154,34 +154,34 @@ const PostRead = () => {
                                             </div>
                                         </div>
                                         <div className="mt-4 h4">
-                                            {post.title}
+                                            {post?.title}
                                         </div>
                                         {
-                                            !post.price
+                                            !post?.price
                                                 ?
                                                 null
                                                 :
                                                 <div className="d-flex justify-content-between align-items-center border-top border-bottom py-4 my-3">
                                                     <div>
                                                         <div>
-                                                            <span className="text-green h2">{post.discount}</span><span className="fs-17 fw-black"> manat</span>
-                                                            <span className="fs-17 ms-4 text-muted text-decoration-line-through">{post.price}<span className="fs-17"> manat</span></span>
+                                                            <span className="text-green h2">{post?.discount}</span><span className="fs-17 fw-black"> manat</span>
+                                                            <span className="fs-17 ms-4 text-muted text-decoration-line-through">{post?.price}<span className="fs-17"> manat</span></span>
                                                         </div>
                                                         <div className="d-flex align-items-center mt-4 text-muted small">
                                                             <FontAwesomeIcon icon={faCalendarAlt} />
-                                                            <div className="ms-2">{moment(post.start_date).format('DD.MM.YYYY')} - </div>
-                                                            <div className="ms-2">{moment(post.end_date).format('DD.MM.YYYY')}</div>
+                                                            <div className="ms-2">{moment(post?.start_date).format('DD.MM.YYYY')} - </div>
+                                                            <div className="ms-2">{moment(post?.end_date).format('DD.MM.YYYY')}</div>
                                                         </div>
                                                     </div>
                                                     <div className="bg-green text-white rounded-circle h5 d-flex justify-content-center align-items-center" style={{ width: "70px", height: "70px" }}>
-                                                        {post.discount ? Math.floor(100 - (post.discount * 100 / post.price)) : 0}%
+                                                        {post?.discount ? Math.floor(100 - (post?.discount * 100 / post?.price)) : 0}%
                                                     </div>
                                                 </div>
                                         }
-                                        <p className="mt-4" dangerouslySetInnerHTML={{ __html: post.description }}></p>
+                                        <p className="mt-4" dangerouslySetInnerHTML={{ __html: post?.description }}></p>
                                         <div className="row mb-4">
                                             {
-                                                post.tags.map((tag, index) => (
+                                                post?.tags.map((tag, index) => (
                                                     <div key={index} className="col-auto">
                                                         <div className="bg-green-opacity-50 text-green fw-black px-2 py-1 rounded">
                                                             #{tag === null ? " " : tag.name}
@@ -202,8 +202,8 @@ const PostRead = () => {
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-md-2 col-2 text-center mt-50" style={{ zIndex: "1" }}>
                                     {
-                                        post.prev_id !== null &&
-                                        <Link to={'/arzanladys/' + post.prev_id} className="bg-green text-white rounded-circle d-inline fs-18 shadow" style={{ padding: "5px 9px" }}>
+                                        post?.prev_id !== null &&
+                                        <Link to={'/arzanladys/' + post?.prev_id} className="bg-green text-white rounded-circle d-inline fs-18 shadow" style={{ padding: "5px 9px" }}>
                                             <FontAwesomeIcon icon={faArrowRight} />
                                         </Link>
                                     }
