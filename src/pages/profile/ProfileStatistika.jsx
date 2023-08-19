@@ -27,6 +27,8 @@ const ProfileStatistika = () => {
 
     const { t } = useTranslation();
 
+    console.log(user);
+
     return (
         <>
             {loading ? (

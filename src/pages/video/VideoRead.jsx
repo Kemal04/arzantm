@@ -51,7 +51,7 @@ const VideoRead = () => {
             <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh", background: "#0F0F0F" }}>
                 <div className="position-relative" style={{ width: "550px", }}>
 
-                    <video src={'http://95.85.126.113:8080/' + video?.video.url} className="img-fluid shadow-lg rounded-4" style={{ height: "831px" }} autoPlay controls></video>
+                    <video src={'https://beta2.arzan.info/' + video?.video.url} className="img-fluid shadow-lg rounded-4" style={{ height: "831px" }} autoPlay controls></video>
 
                     <div className='position-absolute text-white text-center end-0' style={{ zIndex: "1", bottom: "35%" }}>
 

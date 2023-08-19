@@ -59,10 +59,10 @@ const ProfileWallet = () => {
                             </div>
                             <div className='row gx-2 align-items-center my-3'>
                                 <div className='col-xl-4 mb-3'>
-                                    <div className='border rounded-1 d-flex align-items-center justify-content-between p-4'>
+                                    <Link to='/toleg' className='border rounded-1 d-flex align-items-center justify-content-between p-4 text-dark text-decoration-none'>
                                         <img src={shoping_bag} alt="" className='img-fluid' style={{ width: "43px" }} />
                                         <div className='fw-black'>Ball satyn almak</div>
-                                    </div>
+                                    </Link>
                                 </div>
                                 <div className='col-xl-4 mb-3'>
                                     <div className='border rounded-1 d-flex align-items-center justify-content-between p-4'>
