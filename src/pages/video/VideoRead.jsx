@@ -41,7 +41,7 @@ const VideoRead = () => {
             setIsClicked(isClicked + 1);
             setLikes(likes + 1);
         }).catch((err) => {
-            toast.error(err);
+            toast.error(err.response.data.message);
         });
     }
 

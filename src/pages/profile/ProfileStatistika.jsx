@@ -95,12 +95,12 @@ const ProfileStatistika = () => {
                                                         <td className='text-end pe-4'>{user.like_count}</td>
                                                         <td>
                                                             <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
+                                                                {user.coin_stats.like_coin}
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr className='border-bottom'>
+                                                    {/* <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={chat} alt="" className='img-fluid me-3' />
                                                             {t('teswir')}
@@ -112,8 +112,8 @@ const ProfileStatistika = () => {
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
+                                                    </tr> */}
+                                                    {/* <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={footprint} alt="" className='img-fluid me-3' />
                                                             {t('myhmanlar')}
@@ -125,8 +125,8 @@ const ProfileStatistika = () => {
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
-                                                    </tr>
-                                                    <tr className='border-bottom'>
+                                                    </tr> */}
+                                                    {/* <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={users} alt="" className='img-fluid me-3' />
                                                             {t('yzarlayjylar')}
@@ -151,16 +151,16 @@ const ProfileStatistika = () => {
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                    </tr> */}
                                                     <tr className='border-bottom'>
                                                         <td className='d-flex align-items-center'>
                                                             <img src={calendar} alt="" className='img-fluid me-3' />
-                                                            {t('girilen_gun')}
+                                                            {t('Post')}
                                                         </td>
-                                                        <td className='text-end pe-4'>{user.day_streak.day_streak}</td>
+                                                        <td className='text-end pe-4'>{user.post_count}</td>
                                                         <td>
                                                             <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                0
+                                                                {user.coin_stats.post_coin}
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
