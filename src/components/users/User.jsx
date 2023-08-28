@@ -8,6 +8,7 @@ import plus from '../../assets/icons/plus.svg'
 import selected from '../../assets/icons/selected.svg'
 import logout_img from '../../assets/icons/logout.svg'
 import bell from '../../assets/icons/bell.svg'
+import hyzmat from '../../assets/icons/hyzmat.svg'
 import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,7 +20,7 @@ const User = () => {
     const { authState, setAuthState } = useContext(AuthContext)
 
     //CURRENT USER FETCH
-    const [user, loading] = useFetch("/api/v1/user/profile/" + authState.id, "data");
+    const [user] = useFetch("/api/v1/user/profile/" + authState.id, "data");
 
     const navigate = useNavigate()
 
@@ -47,6 +48,12 @@ const User = () => {
                     <Link to="/profile/gapjyk" className="dropdown-item d-flex align-items-center mb-2">
                         <img src={wallet} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
                         {t('gapjyk')}
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/profile/hyzmat-satyn-almak" className="dropdown-item d-flex align-items-center mb-2">
+                        <img src={hyzmat} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
+                        Hyzmat satyn almak
                     </Link>
                 </li>
                 <li>

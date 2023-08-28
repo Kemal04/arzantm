@@ -5,8 +5,9 @@ import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import moment from 'moment/moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
+import like_empty from '../../assets/icons/like-empty.svg'
 import eye from '../../assets/icons/eye.png'
 import grid_little from '../../assets/icons/grid-little.svg'
 import grid_big from '../../assets/icons/grid-big.svg'
@@ -255,7 +256,7 @@ const Video = () => {
                                                 </div>
                                                 <div className='col-xl-6 d-flex align-items-center text-end justify-content-end'>
                                                     <span className='me-2'>{video.like_count === null ? 0 : video.like_count}</span>
-                                                    <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "15px" }} />
+                                                    <img src={like_empty} alt="" style={{ fontSize: "15px" }} />
                                                 </div>
                                             </div>
                                         </div>

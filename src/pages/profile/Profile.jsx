@@ -172,7 +172,7 @@ const Profile = () => {
                                             <div>Loading...</div>
                                         ) : (
                                             activePosts?.map((post, index) =>
-                                                <div key={index} className='col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3 text-decoration-none text-dark'>
+                                                <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3 text-decoration-none text-dark'>
                                                     <div className='card rounded-1'>
                                                         <div className='text-center'>
                                                             <img src={'https://arzan.info/' + post.image} alt="" style={{ width: "100%", height: "250px", objectFit: "contain" }} />
@@ -191,7 +191,7 @@ const Profile = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </Link>
                                             )
                                         )
                                     }

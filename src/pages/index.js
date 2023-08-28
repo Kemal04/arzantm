@@ -11,6 +11,7 @@ export { default as Video } from "./video/Video"
 export { default as VideoRead } from "./video/VideoRead"
 
 export { default as Profile } from "./profile/Profile"
+export { default as ProfileService } from "./profile/ProfileService"
 export { default as ProfileBloked } from "./profile/ProfileBloked"
 export { default as ProfileWallet } from "./profile/ProfileWallet"
 export { default as ProfileStatistika } from "./profile/ProfileStatistika"
