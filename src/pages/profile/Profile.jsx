@@ -88,7 +88,7 @@ const Profile = () => {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-        }).then((res) => {
+        }).then(() => {
             const newList = activePosts.filter((x) => x.id !== id)
             setActivePosts(newList)
             navigate("/profile")
@@ -137,6 +137,9 @@ const Profile = () => {
                                     <div className='col-xl-12 mb-3 text-secondary'>
                                         <img src={location} alt='' className='img-fluid me-2' />
                                         Ashgabat
+                                    </div>
+                                    <div className='col-xl-12 mb-3 text-secondary d-flex justify-content-center'>
+                                        {user.about}
                                     </div>
                                     <div className='col-xl-2 border-end my-3'>
                                         <b>{user.post_waiting_count}</b>

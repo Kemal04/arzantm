@@ -51,7 +51,6 @@ const Navbar = () => {
         setValue('')
     };
 
-
     return (
         <>
             <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-white'}`}>
@@ -139,7 +138,7 @@ const Navbar = () => {
                                 }
 
                                 {
-                                    authState.role === "OFFICAL"
+                                    authState.role === "OFFICIAL"
                                     &&
                                     <Offical />
                                 }

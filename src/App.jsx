@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, TermsOfUse, TopList, Video, VideoRead } from "./pages";
+import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -83,11 +83,13 @@ const App = () => {
                                 <Route path="/arzanladyslar" element={<Posts />} />
                                 <Route path="/arzanladys/:postId" element={<PostRead />} />
 
+                                <Route path="/tags" element={<Tags />} />
+
                                 <Route path="/top-list" element={<TopList />} />
                                 <Route path="/post-gosmak" element={<PostAdd />} />
 
                                 {
-                                    authState.role === "USER"
+                                    authState.status
                                     &&
                                     <>
                                         <Route path="/profile" element={<Profile />} />
@@ -100,8 +102,8 @@ const App = () => {
                                 }
 
 
-                                {
-                                    authState.role === "OFFICAL"
+                                {/* {
+                                    authState.role === "OFFICIAL"
                                     &&
                                     <>
                                         <Route path="/offical" element={<Offical />} />
@@ -109,7 +111,7 @@ const App = () => {
                                         <Route path="/offical/expired" element={<OfficalExpired />} />
                                         <Route path="/offical/self" element={<OfficalSelf />} />
                                     </>
-                                }
+                                } */}
 
 
                                 <Route path="/bildirisler" element={<Notifications />} />

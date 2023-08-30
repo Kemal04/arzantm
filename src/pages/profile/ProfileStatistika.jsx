@@ -95,7 +95,7 @@ const ProfileStatistika = () => {
                                                         <td className='text-end pe-4'>{user.like_count}</td>
                                                         <td>
                                                             <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                {user.coin_stats.like_coin}
+                                                                {user.coin_stats?.like_coin}
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>
@@ -160,7 +160,7 @@ const ProfileStatistika = () => {
                                                         <td className='text-end pe-4'>{user.post_count}</td>
                                                         <td>
                                                             <div className='d-flex align-items-center justify-content-end' style={{ color: "#E79E12" }}>
-                                                                {user.coin_stats.post_coin}
+                                                                {user.coin_stats?.post_coin}
                                                                 <img src={coin} alt="" className='img-fluid ms-2' />
                                                             </div>
                                                         </td>

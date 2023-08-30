@@ -26,6 +26,7 @@ export { default as Posts } from "./post/Posts"
 export { default as ChosenPosts } from "./post/ChosenPosts"
 export { default as PostRead } from "./post/PostRead"
 export { default as PostAdd } from "./post/PostAdd"
+export { default as Tags } from "./post/Tags"
 
 export { default as TopList } from "./topList/TopList"
 

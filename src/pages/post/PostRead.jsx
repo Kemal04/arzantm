@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch";
 import { toast } from "react-hot-toast";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
@@ -26,6 +26,7 @@ const PostRead = () => {
 
     const { t } = useTranslation();
     const { postId } = useParams();
+    const navigate = useNavigate()
 
     const [post, loading] = useFetch(`/api/v1/post/${postId}`, "data", true);
 
@@ -59,6 +60,10 @@ const PostRead = () => {
         }).catch((res) => {
             toast.error(res.response.data.message);
         });
+    }
+
+    const handleTag = async (name) => {
+        navigate('/tags', { state: name })
     }
 
     return (
@@ -183,7 +188,7 @@ const PostRead = () => {
                                             {
                                                 post?.tags.map((tag, index) => (
                                                     <div key={index} className="col-auto">
-                                                        <div className="bg-green-opacity-50 text-green fw-black px-2 py-1 rounded">
+                                                        <div className="bg-green-opacity-50 text-green fw-black px-2 py-1 rounded" style={{ cursor: "pointer" }} onClick={() => handleTag(tag.name)}>
                                                             #{tag === null ? " " : tag.name}
                                                         </div>
                                                     </div>

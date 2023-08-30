@@ -25,14 +25,11 @@ const Home = () => {
         perMove: 1,
         pagination: false,
         arrows: false,
-        autoplay: true,
-        autoplaySpeed: 1,
-        speed: 1000,
         breakpoints:
         {
             991: { perPage: 3, gap: '1.5rem', },
             768: { perPage: 2, gap: '1.5rem', },
-            575: { perPage: 1.4, gap: '1rem', },
+            575: { perPage: 2, gap: '1rem', },
         }
     };
 
@@ -120,7 +117,7 @@ const Home = () => {
                                 <>
                                     {
                                         selectedPosts.map((post, index) => (
-                                            <SplideSlide key={index} className='d-flex justify-content-lg-center justify-content-between'>
+                                            <SplideSlide key={index} className='d-flex justify-content-lg-center justify-content-between me-lg-0 me-xl-0 me-md-0 me-5'>
                                                 <Link to={`/arzanladys/${post.id}`} key={index} className='mb-3 text-decoration-none'>
                                                     <div className='position-relative card border-0' style={{ width: "220px" }}>
                                                         <div className='text-center d-flex'>

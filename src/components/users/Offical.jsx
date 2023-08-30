@@ -1,52 +1,69 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 //IMAGES
+import logoImg from '../../assets/arzanTm.png'
 import user_bold from '../../assets/icons/user-bold.svg'
 import haryt100 from '../../assets/cards/offical/circle/100haryt.png'
 import wallet from '../../assets/icons/wallet.svg'
 import plus from '../../assets/icons/plus.svg'
 import news from '../../assets/icons/news.svg'
 import foot from '../../assets/icons/foot.svg'
-import service from '../../assets/icons/service.svg'
+import hyzmat from '../../assets/icons/hyzmat.svg'
 import selected from '../../assets/icons/selected.svg'
 import logout_img from '../../assets/icons/logout.svg'
 import bell from '../../assets/icons/bell.svg'
+import { useTranslation } from 'react-i18next'
+import { useContext } from 'react'
+import useFetch from '../../hooks/useFetch'
+import { AuthContext } from '../../context/AuthContext'
 
 const Offical = () => {
 
-    const handleLogout = () => {
+    //CONTEXT
+    const { authState, setAuthState } = useContext(AuthContext)
 
+    //CURRENT USER FETCH
+    const [user] = useFetch("/api/v1/user/profile/" + authState.id, "data");
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setAuthState({ name: "", id: 0, status: false, role: "Guest" })
+        navigate('/')
     };
+
+    const { t } = useTranslation();
 
     return (
         <>
             <li className="dropdown ms-5">
                 <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src={haryt100} alt="" className='me-1' style={{ width: "40px" }} />
+                    <img src={user?.avatar_image.url === null ? logoImg : 'https://arzan.info/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                 </div>
                 <ul className="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
                     <li>
-                        <Link to="/offical" className="dropdown-item d-flex align-items-center mb-2">
+                        <Link to="/profile" className="dropdown-item d-flex align-items-center mb-2">
                             <img src={user_bold} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
-                            Profil
+                            {t('profil')}
                         </Link>
                     </li>
                     <li>
                         <Link to="/profile/gapjyk" className="dropdown-item d-flex align-items-center mb-2">
                             <img src={wallet} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
-                            Gapjyk
+                            {t('gapjyk')}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/profile/hyzmat-satyn-almak" className="dropdown-item d-flex align-items-center mb-2">
+                            <img src={hyzmat} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
+                            Hyzmat satyn almak
                         </Link>
                     </li>
                     <li>
                         <Link to="/post-gosmak" className="dropdown-item d-flex align-items-center mb-2">
                             <img src={plus} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
-                            Post goşmak
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/post-gosmak" className="dropdown-item d-flex align-items-center mb-2">
-                            <img src={service} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
-                            Hyzmat aatyn almak
+                            {t('post_gosmak')}
                         </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
