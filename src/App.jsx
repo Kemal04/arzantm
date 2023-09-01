@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalExpired, OfficalFollow, OfficalSelf, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
+import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";

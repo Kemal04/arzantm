@@ -24,7 +24,7 @@ const Video = () => {
         type: 'loop',
         perPage: 1,
         perMove: 1,
-        pagination: false,
+        pagination: true,
         autoplay: false,
         arrows: false,
     };

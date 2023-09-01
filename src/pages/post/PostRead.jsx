@@ -7,12 +7,12 @@ import { faCalendarAlt, faComment, faEye, faHeart, faArrowLeft, faArrowRight } f
 import moment from "moment";
 import bookmark from '../../assets/icons/bookmark.svg'
 import share from '../../assets/icons/share.svg'
-import like_img from '../../assets/icons/like-empty.svg'
 import axios from "axios";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import logo from '../../assets/arzanTm.png'
+// import useSound from 'use-sound';
 
 const PostRead = () => {
 
@@ -49,13 +49,19 @@ const PostRead = () => {
         }
     }, [post])
 
+    const [animate, setAnimate] = useState(false)
+
     const handleLike = async () => {
         await axios.post(`/api/v1/post/like`, { id: postId }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
         }).then(() => {
-            setIsClicked(isClicked + 1);
+            setAnimate(true)
+            setTimeout(() => {
+                setIsClicked(isClicked + 1);
+                setAnimate(false)
+            }, 700);
             setLikes(likes + 1);
         }).catch((res) => {
             toast.error(res.response.data.message);
@@ -128,18 +134,18 @@ const PostRead = () => {
                                             ))
                                         }
 
-                                        <div className="d-flex justify-content-between mt-4">
+                                        <div className="d-flex justify-content-between mt-4 position-relative">
                                             <div>
                                                 <img src={bookmark} alt="" className="me-3" style={{ width: "25px" }} />
                                                 <img src={share} alt="" style={{ width: "25px" }} />
                                             </div>
-                                            <div>
+                                            <div className="">
                                                 {
                                                     isClicked === 1
                                                         ?
-                                                        <FontAwesomeIcon icon={faHeart} className="text-danger" style={{ fontSize: "25px" }} />
+                                                        <div className={`like-btn-svg-full`}></div>
                                                         :
-                                                        <img src={like_img} alt="" style={{ width: "25px", cursor: "pointer" }} onClick={handleLike} />
+                                                        <div className={`like-btn-svg ${animate ? "animate" : ""}`} onClick={handleLike}></div>
                                                 }
                                             </div>
                                         </div>
