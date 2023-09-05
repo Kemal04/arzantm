@@ -145,109 +145,107 @@ const Foto = () => {
 
     return (
         <>
-            <div className='container d-flex align-items-center my-4 small-sm'>
-                <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
-                <div className='mx-2'>/</div>
-                <div>{t('albomlar')}</div>
-            </div>
-
-            <div className='container mt-2 '>
-                <div className='d-flex align-items-center justify-content-between'>
-                    <div className='d-flex align-items-center'>
-                        <div className='h3 me-4'>{t('albomlar')} <span className='text-green'>({galleries.length} / {total})</span></div>
+            {
+                loading1 ? (
+                    <div className=' d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100' style={{ height: "100vh", backgroundColor: "rgba(0,0,0,0.6)" }}>
+                        <div className="spinner-border text-white">
+                        </div>
                     </div>
-                    <div className='d-flex align-items-center'>
-                        <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
-                        <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
-                    </div>
-                </div>
+                ) : (
+                    <>
+                        <div className='container d-flex align-items-center my-4 small-sm'>
+                            <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
+                            <div className='mx-2'>/</div>
+                            <div>{t('albomlar')}</div>
+                        </div>
 
-                <div className='row mt-3 justify-content-between'>
-                    <Splide options={option2} hasTrack={false}>
-                        <SplideTrack className='row g-0'>
-                            {
-                                loading1 ? (
-                                    <SplideSlide>Loading...</SplideSlide>
-                                ) : (
-                                    <>
-                                        <SplideSlide className='col-xl-auto'>
-                                            <button className={activeCat == "All" ? `btn bg-green text-white btn-sm rounded px-4 me-3` : `btn btn-outline-green btn-sm rounded px-4 me-3`} id={"All"} onClick={changeData}>Hemmesi ({galleries.length})</button>
-                                        </SplideSlide>
+                        <div className='container mt-2 '>
+                            <div className='d-flex align-items-center justify-content-between'>
+                                <div className='d-flex align-items-center'>
+                                    <div className='h3 me-4'>{t('albomlar')} <span className='text-green'>({galleries.length} / {total})</span></div>
+                                </div>
+                                <div className='d-flex align-items-center'>
+                                    <img src={grid_little} alt="" className='me-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(false)} />
+                                    <img src={grid_big} alt="" className='ms-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(true)} />
+                                </div>
+                            </div>
+
+                            <div className='row mt-3 justify-content-between'>
+                                <Splide options={option2} hasTrack={false}>
+                                    <SplideTrack className='row g-0'>
                                         {
-                                            categories.map((category, index) => (
-                                                <SplideSlide className='col-xl-auto' key={index}>
-                                                    <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name} ({category.statistics.gallery_count})</button>
+                                            <>
+                                                <SplideSlide className='col-xl-auto'>
+                                                    <button className={activeCat == "All" ? `btn bg-green text-white btn-sm rounded px-4 me-3` : `btn btn-outline-green btn-sm rounded px-4 me-3`} id={"All"} onClick={changeData}>Hemmesi ({galleries.length})</button>
                                                 </SplideSlide>
-                                            ))
+                                                {
+                                                    categories.map((category, index) => (
+                                                        <SplideSlide className='col-xl-auto' key={index}>
+                                                            <button className={activeCat == category.category.id ? `btn bg-green btn-sm rounded px-4 text-white me-3` : `btn bg-light btn-outline-green btn-sm rounded px-4 me-3`} id={category.category.id} onClick={changeData}>{category.category.name} ({category.statistics.gallery_count})</button>
+                                                        </SplideSlide>
+                                                    ))
+                                                }
+                                            </>
                                         }
-                                    </>
-                                )
-                            }
-                        </SplideTrack>
-                    </Splide>
-                </div>
+                                    </SplideTrack>
+                                </Splide>
+                            </div>
 
-                <div className='my-3'>
-                    <div className='container p-0 text-center mt-3'>
-                        <Splide options={options} hasTrack={false}>
-                            <SplideTrack className='row g-0'>
+                            <div className='my-3'>
+                                <div className='container p-0 text-center mt-3'>
+                                    <Splide options={options} hasTrack={false}>
+                                        <SplideTrack className='row g-0'>
+                                            {
+                                                filteredBanner?.map((banner, index) =>
+                                                    banner.platform[0].name === "WEB"
+                                                    &&
+                                                    banner.page_category[0].page?.name === "PHOTO"
+                                                    &&
+                                                    <SplideSlide className='col-lg-12 p-0' key={index} >
+                                                        <Link to={banner.url}>
+                                                            <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid w-100' title={banner.title} />
+                                                        </Link>
+                                                    </SplideSlide>
+                                                )
+                                            }
+                                        </SplideTrack>
+                                    </Splide>
+                                </div >
+                            </div>
+
+                            <div className='row my-5 gx-3'>
                                 {
-                                    loading ? (
-                                        <SplideSlide>Loading...</SplideSlide>
-                                    ) : (
-                                        filteredBanner?.map((banner, index) =>
-                                            banner.platform[0].name === "WEB"
-                                            &&
-                                            banner.page_category[0].page?.name === "PHOTO"
-                                            &&
-                                            <SplideSlide className='col-lg-12 p-0' key={index} >
-                                                <Link to={banner.url}>
-                                                    <img src={'https://arzan.info/' + banner.image.url} alt="banner" className='img-fluid w-100' title={banner.title} />
-                                                </Link>
-                                            </SplideSlide>
-                                        )
-                                    )
-                                }
-                            </SplideTrack>
-                        </Splide>
-                    </div >
-                </div>
-
-                <div className='row my-5 gx-3'>
-                    {
-                        loading ? (
-                            <div>Loading...</div>
-                        ) : (
-                            filteredData?.map((gallery, index) => (
-                                <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-4 mb-3 text-decoration-none text-dark ${grid === true ? "col-xl-6" : null}`}>
-                                    <div className='card rounded-2 h-100'>
-                                        <div className='card-body d-flex align-items-center'>
-                                            <img src={gallery.user.avatar_image.url === null ? logo : 'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                                            <div>{gallery.user.name}</div>
-                                        </div>
-                                        <div className='text-center'>
-                                            <img src={'https://arzan.info/' + gallery.avatar_image.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
-                                        </div>
-                                        <div className='card-body p-2 position-relative pb-5'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>{gallery.title}</div>
-                                            <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
-                                                <div className='text-secondary d-flex align-items-center me-3'>
-                                                    <img src={gallery_img} alt="" className='img-fluid me-1' />
-                                                    <span>{gallery.image_count}</span>
+                                    filteredData?.map((gallery, index) => (
+                                        <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-4 mb-3 text-decoration-none text-dark ${grid === true ? "col-xl-6" : null}`}>
+                                            <div className='card rounded-2 h-100'>
+                                                <div className='card-body d-flex align-items-center'>
+                                                    <img src={gallery.user.avatar_image.url === null ? logo : 'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                    <div>{gallery.user.name}</div>
                                                 </div>
-                                                <div className='text-secondary d-flex align-items-center'>
-                                                    <img src={eye} alt="" className='img-fluid me-1' />
-                                                    <span>{gallery.view_count}</span>
+                                                <div className='text-center'>
+                                                    <img src={'https://arzan.info/' + gallery.avatar_image.url} alt="" className='img-fluid' style={{ width: "100%", height: "250px", objectFit: "contain" }} />
+                                                </div>
+                                                <div className='card-body p-2 position-relative pb-5'>
+                                                    <div className='card-title' style={{ fontWeight: "500" }}>{gallery.title}</div>
+                                                    <div className='d-flex justify-content-between align-items-center position-absolute bottom-0 mb-2'>
+                                                        <div className='text-secondary d-flex align-items-center me-3'>
+                                                            <img src={gallery_img} alt="" className='img-fluid me-1' />
+                                                            <span>{gallery.image_count}</span>
+                                                        </div>
+                                                        <div className='text-secondary d-flex align-items-center'>
+                                                            <img src={eye} alt="" className='img-fluid me-1' />
+                                                            <span>{gallery.view_count}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))
-                        )
-                    }
-                </div>
-            </div >
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        </div >
+                    </>
+                )}
         </>
     )
 }

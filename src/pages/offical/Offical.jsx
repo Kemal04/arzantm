@@ -1,163 +1,90 @@
-import profile from '../../assets/cards/offical/circle/100haryt.png'
-import phone from '../../assets/icons/phone-bold.svg'
-import location from '../../assets/icons/location.svg'
-
-import { Link } from 'react-router-dom'
-import OfficalBanner from '../../components/banners/OfficalBanner'
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom"
+import column_icon from '../../assets/icons/grid-column.svg'
+import grid_little from '../../assets/icons/grid-little.svg'
+import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import logo_img from '../../assets/cards/offical/arzan.jpeg'
+import { Fragment } from "react";
 
 const Offical = () => {
+
+    const { t } = useTranslation();
+
+    //DESIGN GRIDS
+    const [grid, setGrid] = useState(false)
+
+    const [officals, loading] = useFetch("/api/v1/user/profile?subscription_type_id=2", "data");
+
     return (
         <>
-            <div className='container mt-4'>
-                <div className='text-center'>
-                    <div className='d-flex justify-content-center'>
-                        <div style={{ width: "60%" }}>
-                            <OfficalBanner />
+            {
+                loading ? (
+                    <div className=' d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100' style={{ height: "100vh", backgroundColor: "rgba(0,0,0,0.6)" }}>
+                        <div className="spinner-border text-white">
                         </div>
                     </div>
-                    <div className='row justify-content-center g-0'>
-                        <div className='col-xl-12 position-relative'>
-                            <img src={profile} alt="" className='img-fluid' style={{ marginTop: "-80px" }} />
+                ) : (
+                    <>
+                        <div className='container d-flex align-items-center my-4 small-sm'>
+                            <Link to='/' className='text-green text-decoration-none'>{t('bas_sahypa')}</Link>
+                            <div className='mx-2'>/</div>
+                            <div>{t('taze_resmiler')}</div>
                         </div>
-                        <div className='col-xl-12 h5 mt-1 mb-3'>
-                            @100haryt.com
-                        </div>
-                        <div className='col-xl-12 mb-3 text-secondary'>
-                            <img src={phone} alt='' className='img-fluid me-2' />
-                            993 61 000000
-                        </div>
-                        <div className='col-xl-12 mb-3 text-secondary'>
-                            <img src={location} alt='' className='img-fluid me-2' />
-                            Ashgabat
-                        </div>
-                        <div className='col-xl-12 mb-3 text-secondary d-flex justify-content-center'>
-                            <div style={{ width: "60%" }}>
-                                Ваш комфорт, наше удовольствие! Мы как интернет-магазин 100haryt предлагаем вам товары на любой вкуc. Компьютеры, телефоны, малая бытовая техника, товары для дома, книги, игрушки для детей и многое другое. Покупка в нашем интернет магазине - это быстро, легко и удобно. Мы еженедельно будем радовать вас скидками, акциями и спец.предложениями.                            </div>
-                        </div>
-                        <div className='col-xl-2 border-end my-3'>
-                            <b>150</b>
-                            <div>Garaşylýar</div>
-                        </div>
-                        <div className='col-xl-2 border-end my-3'>
-                            <b>267</b>
-                            <div>Kabul edilmedi</div>
-                        </div>
-                        <div className='col-xl-2 my-3'>
-                            <b>94</b>
-                            <div>Tassyklandy</div>
-                        </div>
-                        <div className='col-xl-12 my-3'>
-                            <Link to="/offical/follow" className='btn btn-green me-3' style={{ paddingLeft: "100px", paddingRight: "100px" }}>
-                                Yzarla
-                            </Link>
-                            <button className='btn btn-light border' style={{ paddingLeft: "60px", paddingRight: "60px" }}>
-                                Teswirler ( 45/200 )
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                {/* CHEAP */}
-                <div className='container mt-2'>
-                    <div className='d-flex justify-content-center'>
-                        <div className='w-75'>
-                            <div className='h3'>Pending</div>
-                            {/* <div className='row mt-3'>
-                                <div className='col-xl-4 mb-3'>
-                                    <div className='card rounded-1'>
-                                        <img src={cheap_1} alt="" className='img-fluid' />
-                                        <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                        </div>
-                                        <div className='card-body p-2'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>19.02.2022</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    121
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div className="container">
+                            <div className='d-flex align-items-center justify-content-between'>
+                                <div className='d-flex align-items-center'>
+                                    <div className='h3 me-4'>Resmi hasaplar <span className='text-green'>({officals?.length})</span></div>
                                 </div>
-                                <div className='col-xl-4 mb-3'>
-                                    <div className='card rounded-1'>
-                                        <img src={cheap_2} alt="" className='img-fluid' />
-                                        <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                        </div>
-                                        <div className='card-body p-2'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>19.02.2022</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    121
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div className='d-flex align-items-center'>
+                                    <img src={column_icon} alt="" className='me-2' style={{ width: "25px", cursor: "pointer" }} onClick={() => setGrid(false)} />
+                                    <img src={grid_little} alt="" className='ms-2' style={{ width: "24px", cursor: "pointer" }} onClick={() => setGrid(true)} />
                                 </div>
-                                <div className='col-xl-4 mb-3'>
-                                    <div className='card rounded-1'>
-                                        <img src={cheap_3} alt="" className='img-fluid' />
-                                        <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                        </div>
-                                        <div className='card-body p-2'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>19.02.2022</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    121
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-xl-4 mb-3'>
-                                    <div className='card rounded-1'>
-                                        <img src={cheap_4} alt="" className='img-fluid' />
-                                        <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                        </div>
-                                        <div className='card-body p-2'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>19.02.2022</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    121
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-xl-4 mb-3'>
-                                    <div className='card rounded-1'>
-                                        <img src={cheap_5} alt="" className='img-fluid' />
-                                        <div className='position-absolute p-2 end-0'>
-                                            <div className='bg-green text-white small rounded-circle px-1 py-2'>23%</div>
-                                        </div>
-                                        <div className='card-body p-2'>
-                                            <div className='card-title' style={{ fontWeight: "500" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</div>
-                                            <div className='d-flex justify-content-between align-items-center mt-3'>
-                                                <div className='small text-secondary'>19.02.2022</div>
-                                                <div className='small text-secondary'>
-                                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                                    121
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+
+                        <div className="container mt-5">
+                            <div className="row">
+                                {
+                                    officals?.map((offical, index) => (
+                                        <Fragment key={index} >
+
+                                            <Link to='/' className={`col-xl-12 text-decoration-none text-dark ${!grid ? "" : "d-none"}`}>
+                                                <div className="d-flex justify-content-between align-items-center border p-3 mb-3">
+                                                    <div className="d-flex align-items-center">
+                                                        <img src={offical.avatar_image.url === null ? logo_img : 'https://arzan.info/' + offical.avatar_image.url} alt="" className='rounded-circle' style={{ width: "60px", height: "60px", objectFit: "cover" }} />
+                                                        <div className='ms-4'>
+                                                            <div className='fw-black'>{offical.name}</div>
+                                                            <div className='text-secondary small'>
+                                                                Yzarlaýanlar: 0
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button className="btn btn-green px-3 py-2 btn-sm">Yzarla</button>
+                                                </div>
+                                            </Link>
+
+                                            <Link to='/' className={`col-xl-3 text-decoration-none text-dark mb-3 ${!grid ? "d-none" : ""}`}>
+                                                <div className="card rounded-4 text-center d-flex flex-column align-items-center pt-3">
+                                                    <img src={offical.avatar_image.url === null ? logo_img : 'https://arzan.info/' + offical.avatar_image.url} className='rounded-circle' style={{ width: "125px", height: "125px", objectFit: "cover" }} />
+                                                    <div className="card-body">
+                                                        <div className="card-title fw-black">{offical.name}</div>
+                                                        <div className='text-secondary small mb-2'> Yzarlaýanlar: 0 </div>
+                                                        <button className="btn btn-green py-2 btn-sm" style={{ paddingRight: "100px", paddingLeft: "100px" }}>Yzarla</button>
+                                                    </div>
+                                                </div>
+                                            </Link>
+
+                                        </Fragment>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </>
+                )
+            }
+
         </>
     )
 }

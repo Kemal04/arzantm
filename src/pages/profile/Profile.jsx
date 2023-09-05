@@ -99,81 +99,82 @@ const Profile = () => {
 
     return (
         <>
-            {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <div className='container mt-4'>
-                    <div className='d-flex justify-content-center'>
-                        <div style={{ width: "60%" }}>
-                            <div className='text-center'>
-                                <img src={image === null ? 'https://arzan.info/' + user.avatar_image.url : image} alt="" className='img-fluid' style={{ height: "500px", width: "1000px", objectFit: "cover", filter: "blur(4px)" }} />
-                                <div className='row justify-content-center g-0'>
-                                    <div className='col-xl-12 position-relative'>
-                                        {/* <img src={'https://arzan.info/' + user.avatar_image.url} alt="" className='img-fluid rounded-circle border'/>
+            {
+                loading ? (
+                    <div className=' d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100' style={{ height: "100vh", zIndex: "10", backgroundColor: "rgba(0,0,0,0.6)" }}>
+                        <div className="spinner-border text-white">
+                        </div>
+                    </div>
+                ) : (
+                    <div className='container mt-4'>
+                        <div className='d-flex justify-content-center'>
+                            <div style={{ width: "60%" }}>
+                                <div className='text-center'>
+                                    <img src={image === null ? 'https://arzan.info/' + user.avatar_image.url : image} alt="" className='img-fluid' style={{ height: "500px", width: "1000px", objectFit: "cover", filter: "blur(4px)" }} />
+                                    <div className='row justify-content-center g-0'>
+                                        <div className='col-xl-12 position-relative'>
+                                            {/* <img src={'https://arzan.info/' + user.avatar_image.url} alt="" className='img-fluid rounded-circle border'/>
                                 <span className="position-absolute translate-middle badge rounded-circle px-1 bottom-0 bg-white" style={{ right: "43%" }}>
                                     <img src={edit} alt="" className='img-fluid' />
                                 </span> */}
-                                        <div className="avatar-upload" style={{ marginTop: "-100px" }} >
-                                            <div className="avatar-edit">
-                                                <input type='file' id="imageUpload" onChange={onImageChange} />
-                                                <label htmlFor="imageUpload">
-                                                    <FontAwesomeIcon icon={faPenAlt} />
-                                                </label>
-                                            </div>
-                                            <div className="avatar-preview">
-                                                <div id="imagePreview" style={{ backgroundImage: `url(${image === null ? 'https://arzan.info/' + user.avatar_image.url : image})` }}>
+                                            <div className="avatar-upload" style={{ marginTop: "-100px" }} >
+                                                <div className="avatar-edit">
+                                                    <input type='file' id="imageUpload" onChange={onImageChange} />
+                                                    <label htmlFor="imageUpload">
+                                                        <FontAwesomeIcon icon={faPenAlt} />
+                                                    </label>
                                                 </div>
+                                                <div className="avatar-preview">
+                                                    <div id="imagePreview" style={{ backgroundImage: `url(${image === null ? 'https://arzan.info/' + user.avatar_image.url : image})` }}>
+                                                    </div>
+                                                </div>
+                                                {img && <button className='btn btn-green mt-3' onClick={handleClick}>{t('gosmak')}</button>}
                                             </div>
-                                            {img && <button className='btn btn-green mt-3' onClick={handleClick}>{t('gosmak')}</button>}
+                                        </div>
+                                        <div className='col-xl-12 h5 mt-1 mb-3'>
+                                            {user.name}
+                                        </div>
+                                        <div className='col-xl-12 mb-3 text-secondary'>
+                                            <img src={phone} alt='' className='img-fluid me-2' />
+                                            {user.phone}
+                                        </div>
+                                        <div className='col-xl-12 mb-3 text-secondary'>
+                                            <img src={location} alt='' className='img-fluid me-2' />
+                                            Ashgabat
+                                        </div>
+                                        <div className='col-xl-12 mb-3 text-secondary d-flex justify-content-center'>
+                                            {user.about}
+                                        </div>
+                                        <div className='col-xl-2 border-end my-3'>
+                                            <b>{user.post_waiting_count}</b>
+                                            <div style={{ cursor: "pointer" }} onClick={() => changeStatus("waiting")} className='text-muted'>{t('garasylyar')}</div>
+                                        </div>
+                                        <div className='col-xl-2 border-end my-3'>
+                                            <b>{user.post_declined_count}</b>
+                                            <div style={{ cursor: "pointer" }} onClick={() => changeStatus("declined")} className='text-muted'>{t('kabul_edilmedi')}</div>
+                                        </div>
+                                        <div className='col-xl-2 my-3'>
+                                            <b>{user.post_approved_count}</b>
+                                            <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
+                                        </div>
+                                        <div className='col-xl-12 my-3 d-flex justify-content-center'>
+                                            <Link to='/profile/statistika' className='btn border-green me-2 w-100'>
+                                                <img src={coin} alt="" className='img-fluid me-2' />
+                                                {user.coin_balance}
+                                            </Link>
+                                            <Link to="/profile/resmi-hasap-ac" className='btn btn-green ms-2 w-100'>
+                                                {t('resmi_hasap_ac')}
+                                            </Link>
                                         </div>
                                     </div>
-                                    <div className='col-xl-12 h5 mt-1 mb-3'>
-                                        {user.name}
-                                    </div>
-                                    <div className='col-xl-12 mb-3 text-secondary'>
-                                        <img src={phone} alt='' className='img-fluid me-2' />
-                                        {user.phone}
-                                    </div>
-                                    <div className='col-xl-12 mb-3 text-secondary'>
-                                        <img src={location} alt='' className='img-fluid me-2' />
-                                        Ashgabat
-                                    </div>
-                                    <div className='col-xl-12 mb-3 text-secondary d-flex justify-content-center'>
-                                        {user.about}
-                                    </div>
-                                    <div className='col-xl-2 border-end my-3'>
-                                        <b>{user.post_waiting_count}</b>
-                                        <div style={{ cursor: "pointer" }} onClick={() => changeStatus("waiting")} className='text-muted'>{t('garasylyar')}</div>
-                                    </div>
-                                    <div className='col-xl-2 border-end my-3'>
-                                        <b>{user.post_declined_count}</b>
-                                        <div style={{ cursor: "pointer" }} onClick={() => changeStatus("declined")} className='text-muted'>{t('kabul_edilmedi')}</div>
-                                    </div>
-                                    <div className='col-xl-2 my-3'>
-                                        <b>{user.post_approved_count}</b>
-                                        <div style={{ cursor: "pointer" }} onClick={() => changeStatus("approved")} className='text-muted'>{t('tassyklandy')}</div>
-                                    </div>
-                                    <div className='col-xl-12 my-3 d-flex justify-content-center'>
-                                        <Link to='/profile/statistika' className='btn border-green me-2 w-100'>
-                                            <img src={coin} alt="" className='img-fluid me-2' />
-                                            {user.coin_balance}
-                                        </Link>
-                                        <Link to="/profile/resmi-hasap-ac" className='btn btn-green ms-2 w-100'>
-                                            {t('resmi_hasap_ac')}
-                                        </Link>
-                                    </div>
                                 </div>
-                            </div>
 
 
-                            {/* CHEAP */}
-                            <div className='container mt-2'>
-                                <div className='h3'>Posts</div>
-                                <div className='row mt-3'>
-                                    {
-                                        loading ? (
-                                            <div>Loading...</div>
-                                        ) : (
+                                {/* CHEAP */}
+                                <div className='container mt-2'>
+                                    <div className='h3'>Posts</div>
+                                    <div className='row mt-3'>
+                                        {
                                             activePosts?.map((post, index) =>
                                                 <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3 text-decoration-none text-dark'>
                                                     <div className='card rounded-1'>
@@ -196,14 +197,13 @@ const Profile = () => {
                                                     </div>
                                                 </Link>
                                             )
-                                        )
-                                    }
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
             }
         </>
     )

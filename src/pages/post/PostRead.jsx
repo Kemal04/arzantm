@@ -75,9 +75,11 @@ const PostRead = () => {
     return (
         <>
             {
-
                 loading ? (
-                    <div>Loading...</div>
+                    <div className=' d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100' style={{ height: "100vh", zIndex: "10", backgroundColor: "rgba(0,0,0,0.6)" }}>
+                        <div className="spinner-border text-white">
+                        </div>
+                    </div>
                 ) : (
                     <>
                         <div className='container d-flex align-items-center my-4 small-sm'>

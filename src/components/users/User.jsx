@@ -33,7 +33,7 @@ const User = () => {
     const { t } = useTranslation();
 
     return (
-        <li className="dropdown ms-5">
+        <li className="dropdown ms-3">
             <div className="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src={user?.avatar_image === null ? logoImg : 'https://arzan.info/' + user?.avatar_image.url} alt="" className='me-1 rounded-circle' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
             </div>

@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
+import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -65,7 +65,7 @@ const App = () => {
                                         <Route path="/reset-password" element={<ResetPassword />} />
                                     </>
                                 }
-                                
+
                                 {
                                     authState.status
                                     &&
@@ -88,6 +88,7 @@ const App = () => {
                                 <Route path="/top-list" element={<TopList />} />
                                 <Route path="/post-gosmak" element={<PostAdd />} />
 
+                                <Route path="/resmi-hasaplar" element={<Offical />} />
                                 {
                                     authState.status
                                     &&
@@ -100,19 +101,6 @@ const App = () => {
                                         <Route path="/profile/resmi-hasap-ac" element={<ProfileOpenOffical />} />
                                     </>
                                 }
-
-
-                                {/* {
-                                    authState.role === "OFFICIAL"
-                                    &&
-                                    <>
-                                        <Route path="/offical" element={<Offical />} />
-                                        <Route path="/offical/follow" element={<OfficalFollow />} />
-                                        <Route path="/offical/expired" element={<OfficalExpired />} />
-                                        <Route path="/offical/self" element={<OfficalSelf />} />
-                                    </>
-                                } */}
-
 
                                 <Route path="/bildirisler" element={<Notifications />} />
                                 <Route path="/bildiris/:notificationId" element={<NotificationRead />} />

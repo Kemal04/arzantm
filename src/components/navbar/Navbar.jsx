@@ -54,11 +54,11 @@ const Navbar = () => {
     return (
         <>
             <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-white'}`}>
-                <div className="container px-5">
+                <div className="container">
 
                     {/* LOGO */}
-                    <Link to="/" className="navbar-brand ps-2">
-                        <img src={logo} alt="" className='img-fluid' />
+                    <Link to="/" className="navbar-brand">
+                        <img src={logo} alt="" className='img-fluid' style={{ maxWidth: "120px", height: "40px" }} />
                     </Link>
 
                     {/* RESPONSOVE BUTTON */}
@@ -67,8 +67,8 @@ const Navbar = () => {
                     </button>
 
                     {/* NAVBAR */}
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ms-4 align-items-center">
+                    <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul className="navbar-nav ms-4 align-items-center ">
                             <li className="nav-item dropdown me-5">
                                 <NavLink to="/" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>
@@ -88,19 +88,19 @@ const Navbar = () => {
                                     }
                                 </ul>
                             </li>
-                            <li className='nav-item position-relative'>
+                            <li className='nav-item'>
                                 <form className="d-flex ms-5" onSubmit={handleClick}>
                                     <input value={value} onChange={onChange} className="form-control me-2 rounded-0 ps-5" type="search" placeholder="Gözle..." style={{ background: `url(${search}) no-repeat left`, backgroundPositionX: "20px", width: "500px" }} />
                                 </form>
                             </li>
-                            <li className="nav-item dropdown me-5 ms-5">
+                            <li className="nav-item dropdown mx-5">
                                 <select className="form-select border-0 bg-light" aria-label="Default select example" onChange={changeLanguageHandler}>
                                     <option value="tm">TM</option>
                                     <option value="en">EN</option>
                                     <option value="ru">RU</option>
                                 </select>
                             </li>
-                            <li className="nav-item dropdown mx-2">
+                            <li className="nav-item dropdown mx-5">
                                 <div className="position-relative" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src={bell} alt="" className='me-1' style={{ width: "20px" }} />
                                     {/* <span className="position-absolute translate-middle badge rounded-circle px-1 bg-danger" style={{ top: "6px", left: "22px" }}>
@@ -120,7 +120,7 @@ const Navbar = () => {
                                     authState.status === false
                                     &&
                                     <>
-                                        <li className="nav-item ms-5">
+                                        <li className="nav-item ms-3">
                                             <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <img src={logo_circle} alt="" className='me-1' style={{ width: "40px" }} />
                                             </div>
