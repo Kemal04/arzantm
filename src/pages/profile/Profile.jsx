@@ -62,7 +62,7 @@ const Profile = () => {
 
         const fetchData = async () => {
             await axios.get(`/api/v1/post?user_id=${authState.id}&status=waiting`).then((res) => {
-                setActivePosts(res.data.data);
+                setActivePosts(res.data.data.posts);
             }).catch((res) => {
                 toast.error(res.response.data.error.message)
             })
@@ -75,7 +75,7 @@ const Profile = () => {
 
         await axios.get(`/api/v1/post?user_id=${authState.id}&status=${name}`)
             .then((res) => {
-                setActivePosts(res.data.data)
+                setActivePosts(res.data.data.posts)
             }).catch((err) => {
                 console.log(err);
             })

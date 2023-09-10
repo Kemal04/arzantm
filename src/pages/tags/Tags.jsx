@@ -20,6 +20,7 @@ const Tags = () => {
     const [loading, setLoading] = useState(false);
 
     const [tags, setTags] = useState(null);
+    const [postLength, setPostLength] = useState([]);
 
     const changePage = ({ selected }) => {
         setPage(selected + 1);
@@ -38,8 +39,9 @@ const Tags = () => {
 
         await axios.get(`/api/v1/post?tag=${state === null ? "arzantm" : state}&` + new URLSearchParams(data))
             .then((res) => {
-                setTags(res.data.data)
-                setPages(res.data.data[0].items_full_count / urlParams.limit);
+                setTags(res.data.data.posts);
+                setPostLength(res.data.data.total_count);
+                setPages(res.data.data.total_count / urlParams.limit);
             })
             .catch((err) => {
                 console.log(err);
@@ -59,7 +61,7 @@ const Tags = () => {
                 ) : (
                     <div className='container mt-2 '>
                         <div className='d-flex align-items-center justify-content-between'>
-                            <div className='h3'>Tags <span className='text-green small'>({urlParams.limit * pages})</span></div>
+                            <div className='h3'>Tags <span className='text-green small'>({postLength})</span></div>
                         </div>
                         <div className='row my-5 gx-3'>
                             {

@@ -24,6 +24,7 @@ const Search = () => {
     const { state } = useLocation()
 
     const [posts, setPosts] = useState(null);
+    const [postLength, setPostLength] = useState([]);
     const [galleries, setGalleries] = useState(null);
     const [videos, setVideos] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -33,8 +34,8 @@ const Search = () => {
             setLoading(true);
             await axios.get(`/api/v1/post?query=${state}&limit=100`)
                 .then((res) => {
-                    setPosts(res.data.data)
-
+                    setPosts(res.data.data.posts);
+                    setPostLength(res.data.data.total_count);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -145,7 +146,7 @@ const Search = () => {
                                     <Link to={`/foto/${gallery.id}`} key={index} className={`col-xl-3 mb-3 text-decoration-none text-dark`}>
                                         <div className='card rounded-2 h-100'>
                                             <div className='card-body d-flex align-items-center'>
-                                                <img src={'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                                                <img src={gallery.user.avatar_image.url === null ? logo : 'https://arzan.info/' + gallery.user.avatar_image.url} alt="" className='img-fluid me-2 rounded-circle border' style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                                                 <div>{gallery.user.name}</div>
                                             </div>
                                             <div className='text-center'>

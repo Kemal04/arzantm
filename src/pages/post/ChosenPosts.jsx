@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { toast } from "react-hot-toast";
 import ReactPaginate from 'react-paginate'
 import axios from 'axios'
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from 'react-i18next';
-import useFetch from '../../hooks/useFetch';
 
 const ChosenPosts = () => {
-
-    const [selectedPosts] = useFetch("/api/v1/post?publication_type_id=3&limit=1000000000", "data");
 
     const [pages, setPages] = useState();
     const [page, setPage] = useState(1);
@@ -21,7 +17,9 @@ const ChosenPosts = () => {
     });
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [postLength, setPostLength] = useState([]);
 
+    
     const changePage = ({ selected }) => {
         setPage(selected + 1);
         setUrlParams({
@@ -29,19 +27,20 @@ const ChosenPosts = () => {
             offset: selected * urlParams.limit,
         });
     };
-
+    
     useEffect(() => {
         fetchData(urlParams);
     }, [urlParams]);
-
+    
     const fetchData = async (data) => {
         setLoading(true);
-
+        
         await axios.get(`/api/v1/post?` + new URLSearchParams(data)).then((res) => {
-            setPosts(res.data.data);
-            setPages(res.data.data[0].items_full_count / urlParams.limit);
+            setPosts(res.data.data.posts);
+            setPostLength(res.data.data.total_count);
+            setPages(res.data.data.total_count / urlParams.limit);
         }).catch((res) => {
-            toast.error(res.response.data.error.message)
+            console.log(res)
         })
 
         setLoading(false);
@@ -67,7 +66,7 @@ const ChosenPosts = () => {
 
                         <div className='container mt-2 '>
                             <div className='d-flex align-items-center justify-content-between'>
-                                <div className='h3'>{t('saylananlar')} <span className='text-green small'>({selectedPosts?.length})</span></div>
+                                <div className='h3'>{t('saylananlar')} <span className='text-green small'>({postLength})</span></div>
                             </div>
                             <div className='row my-5 gx-3'>
                                 {

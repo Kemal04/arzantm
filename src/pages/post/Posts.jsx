@@ -11,7 +11,6 @@ import useFetch from '../../hooks/useFetch';
 
 const Posts = () => {
 
-    const [postLength] = useFetch("/api/v1/post?publication_type_id=1&limit=1000000000", "data");
     const [pinnedPosts] = useFetch("/api/v1/post?publication_type_id=2&limit=1000000000", "data");
 
     const [pages, setPages] = useState();
@@ -22,6 +21,7 @@ const Posts = () => {
     });
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [postLength, setPostLength] = useState([]);
 
     const changePage = ({ selected }) => {
         setPage(selected + 1);
@@ -39,10 +39,11 @@ const Posts = () => {
         setLoading(true);
 
         await axios.get(`/api/v1/post?` + new URLSearchParams(data)).then((res) => {
-            setPosts(res.data.data);
-            setPages(res.data.data[0].items_full_count / urlParams.limit);
+            setPosts(res.data.data.posts);
+            setPostLength(res.data.data.total_count);
+            setPages(res.data.data.total_count / urlParams.limit);
         }).catch((res) => {
-            toast.error(res.response.data.error.message)
+            console.log(res)
         })
 
         setLoading(false);
@@ -69,11 +70,11 @@ const Posts = () => {
 
                         <div className='container mt-2 '>
                             <div className='d-flex align-items-center justify-content-between'>
-                                <div className='h3'>{t('arzanladyslar')} <span className='text-green small'>({postLength?.length})</span></div>
+                                <div className='h3'>{t('arzanladyslar')} <span className='text-green small'>({postLength})</span></div>
                             </div>
                             <div className='row my-5 gx-3'>
                                 {
-                                    pinnedPosts?.map((post, index) =>
+                                    pinnedPosts?.posts?.map((post, index) =>
                                         <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-2 justify-content-center text-decoration-none text-dark'>
                                             <div className='card rounded-1 h-100' style={{ width: "240px" }}>
                                                 <div className='text-center overflow-hidden position-relative'>
