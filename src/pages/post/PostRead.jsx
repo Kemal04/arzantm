@@ -30,6 +30,8 @@ const PostRead = () => {
 
     const [post, loading] = useFetch(`/api/v1/post/${postId}`, "data", true);
 
+    console.log(post);
+
     //VIEWED
     useEffect(() => {
         const fetchData = async () => {
@@ -114,7 +116,7 @@ const PostRead = () => {
                                                     ) : (
                                                         post?.images.map((image, index) =>
                                                             <SplideSlide key={index} >
-                                                                <img src={image === null ? "" : 'https://arzan.info/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover", cursor: "pointer" }} title={post.title} data-bs-toggle="modal" data-bs-target={`#exampleModalPostImg${image.id}`} />
+                                                                <img src={image === null ? "" : 'https://arzan.info/' + image.url} alt="banner" className='img-fluid' style={{ height: "430px", objectFit: "cover", cursor: "pointer" }} title={post.title} data-bs-toggle="modal" data-bs-target={`#exampleModalPostImg${image === null ? "" : image.id}`} />
                                                             </SplideSlide>
                                                         )
                                                     )
@@ -124,7 +126,7 @@ const PostRead = () => {
 
                                         {
                                             post?.images.map((image, index) => (
-                                                <div key={index} className="modal fade" id={`exampleModalPostImg${image.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div key={index} className="modal fade" id={`exampleModalPostImg${image === null ? "" : image.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div className="modal-dialog modal-dialog-centered">
                                                         <div className="modal-content">
                                                             <div className="modal-body p-0 d-flex justify-content-center">

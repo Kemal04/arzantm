@@ -35,11 +35,9 @@ const Home = () => {
     };
 
     const [pinnedPosts] = useFetch("/api/v1/post?publication_type_id=2&limit=10", "data");
-    const [posts, loading] = useFetch(`/api/v1/post?publication_type_id=1&limit=${pinnedPosts?.length === undefined ? 0 : 10 - pinnedPosts.length}`, "data");
+    const [posts, loading] = useFetch(`/api/v1/post?publication_type_id=1&limit=${pinnedPosts?.posts.length === undefined ? 0 : 10 - pinnedPosts.posts.length}`, "data");
     const [selectedPosts] = useFetch("/api/v1/post?publication_type_id=3&limit=20", "data");
     const [userOfficals] = useFetch("/api/v1/user/profile?limit=8&subscription_type_id=2", "data");
-
-    console.log(userOfficals);
 
     //PHOTO DATA BADGES
     const [countGallery, setCountGallery] = useState({});
@@ -123,7 +121,7 @@ const Home = () => {
                             <Splide options={option2} hasTrack={false}>
                                 <SplideTrack className='row justify-content-center mt-3'>
                                     {
-                                        selectedPosts?.map((post, index) => (
+                                        selectedPosts?.posts.map((post, index) => (
                                             <SplideSlide key={index} className='d-flex justify-content-lg-center justify-content-between me-lg-0 me-xl-0 me-md-0 me-5'>
                                                 <Link to={`/arzanladys/${post.id}`} key={index} className='mb-3 text-decoration-none'>
                                                     <div className='position-relative card border-0' style={{ width: "240px" }}>
@@ -192,7 +190,7 @@ const Home = () => {
                             </div>
 
                             <div className='row gx-1 justify-content-between mt-3'>
-                                {pinnedPosts?.map((post, index) =>
+                                {pinnedPosts?.posts.map((post, index) =>
                                     <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-2 justify-content-center text-decoration-none text-dark'>
                                         <div className='card rounded-1 h-100' style={{ width: "240px" }}>
                                             <div className='text-center overflow-hidden position-relative'>
@@ -217,7 +215,7 @@ const Home = () => {
                                     </Link>
                                 )}
 
-                                {posts.map((post, index) =>
+                                {posts?.posts.map((post, index) =>
                                     <Link to={`/arzanladys/${post.id}`} key={index} className='col-xl-auto col-lg-3 col-md-4 col-sm-6 col-6 d-flex mb-2 justify-content-center text-decoration-none text-dark'>
                                         <div className='card rounded-1 h-100' style={{ width: "240px" }}>
                                             <div className='text-center overflow-hidden position-relative'>
