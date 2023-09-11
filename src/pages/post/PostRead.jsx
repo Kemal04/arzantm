@@ -30,8 +30,6 @@ const PostRead = () => {
 
     const [post, loading] = useFetch(`/api/v1/post/${postId}`, "data", true);
 
-    console.log(post);
-
     //VIEWED
     useEffect(() => {
         const fetchData = async () => {
