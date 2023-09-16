@@ -50,7 +50,7 @@ const Offical = () => {
                                     officals?.map((offical, index) => (
                                         <Fragment key={index} >
 
-                                            <Link to='/' className={`col-xl-12 text-decoration-none text-dark ${!grid ? "" : "d-none"}`}>
+                                            <Link to={`/resmi-hasap/${offical.id}`} className={`col-xl-12 text-decoration-none text-dark ${!grid ? "" : "d-none"}`}>
                                                 <div className="d-flex justify-content-between align-items-center border p-3 mb-3">
                                                     <div className="d-flex align-items-center">
                                                         <img src={offical.avatar_image.url === null ? logo_img : 'https://arzan.info/' + offical.avatar_image.url} alt="" className='rounded-circle' style={{ width: "60px", height: "60px", objectFit: "cover" }} />

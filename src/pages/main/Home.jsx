@@ -225,9 +225,9 @@ const Home = () => {
                             <div className='row justify-content-between g-0 mt-3'>
                                 {
                                     userOfficals?.map((user, index) => (
-                                        <div className='col-auto mb-3' key={index}>
+                                        <Link to={`/resmi-hasap/${user.id}`} className='col-auto mb-3' key={index}>
                                             <img src={user.avatar_image.url === null ? logo_img : 'https://arzan.info/' + user.avatar_image.url} alt="" className='border rounded' style={{ width: "140px", height: "140px", objectFit: "cover" }} />
-                                        </div>
+                                        </Link>
                                     ))
                                 }
                             </div>

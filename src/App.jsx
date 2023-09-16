@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { Footer, Navbar, ResetPassword, ScrollToTop, Sms } from "./components";
 
 //USER INTERFACE
-import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
+import { About, ChosenPosts, Contact, FAQ, Foto, FotoRead, Home, NoticeCreate, NoticeRead, Notices, NotificationRead, Notifications, Offical, OfficalRead, Payment, PostAdd, PostRead, Posts, Profile, ProfileBloked, ProfileOpenOffical, ProfileService, ProfileStatistika, ProfileWallet, Search, Tags, TermsOfUse, TopList, Video, VideoRead } from "./pages";
 
 //OTHERS
 import { AuthContext } from "./context/AuthContext";
@@ -89,6 +89,7 @@ const App = () => {
                                 <Route path="/post-gosmak" element={<PostAdd />} />
 
                                 <Route path="/resmi-hasaplar" element={<Offical />} />
+                                <Route path="/resmi-hasap/:officalId" element={<OfficalRead />} />
                                 {
                                     authState.status
                                     &&

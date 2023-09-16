@@ -18,6 +18,7 @@ export { default as ProfileStatistika } from "./profile/ProfileStatistika"
 export { default as ProfileOpenOffical } from "./profile/ProfileOpenOffical"
 
 export { default as Offical } from "./offical/Offical"
+export { default as OfficalRead } from "./offical/OfficalRead"
 
 export { default as Posts } from "./post/Posts"
 export { default as ChosenPosts } from "./post/ChosenPosts"
