@@ -636,7 +636,7 @@ const PostAdd = () => {
                                     ))}
                                 </select>
                             </div>
-                            <input type="text" className="form-control" id="title" name="title" value={input} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+                            <input type="text" className="form-control" id="title" name="title" placeholder='Tags' value={input} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
                             <div className="d-flex mt-3 align-items-center">
                                 {tags.map((tag, index) => (
                                     <div key={index} className="bg-green text-white rounded px-2 d-flex align-items-center me-2" onClick={() => deleteTag(index)}>
