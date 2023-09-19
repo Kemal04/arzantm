@@ -2,7 +2,7 @@ import { useContext } from "react";
 import useFetch from "../../hooks/useFetch";
 import { AuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import coin from '../../assets/icons/coin.svg'
 import chat_icon from '../../assets/icons/chat.svg'
 import location from '../../assets/icons/location.svg'
@@ -16,6 +16,10 @@ const ProfileService = () => {
     const [user, loading] = useFetch("/api/v1/user/profile/" + authState.id, "data");
 
     const [services] = useFetch("/api/v1/service", "data");
+
+    const [locations] = useFetch("/api/v1/location/list", "data");
+
+    console.log(services);
 
     return (
         <>
@@ -54,8 +58,7 @@ const ProfileService = () => {
                                         </Link>
                                     </div>
                                     <div className="col-xl-12 mt-4">
-                                        <div htmlFor="servicess" className="mb-2 small">Hyzmatyň görnüşini saýlaň:</div>
-                                        <select name='' id='servicess' className="form-select bg-light" required>
+                                        {/* <select name='' id='servicess' className="form-select bg-light" required>
                                             {
                                                 services?.map((service, index) => (
                                                     <option key={index} value={service.id} id={index} className="d-flex justify-content-between">
@@ -63,7 +66,55 @@ const ProfileService = () => {
                                                     </option>
                                                 ))
                                             }
+                                        </select> */}
+                                        <div className="small">Hyzmatyň görnüşini saýlaň:</div>
+                                        <div className="nav-item dropdown">
+                                            <div to="/" className="nav-link dropdown-toggle btn btn-light py-1 border" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span>
+                                                    Hyzmatlar
+                                                </span>
+                                            </div>
+                                            <ul className="dropdown-menu w-100">
+                                                {
+                                                    loading ? (
+                                                        <li>Loading...</li>
+                                                    ) : (
+                                                        services?.map((service, index) =>
+                                                            <li key={index}><div className="dropdown-item cursor-pointer d-flex justify-content-between">
+                                                                <div>
+                                                                    <img src={'https://arzan.info/' + service.image} alt="" style={{ width: "20px" }} className="me-2" />
+                                                                    {service.name}
+                                                                </div>
+                                                                <div>
+                                                                    <span className="text-warning fw-black">{service.cost}</span>
+                                                                    <img src={coin} alt="" style={{ width: "15px" }} className="ms-2" />
+                                                                </div>
+                                                            </div></li>
+                                                        )
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className='col-12 mt-3'>
+                                        <label htmlFor="location" className="small">Ýeri</label>
+                                        <select name='location' id='location' className="form-select mt-1" required multiple>
+                                            {locations?.map((location, index) => (
+                                                <option key={index} value={location.id} id={index}>
+                                                    {location.name}
+                                                </option>
+                                            ))}
                                         </select>
+                                    </div>
+                                    <div className='col-12 mt-3'>
+                                        <div className="small">Umumy bahasy:</div>
+                                        <div>
+                                            <span className="text-warning fw-black">1300</span>
+                                            <img src={coin} alt="" style={{ width: "15px" }} className="ms-2" />
+                                        </div>
+                                    </div>
+                                    <div className="col-xl-12 d-grid mt-3">
+                                        <button className="btn btn-green">Satyn al</button>
                                     </div>
                                 </div>
                             </div>
