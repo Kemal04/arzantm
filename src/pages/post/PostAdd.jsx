@@ -357,17 +357,7 @@ const PostAdd = () => {
             toast.error("Düzgünleri okadym")
         }
         else {
-            await axios.post(`/api/v1/post/create`, formData, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                },
-            })
-                .then((res) => {
-                    toast.success(res.data.message)
-                    navigate("/profile")
-                }).catch((err) => {
-                    toast.error(err.response.data.message)
-                });
+           
         }
     }
 
