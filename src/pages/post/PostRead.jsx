@@ -72,6 +72,21 @@ const PostRead = () => {
         navigate('/tags', { state: name })
     }
 
+    const [favorite, setFavorite] = useState([]);
+
+    useEffect(() => {
+        const marks = JSON.parse(localStorage.getItem('mark'))
+        setFavorite(marks === null ? [] : marks)
+    }, [])
+
+    const addToFavorite = (id) => {
+        if (!favorite.includes(id)) {
+            setFavorite(favorite.concat(id))
+            localStorage.setItem("mark", JSON.stringify([...favorite, id]))
+        }
+    };
+
+
     return (
         <>
             {
@@ -138,7 +153,7 @@ const PostRead = () => {
 
                                         <div className="d-flex justify-content-between mt-4 position-relative">
                                             <div>
-                                                <img src={bookmark} alt="" className="me-3" style={{ width: "25px" }} />
+                                                <img src={bookmark} alt="" className="me-3" style={{ width: "25px", cursor: "pointer" }} onClick={() => addToFavorite(post)} />
                                                 <img src={share} alt="" style={{ width: "25px" }} />
                                             </div>
                                             <div className="">
