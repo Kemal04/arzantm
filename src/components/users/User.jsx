@@ -64,7 +64,7 @@ const User = () => {
                 </li>
                 <li><hr className="dropdown-divider" /></li>
                 <li>
-                    <Link to="/profile" className="dropdown-item d-flex align-items-center mb-2">
+                    <Link to="/bellenenler" className="dropdown-item d-flex align-items-center mb-2">
                         <img src={selected} alt='' className='img-fluid me-2' style={{ width: "16px" }} />
                         {t('bellenenler')}
                     </Link>
