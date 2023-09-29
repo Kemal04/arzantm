@@ -667,10 +667,6 @@ const PostAdd = () => {
                                         {t('duzgunleri_okadym')}
                                     </label>
                                 </div>
-                                <Link to="/" className='d-flex align-items-center text-green text-decoration-none'>
-                                    <FontAwesomeIcon icon={faEye} className='me-2' />
-                                    {t('onunden_syn')}
-                                </Link>
                             </div>
                             <div className='col-xl-12 text-center mb-5'>
                                 <button onClick={handleClick} className='btn btn-green' style={{ padding: "10px 145px" }}>{t('gosmak')}</button>

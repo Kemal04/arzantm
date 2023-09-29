@@ -12,7 +12,7 @@ const PostMarked = () => {
     const [mark, setMark] = useState([])
 
     useEffect(() => {
-        const marks = JSON.parse(localStorage.getItem('mark'))
+        const marks = JSON.parse(localStorage.getItem('favorites'))
         setMark(marks)
     }, [])
 
